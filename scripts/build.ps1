@@ -3,7 +3,8 @@
 # ==============================================================================
 [CmdletBinding()]
 param (
-    [string]$Configuration = "Release"
+    [string]$Configuration = "Release",
+    [switch]$SkipTests = $false
 )
 
 $ErrorActionPreference = "Stop"
@@ -33,7 +34,7 @@ $solutionPath = Join-Path $PSScriptRoot "..\GameLauncherHub.sln"
 
 # 2. Restauracao de Dependencias
 Write-Host "`n--> Restaurando pacotes NuGet..." -ForegroundColor Yellow
-& $dotnet restore $solutionPath
+& $dotnet restore $solutionPath -m:1 -nr:false
 if ($LASTEXITCODE -ne 0) {
     Write-Host "[ERRO] Falha ao restaurar pacotes NuGet." -ForegroundColor Red
     exit $LASTEXITCODE
@@ -41,7 +42,7 @@ if ($LASTEXITCODE -ne 0) {
 
 # 3. Compilacao da Solucao
 Write-Host "`n--> Compilando a solucao ($Configuration)..." -ForegroundColor Yellow
-& $dotnet build $solutionPath --configuration $Configuration --no-restore
+& $dotnet build $solutionPath --configuration $Configuration --no-restore -m:1 -nr:false -p:UseSharedCompilation=false
 if ($LASTEXITCODE -ne 0) {
     Write-Host "[ERRO] Falha durante a compilacao." -ForegroundColor Red
     exit $LASTEXITCODE
@@ -49,12 +50,16 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "[OK] Solucao compilada com sucesso!" -ForegroundColor Green
 
 # 4. Execucao dos Testes Automatizados
-$testProjectPath = Join-Path $PSScriptRoot "..\tests\GameLauncherHub.UnitTests\GameLauncherHub.UnitTests.csproj"
-Write-Host "`n--> Executando suite de testes unitarios..." -ForegroundColor Yellow
-& $dotnet test $testProjectPath --configuration $Configuration --no-build --logger "console;verbosity=normal"
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "[ERRO] Um ou mais testes falharam." -ForegroundColor Red
-    exit $LASTEXITCODE
+if (-not $SkipTests) {
+    $testProjectPath = Join-Path $PSScriptRoot "..\tests\GameLauncherHub.UnitTests\GameLauncherHub.UnitTests.csproj"
+    Write-Host "`n--> Executando suite de testes unitarios..." -ForegroundColor Yellow
+    & $dotnet test $testProjectPath --configuration $Configuration --no-build -m:1 -nr:false --logger "console;verbosity=normal"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "[ERRO] Um ou mais testes falharam." -ForegroundColor Red
+        exit $LASTEXITCODE
+    }
+} else {
+    Write-Host "`n[INFO] Execucao de testes unitarios ignorada (-SkipTests)." -ForegroundColor Cyan
 }
 
 Write-Host "`n==========================================================" -ForegroundColor Green

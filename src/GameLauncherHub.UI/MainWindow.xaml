@@ -31,9 +31,10 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="46" />  <!-- 1. Barra de Título Customizada -->
-            <RowDefinition Height="Auto" />  <!-- 2. Barra de Filtros e Pesquisa -->
-            <RowDefinition Height="*" />     <!-- 3. Grade ou Lista de Launchers -->
+            <RowDefinition Height="46" />  <!-- 0. Barra de Título Customizada -->
+            <RowDefinition Height="Auto" /><!-- 1. Banner de Atualização Disponível -->
+            <RowDefinition Height="Auto" /><!-- 2. Barra de Filtros e Pesquisa -->
+            <RowDefinition Height="*" />   <!-- 3. Grade ou Lista de Launchers -->
             <RowDefinition Height="32" />  <!-- 4. Barra de Status / Rodapé -->
         </Grid.RowDefinitions>
 
@@ -158,18 +159,47 @@
                               Data="{StaticResource IconSettings}" />
                     </Button>
 
+                    <!-- Botão de Verificar Atualizações do Hub -->
+                    <Button Style="{StaticResource GhostIconButton}"
+                            Width="30"
+                            Height="30"
+                            Margin="0,0,8,0"
+                            ToolTip="Verificar atualizações do GameLauncher Hub no GitHub"
+                            Command="{Binding CheckForUpdatesCommand}">
+                        <Path Width="13"
+                              Height="13"
+                              Stretch="Uniform"
+                              Fill="{StaticResource TextSecondaryBrush}"
+                              Data="{StaticResource IconDownload}" />
+                    </Button>
+
                     <!-- Botão Sobre o Aplicativo -->
                     <Button Style="{StaticResource GhostIconButton}"
                             Width="30"
                             Height="30"
-                            Margin="0,0,14,0"
-                            ToolTip="Sobre o GameLauncher Hub (Release 0.11.4)"
+                            Margin="0,0,10,0"
+                            ToolTip="Sobre o GameLauncher Hub"
                             Command="{Binding OpenAboutCommand}">
                         <Path Width="13"
                               Height="13"
                               Stretch="Uniform"
                               Fill="{StaticResource TextSecondaryBrush}"
                               Data="{StaticResource IconInfo}" />
+                    </Button>
+
+                    <!-- Pílula de Atualização Disponível (exibida apenas quando detectada nova versão) -->
+                    <Button Style="{StaticResource ModernActionButton}"
+                            Background="#10B981"
+                            Height="26"
+                            Padding="8,0"
+                            Margin="0,0,12,0"
+                            ToolTip="Nova versão disponível no GitHub (Clique para atualizar)"
+                            Visibility="{Binding IsUpdateAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Command="{Binding OpenUpdateDialogCommand}">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Path Width="10" Height="10" Stretch="Uniform" Fill="#FFFFFF" Data="{StaticResource IconDownload}" Margin="0,0,6,0" />
+                            <TextBlock Text="Atualização" FontSize="11" FontWeight="Bold" Foreground="#FFFFFF" />
+                        </StackPanel>
                     </Button>
 
                     <!-- Botões Padrão da Janela do Windows -->
@@ -204,8 +234,51 @@
             </Grid>
         </Border>
 
-        <!-- 2. BARRA DE FILTROS, PESQUISA E ALTERNÂNCIA DE MODO -->
+        <!-- 1. BANNER DE ATUALIZAÇÃO DISPONÍVEL (SLIDE-IN DISPENSÁVEL) -->
         <Border Grid.Row="1"
+                Background="#161F2E"
+                BorderBrush="{StaticResource SuccessEmeraldBrush}"
+                BorderThickness="0,0,0,1"
+                Padding="24,10"
+                Visibility="{Binding IsUpdateBannerVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Width="24" Height="24" CornerRadius="6" Background="{StaticResource SuccessEmeraldBrush}" Margin="0,0,10,0">
+                        <Path Width="11" Height="11" Stretch="Uniform" Fill="#FFFFFF" Data="{StaticResource IconDownload}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <TextBlock Text="Nova versão disponível!" FontWeight="Bold" FontSize="12" Foreground="#FFFFFF" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <Border Background="#122A1E" BorderBrush="{StaticResource SuccessEmeraldBrush}" BorderThickness="1" CornerRadius="4" Padding="6,1" VerticalAlignment="Center" Margin="0,0,10,0">
+                        <TextBlock Text="{Binding AvailableUpdate.TagName}" FontSize="11" FontWeight="Bold" Foreground="{StaticResource SuccessEmeraldBrush}" />
+                    </Border>
+                    <TextBlock Text="Uma versão atualizada do GameLauncher Hub está pronta para instalação." FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="Atualizar Agora"
+                            Style="{StaticResource ModernActionButton}"
+                            Background="{StaticResource SuccessEmeraldBrush}"
+                            Height="28" Padding="14,0"
+                            FontWeight="Bold"
+                            Command="{Binding OpenUpdateDialogCommand}"
+                            Margin="0,0,8,0" />
+
+                    <Button Style="{StaticResource GhostIconButton}"
+                            Width="28" Height="28"
+                            ToolTip="Dispensar aviso de atualização"
+                            Command="{Binding DismissUpdateBannerCommand}">
+                        <Path Width="10" Height="10" Stretch="Uniform" Fill="{StaticResource TextMutedBrush}" Data="{StaticResource IconClose}" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 2. BARRA DE FILTROS, PESQUISA E ALTERNÂNCIA DE MODO -->
+        <Border Grid.Row="2"
                 Background="#10121A"
                 BorderBrush="{StaticResource SurfaceBorderBrush}"
                 BorderThickness="0,0,0,1"
@@ -309,7 +382,7 @@
         </Border>
 
         <!-- 3. ÁREA PRINCIPAL: CARDS OU LINHAS COMPACTAS -->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <!-- 3.A. Visualização em Cards (WrapPanel) -->
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Disabled"
@@ -491,7 +564,7 @@
         </Grid>
 
         <!-- 4. BARRA DE STATUS / RODAPÉ -->
-        <Border Grid.Row="3"
+        <Border Grid.Row="4"
                 Background="{StaticResource HeaderBackgroundBrush}"
                 BorderBrush="{StaticResource SurfaceBorderBrush}"
                 BorderThickness="0,1,0,0"
@@ -519,12 +592,20 @@
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
 
-                <!-- Indicador de Plataforma e Ambiente -->
-                <TextBlock Grid.Column="2"
-                           Text=".NET 10 | Windows Desktop"
-                           FontSize="11"
-                           Foreground="{StaticResource TextMutedBrush}"
-                           VerticalAlignment="Center" />
+                <!-- Indicador de Plataforma e Botão de Verificação de Atualização -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="Verificar Atualizações"
+                            Style="{StaticResource ModernTextButton}"
+                            FontSize="11"
+                            Foreground="{StaticResource AccentIndigoBrush}"
+                            Margin="0,0,14,0"
+                            Command="{Binding CheckForUpdatesCommand}"
+                            ToolTip="Verificar se há novas versões disponíveis no GitHub Releases" />
+                    <TextBlock Text=".NET 10 | Windows Desktop"
+                               FontSize="11"
+                               Foreground="{StaticResource TextMutedBrush}"
+                               VerticalAlignment="Center" />
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>

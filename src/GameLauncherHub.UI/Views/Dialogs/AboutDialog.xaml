@@ -103,7 +103,8 @@
                                 CornerRadius="10"
                                 Padding="10,2"
                                 Margin="0,0,8,0">
-                            <TextBlock Text="Release 0.11.4"
+                            <TextBlock x:Name="VersionTextBlock"
+                                       Text="Release 0.11.4"
                                        FontSize="11"
                                        FontWeight="Bold"
                                        Foreground="{StaticResource SuccessEmeraldBrush}" />
@@ -163,6 +164,55 @@
                                FontSize="11"
                                Foreground="{StaticResource TextSecondaryBrush}"
                                LineHeight="16" />
+
+                    <!-- Seção de Verificação de Atualizações no GitHub -->
+                    <Border Background="{StaticResource SurfaceBackgroundBrush}"
+                            BorderBrush="{StaticResource SurfaceBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="14,10"
+                            Width="440"
+                            Margin="0,16,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Atualizações de Software (GitHub)"
+                                           FontWeight="SemiBold"
+                                           FontSize="12"
+                                           Foreground="#FFFFFF" />
+                                <TextBlock x:Name="UpdateStatusTextBlock"
+                                           Text="Clique para verificar se há novas versões no GitHub."
+                                           FontSize="11"
+                                           Foreground="{StaticResource TextMutedBrush}"
+                                           Margin="0,2,0,0"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button x:Name="CheckUpdatesButton"
+                                        Content="Verificar"
+                                        Style="{StaticResource ModernActionButton}"
+                                        Background="{StaticResource AccentIndigoBrush}"
+                                        Height="28"
+                                        Padding="12,0"
+                                        Click="CheckUpdatesButton_Click" />
+
+                                <Button x:Name="OpenUpdateButton"
+                                        Content="Atualizar Agora"
+                                        Style="{StaticResource ModernActionButton}"
+                                        Background="{StaticResource SuccessEmeraldBrush}"
+                                        Height="28"
+                                        Padding="12,0"
+                                        Margin="6,0,0,0"
+                                        Visibility="Collapsed"
+                                        Click="OpenUpdateButton_Click" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
                 </StackPanel>
             </ScrollViewer>
 

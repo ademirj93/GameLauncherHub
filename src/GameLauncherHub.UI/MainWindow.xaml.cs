@@ -34,6 +34,7 @@ public partial class MainWindow : Window
         _viewModel.RequestOpenSettings += OnOpenSettings;
         _viewModel.RequestOpenHistory += OnOpenHistory;
         _viewModel.RequestOpenAbout += OnOpenAbout;
+        _viewModel.RequestOpenUpdateDialog += OnOpenUpdateDialog;
 
         Loaded += async (s, e) =>
         {
@@ -147,7 +148,26 @@ public partial class MainWindow : Window
 
     private void OnOpenAbout()
     {
-        var dialog = new AboutDialog
+        var updateService = _serviceProvider.GetRequiredService<IAppUpdateService>();
+        var dialog = new AboutDialog(updateService)
+        {
+            Owner = this
+        };
+
+        dialog.RequestOpenUpdateDialog += (updateInfo) =>
+        {
+            OnOpenUpdateDialog(updateInfo);
+        };
+
+        dialog.ShowDialog();
+    }
+
+    private void OnOpenUpdateDialog(Domain.Models.AppUpdateInfo updateInfo)
+    {
+        var updateVm = _serviceProvider.GetRequiredService<UpdateViewModel>();
+        updateVm.Initialize(updateInfo);
+
+        var dialog = new UpdateDialog(updateVm)
         {
             Owner = this
         };

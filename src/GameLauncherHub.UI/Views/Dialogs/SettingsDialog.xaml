@@ -325,6 +325,12 @@
                                       Margin="0,12,0,0"
                                       Cursor="Hand" />
 
+                            <CheckBox Content="Verificar atualizações do GameLauncher Hub no GitHub ao iniciar"
+                                      IsChecked="{Binding AutoCheckUpdatesOnStartup}"
+                                      Foreground="{StaticResource TextPrimaryBrush}"
+                                      Margin="0,12,0,0"
+                                      Cursor="Hand" />
+
                             <CheckBox Content="Exibir notificações na área de trabalho ao concluir downloads"
                                       IsChecked="{Binding ShowNotifications}"
                                       Foreground="{StaticResource TextPrimaryBrush}"

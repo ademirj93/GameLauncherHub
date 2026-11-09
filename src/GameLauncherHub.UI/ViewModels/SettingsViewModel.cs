@@ -98,6 +98,9 @@ public partial class SettingsViewModel : ObservableObject
     private bool _autoCheckInstallationsOnStartup = true;
 
     [ObservableProperty]
+    private bool _autoCheckUpdatesOnStartup = true;
+
+    [ObservableProperty]
     private string _theme = "Dark";
 
     [ObservableProperty]
@@ -151,6 +154,7 @@ public partial class SettingsViewModel : ObservableObject
         IsViewCompact = string.Equals(ViewMode, "Compact", StringComparison.OrdinalIgnoreCase);
         IsViewCards = !IsViewCompact;
         AutoCheckInstallationsOnStartup = settings.AutoCheckInstallationsOnStartup;
+        AutoCheckUpdatesOnStartup = settings.AutoCheckUpdatesOnStartup;
         Theme = settings.Theme;
         Language = settings.Language;
         ShowNotifications = settings.ShowNotifications;
@@ -255,6 +259,7 @@ public partial class SettingsViewModel : ObservableObject
         settings.TrayDisplayMode = TrayDisplayMode;
         settings.ViewMode = ViewMode;
         settings.AutoCheckInstallationsOnStartup = AutoCheckInstallationsOnStartup;
+        settings.AutoCheckUpdatesOnStartup = AutoCheckUpdatesOnStartup;
         settings.Theme = Theme;
         settings.Language = Language;
         settings.ShowNotifications = ShowNotifications;
@@ -299,6 +304,7 @@ public partial class SettingsViewModel : ObservableObject
         IsViewCards = true;
         IsViewCompact = false;
         AutoCheckInstallationsOnStartup = true;
+        AutoCheckUpdatesOnStartup = true;
         Theme = "Dark";
         Language = "pt-BR";
         ShowNotifications = true;

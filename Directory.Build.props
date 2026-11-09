@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <!-- Desativa auditoria de vulnerabilidades que exige conexão online com o índice do NuGet durante compilação offline -->
+    <NuGetAudit Condition="'$(NuGetAudit)' == ''">false</NuGetAudit>
+
+    <!-- Otimiza compilação para evitar processos órfãos em ambientes Windows desktop restritos -->
+    <UseSharedCompilation Condition="'$(UseSharedCompilation)' == ''">false</UseSharedCompilation>
+
+    <!-- Configuração recomendada de DPI para WinForms no .NET 10 (elimina aviso WFO0003) -->
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+</Project>
+

@@ -18,6 +18,9 @@ public class AppSettings
 
     // Detecção & Comportamento
     public bool AutoCheckInstallationsOnStartup { get; set; } = true;
+    public bool AutoCheckUpdatesOnStartup { get; set; } = true;
+    public string GitHubRepoOwner { get; set; } = "ademirj93";
+    public string GitHubRepoName { get; set; } = "GameLauncherHub";
     public string Theme { get; set; } = "Dark";
     public string Language { get; set; } = "pt-BR";
     public bool ShowNotifications { get; set; } = true;

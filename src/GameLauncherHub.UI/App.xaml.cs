@@ -12,6 +12,7 @@ using GameLauncherHub.Infrastructure.Services;
 using GameLauncherHub.Infrastructure.SteamGridDB;
 using GameLauncherHub.UI.Services;
 using GameLauncherHub.UI.ViewModels;
+using GameLauncherHub.UI.Views.Dialogs;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -41,7 +42,17 @@ public partial class App : System.Windows.Application
         var systemTrayService = _serviceProvider.GetRequiredService<ISystemTrayService>();
         systemTrayService.Initialize();
 
-        // 2. Apresenta a janela principal
+        // 2. Registra encerramento seguro sob demanda de atualização
+        var updateService = _serviceProvider.GetRequiredService<IAppUpdateService>();
+        updateService.RequestApplicationShutdown += () =>
+        {
+            Dispatcher.Invoke(() =>
+            {
+                Shutdown();
+            });
+        };
+
+        // 3. Apresenta a janela principal
         var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
         mainWindow.Show();
     }
@@ -67,12 +78,13 @@ public partial class App : System.Windows.Application
         services.AddSingleton<ILauncherDetectionService, LauncherDetectionService>();
         services.AddSingleton<ILauncherExecutionService, LauncherExecutionService>();
 
-        // 4. Segurança, Downloads e Verificação Authenticode
+        // 4. Segurança, Downloads, Verificação Authenticode e Atualização
         services.AddSingleton<AuthenticodeVerifier>();
         services.AddSingleton<IInstallerSecurityService, InstallerSecurityService>();
         services.AddSingleton<ILauncherDownloadResolver, LauncherDownloadResolver>();
         services.AddSingleton<IDownloadManager, HttpDownloadManager>();
         services.AddSingleton<IInstallerService, InstallerService>();
+        services.AddSingleton<IAppUpdateService, GitHubUpdateService>();
         services.AddSingleton<ISettingsService, SettingsService>();
         services.AddSingleton<IOperationHistoryService, OperationHistoryService>();
 
@@ -92,9 +104,11 @@ public partial class App : System.Windows.Application
         services.AddSingleton<MainViewModel>();
         services.AddTransient<SettingsViewModel>();
         services.AddTransient<HistoryViewModel>();
+        services.AddTransient<UpdateViewModel>();
 
         // 9. Views
         services.AddTransient<MainWindow>();
+        services.AddTransient<UpdateDialog>();
     }
 
     private void ConfigureUnhandledExceptionLogging()
@@ -102,8 +116,12 @@ public partial class App : System.Windows.Application
         // Tratamento global de exceções da UI thread
         DispatcherUnhandledException += (s, args) =>
         {
+            var details = args.Exception.InnerException != null
+                ? $"{args.Exception.Message}\n\nDetalhes adicionais:\n{args.Exception.InnerException.Message}"
+                : args.Exception.Message;
+
             System.Windows.MessageBox.Show(
-                $"Ocorreu um erro inesperado na aplicação:\n\n{args.Exception.Message}",
+                $"Ocorreu um erro inesperado na aplicação:\n\n{details}",
                 "GameLauncher Hub - Erro",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);

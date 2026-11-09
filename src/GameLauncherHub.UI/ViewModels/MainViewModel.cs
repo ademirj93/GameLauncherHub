@@ -18,6 +18,7 @@ public partial class MainViewModel : ObservableObject
     private readonly ISettingsService _settingsService;
     private readonly ILauncherFavoritesService _favoritesService;
     private readonly ILauncherArtworkService _artworkService;
+    private readonly IAppUpdateService _updateService;
     private readonly List<LauncherCardViewModel> _allCards = new();
 
     public ObservableCollection<LauncherCardViewModel> FilteredCards { get; } = new();
@@ -61,20 +62,36 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private string _batchProgressText = string.Empty;
 
+    // Atualização de Software (GitHub Releases)
+    [ObservableProperty]
+    private bool _isUpdateAvailable;
+
+    [ObservableProperty]
+    private bool _isUpdateBannerVisible;
+
+    [ObservableProperty]
+    private AppUpdateInfo? _availableUpdate;
+
+    [ObservableProperty]
+    private bool _isCheckingUpdates;
+
     public event Action? RequestOpenSettings;
     public event Action? RequestOpenHistory;
     public event Action? RequestOpenAbout;
+    public event Action<AppUpdateInfo>? RequestOpenUpdateDialog;
 
     public MainViewModel(
         ILauncherOrchestratorService orchestratorService,
         ISettingsService settingsService,
         ILauncherFavoritesService favoritesService,
-        ILauncherArtworkService artworkService)
+        ILauncherArtworkService artworkService,
+        IAppUpdateService updateService)
     {
         _orchestratorService = orchestratorService;
         _settingsService = settingsService;
         _favoritesService = favoritesService;
         _artworkService = artworkService;
+        _updateService = updateService;
 
         _orchestratorService.PlatformStateChanged += OnPlatformStateChanged;
         _favoritesService.FavoritesChanged += OnFavoritesChanged;
@@ -82,9 +99,10 @@ public partial class MainViewModel : ObservableObject
 
     public async Task InitializeAsync()
     {
+        AppSettings? settings = null;
         try
         {
-            var settings = await _settingsService.LoadSettingsAsync();
+            settings = await _settingsService.LoadSettingsAsync();
             ViewMode = string.IsNullOrWhiteSpace(settings.ViewMode) ? "Cards" : settings.ViewMode;
         }
         catch
@@ -93,6 +111,12 @@ public partial class MainViewModel : ObservableObject
         }
 
         await LoadPlatformsAsync();
+
+        // Verificação silenciosa de atualizações no GitHub ao iniciar (se habilitado)
+        if (settings?.AutoCheckUpdatesOnStartup ?? true)
+        {
+            _ = CheckUpdatesInBackgroundAsync();
+        }
     }
 
     [RelayCommand]
@@ -303,6 +327,96 @@ public partial class MainViewModel : ObservableObject
     private void OpenAbout()
     {
         RequestOpenAbout?.Invoke();
+    }
+
+    [RelayCommand]
+    public async Task CheckForUpdatesAsync()
+    {
+        IsCheckingUpdates = true;
+        StatusMessage = "Consultando novas versões no GitHub Releases...";
+
+        try
+        {
+            var updateInfo = await _updateService.CheckForUpdatesAsync();
+            AvailableUpdate = updateInfo;
+            IsUpdateAvailable = updateInfo.IsUpdateAvailable;
+
+            if (updateInfo.IsUpdateAvailable)
+            {
+                IsUpdateBannerVisible = true;
+                StatusMessage = $"Nova versão {updateInfo.TagName} disponível para atualização!";
+                RequestOpenUpdateDialog?.Invoke(updateInfo);
+            }
+            else if (!string.IsNullOrEmpty(updateInfo.ErrorMessage))
+            {
+                StatusMessage = updateInfo.ErrorMessage;
+                System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
+                {
+                    System.Windows.MessageBox.Show(
+                        $"{updateInfo.ErrorMessage}\n\nVerifique sua conexão com a internet.",
+                        "Verificação de Atualização",
+                        System.Windows.MessageBoxButton.OK,
+                        System.Windows.MessageBoxImage.Warning);
+                });
+            }
+            else
+            {
+                var v = updateInfo.CurrentVersion;
+                StatusMessage = $"Você já está utilizando a versão mais recente do GameLauncher Hub (v{v.Major}.{v.Minor}.{v.Build}).";
+                System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
+                {
+                    System.Windows.MessageBox.Show(
+                        $"Você já está utilizando a versão mais recente do GameLauncher Hub (v{v.Major}.{v.Minor}.{v.Build}).\n\nNenhuma atualização necessária no momento.",
+                        "Verificação de Atualização",
+                        System.Windows.MessageBoxButton.OK,
+                        System.Windows.MessageBoxImage.Information);
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Erro ao verificar atualizações: {ex.Message}";
+        }
+        finally
+        {
+            IsCheckingUpdates = false;
+        }
+    }
+
+    private async Task CheckUpdatesInBackgroundAsync()
+    {
+        try
+        {
+            var updateInfo = await _updateService.CheckForUpdatesAsync();
+            if (updateInfo.IsUpdateAvailable)
+            {
+                System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
+                {
+                    AvailableUpdate = updateInfo;
+                    IsUpdateAvailable = true;
+                    IsUpdateBannerVisible = true;
+                });
+            }
+        }
+        catch
+        {
+            // Silencioso em verificações secundárias de inicialização
+        }
+    }
+
+    [RelayCommand]
+    private void OpenUpdateDialog()
+    {
+        if (AvailableUpdate != null)
+        {
+            RequestOpenUpdateDialog?.Invoke(AvailableUpdate);
+        }
+    }
+
+    [RelayCommand]
+    private void DismissUpdateBanner()
+    {
+        IsUpdateBannerVisible = false;
     }
 
     partial void OnSearchTextChanged(string value)
