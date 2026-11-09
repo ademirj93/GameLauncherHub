@@ -1,0 +1,244 @@
+<UserControl x:Class="GameLauncherHub.UI.Views.Components.LauncherCardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:GameLauncherHub.UI.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="280" d:DesignWidth="360">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:HexToBrushConverter x:Key="HexToBrushConverter" />
+        <converters:StateToBrushConverter x:Key="StateToBrushConverter" />
+        <converters:StateToActionTextConverter x:Key="StateToActionTextConverter" />
+        <converters:StateToBadgeTextConverter x:Key="StateToBadgeTextConverter" />
+        <converters:StateToProgressVisibilityConverter x:Key="StateToProgressVisibilityConverter" />
+        <converters:IconKeyToGeometryConverter x:Key="IconKeyToGeometryConverter" />
+        <converters:StringNotEmptyToVisibilityConverter x:Key="StringNotEmptyToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <Border x:Name="CardBorder"
+            BorderThickness="1"
+            CornerRadius="12"
+            Margin="6"
+            Padding="0"
+            ClipToBounds="True">
+
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource SurfaceBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{StaticResource SurfaceBorderBrush}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
+                        <Setter Property="Background" Value="{StaticResource SurfaceHoverBrush}" />
+                        <Setter Property="BorderBrush" Value="{StaticResource SurfaceBorderHoverBrush}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="18"
+                              Opacity="0.35"
+                              ShadowDepth="4"
+                              Direction="270"
+                              Color="#000000" />
+        </Border.Effect>
+
+        <Grid>
+            <!-- Faixa superior com a cor de marca da plataforma -->
+            <Border Height="4"
+                    VerticalAlignment="Top"
+                    Background="{Binding AccentColor, Converter={StaticResource HexToBrushConverter}}" />
+
+            <Grid Margin="18,18,18,16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />  <!-- Cabeçalho: Ícone, Nome, Badge -->
+                    <RowDefinition Height="*" />     <!-- Descrição e Versão -->
+                    <RowDefinition Height="Auto" />  <!-- Progresso se houver -->
+                    <RowDefinition Height="Auto" />  <!-- Rodapé com Botões de Ação -->
+                </Grid.RowDefinitions>
+
+                <!-- 1. Top Section: Ícone + Título + Status Badge + Favorito -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Container do Ícone com cor de fundo da marca -->
+                    <Border Grid.Column="0"
+                            Width="44"
+                            Height="44"
+                            CornerRadius="10"
+                            Background="{Binding BrandColor, Converter={StaticResource HexToBrushConverter}}"
+                            BorderBrush="{Binding AccentColor, Converter={StaticResource HexToBrushConverter}}"
+                            BorderThickness="1"
+                            ClipToBounds="True">
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <!-- Arte do SteamGridDB em alta resolução (se baixada e em cache) -->
+                            <Image Source="{Binding ArtworkPath}"
+                                   Width="32"
+                                   Height="32"
+                                   Stretch="Uniform"
+                                   RenderOptions.BitmapScalingMode="HighQuality"
+                                   Visibility="{Binding ArtworkPath, Converter={StaticResource StringNotEmptyToVisibilityConverter}}" />
+
+                            <!-- Fallback Vetorial Oficial Local -->
+                            <Path Width="22"
+                                  Height="22"
+                                  Stretch="Uniform"
+                                  Fill="{Binding AccentColor, Converter={StaticResource HexToBrushConverter}}"
+                                  Data="{Binding IconKey, Converter={StaticResource IconKeyToGeometryConverter}}"
+                                  Visibility="{Binding ArtworkPath, Converter={StaticResource StringNotEmptyToVisibilityConverter}, ConverterParameter=Inverse}" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Nome e Tagline da Plataforma -->
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="12,0,8,0">
+                        <TextBlock Text="{Binding Name}"
+                                   FontWeight="Bold"
+                                   FontSize="15"
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   TextTrimming="CharacterEllipsis" />
+                        <TextBlock Text="{Binding Tagline}"
+                                   FontSize="11"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   Margin="0,2,0,0"
+                                   TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+
+                    <!-- Seção Superior Direita: Favorito + CheckBox de Seleção Múltipla + Badge de Status -->
+                    <StackPanel Grid.Column="2"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Top">
+
+                        <!-- Botão de Favorito (Estrela) -->
+                        <Button Style="{StaticResource GhostIconButton}"
+                                Width="28" Height="28"
+                                Margin="0,0,4,0"
+                                ToolTip="Marcar como favorito"
+                                Command="{Binding ToggleFavoriteCommand}">
+                            <Path Width="14" Height="14" Stretch="Uniform">
+                                <Path.Style>
+                                    <Style TargetType="Path">
+                                        <Setter Property="Data" Value="{StaticResource IconStarOutline}" />
+                                        <Setter Property="Fill" Value="{StaticResource TextMutedBrush}" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsFavorite}" Value="True">
+                                                <Setter Property="Data" Value="{StaticResource IconStar}" />
+                                                <Setter Property="Fill" Value="#F59E0B" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Path.Style>
+                            </Path>
+                        </Button>
+
+                        <!-- CheckBox para Instalação em Lote -->
+                        <CheckBox IsChecked="{Binding IsSelected}"
+                                  Style="{StaticResource ModernSelectionCheckBox}"
+                                  Visibility="{Binding CanBeSelected, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,8,0"
+                                  ToolTip="Selecionar para instalação conjunta" />
+
+                        <!-- Badge de Status com cor semântica -->
+                        <Border CornerRadius="6"
+                                Padding="8,3"
+                                VerticalAlignment="Center"
+                                Background="#141720"
+                                BorderBrush="{Binding State, Converter={StaticResource StateToBrushConverter}}"
+                                BorderThickness="1">
+                            <TextBlock Text="{Binding State, Converter={StaticResource StateToBadgeTextConverter}}"
+                                       FontSize="10"
+                                       FontWeight="Bold"
+                                       Foreground="{Binding State, Converter={StaticResource StateToBrushConverter}}" />
+                        </Border>
+                    </StackPanel>
+                </Grid>
+
+                <!-- 2. Descrição e Versão Detectada -->
+                <StackPanel Grid.Row="1" Margin="0,14,0,12">
+                    <TextBlock Text="{Binding Description}"
+                                TextWrapping="Wrap"
+                                FontSize="12"
+                                Foreground="{StaticResource TextSecondaryBrush}"
+                                LineHeight="17"
+                                MaxHeight="48"
+                                TextTrimming="CharacterEllipsis" />
+
+                    <!-- Indicador de versão ou status técnico -->
+                    <DockPanel Margin="0,10,0,0">
+                        <TextBlock Text="Status:"
+                                   FontSize="11"
+                                   Foreground="{StaticResource TextMutedBrush}"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="{Binding StatusMessage, TargetNullValue='Disponível'}"
+                                   FontSize="11"
+                                   Margin="6,0,0,0"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   TextTrimming="CharacterEllipsis" />
+                    </DockPanel>
+                </StackPanel>
+
+                <!-- 3. Indicador de Progresso (Ativo apenas durante download ou instalação) -->
+                <StackPanel Grid.Row="2"
+                            Margin="0,0,0,10"
+                            Visibility="{Binding State, Converter={StaticResource StateToProgressVisibilityConverter}}">
+                    <DockPanel LastChildFill="False" Margin="0,0,0,4">
+                        <TextBlock Text="{Binding OperationSpeed, TargetNullValue='Baixando...'}"
+                                   FontSize="11"
+                                   Foreground="{StaticResource TextSecondaryBrush}" />
+                        <TextBlock Text="{Binding OperationProgress, StringFormat='{}{0:F0}%'}"
+                                   FontSize="11"
+                                   FontWeight="Bold"
+                                   DockPanel.Dock="Right"
+                                   Foreground="{StaticResource AccentIndigoBrush}" />
+                    </DockPanel>
+                    <ProgressBar Height="5"
+                                 Value="{Binding OperationProgress}"
+                                 Maximum="100"
+                                 Background="#252A38"
+                                 Foreground="{StaticResource AccentIndigoBrush}"
+                                 BorderThickness="0" />
+                </StackPanel>
+
+                <!-- 4. Rodapé: Botão de Ação + Botão de Site Oficial -->
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Botão de Ação Principal (Executar, Instalar, etc.) -->
+                    <Button Grid.Column="0"
+                            Style="{StaticResource ModernActionButton}"
+                            Background="{Binding State, Converter={StaticResource StateToBrushConverter}}"
+                            BorderThickness="0"
+                            Command="{Binding ExecuteActionCommand}">
+                        <TextBlock Text="{Binding State, Converter={StaticResource StateToActionTextConverter}}"
+                                   FontWeight="SemiBold"
+                                   FontSize="12" />
+                    </Button>
+
+                    <!-- Botão de Acesso ao Site Oficial Autorizado -->
+                    <Button Grid.Column="1"
+                            Style="{StaticResource GhostIconButton}"
+                            Margin="8,0,0,0"
+                            ToolTip="Abrir página oficial autorizada"
+                            Command="{Binding OpenWebsiteCommand}">
+                        <Path Width="14"
+                              Height="14"
+                              Stretch="Uniform"
+                              Fill="{StaticResource TextSecondaryBrush}"
+                              Data="{StaticResource IconExternalLink}" />
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+
+</UserControl>

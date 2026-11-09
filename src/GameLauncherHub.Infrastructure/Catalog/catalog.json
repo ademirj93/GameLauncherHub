@@ -1,0 +1,441 @@
+[
+  {
+    "id": "steam",
+    "name": "Steam",
+    "tagline": "Valve Corporation",
+    "description": "A principal plataforma global de distribuição de jogos para PC, comunidade e oficina de mods.",
+    "brandColor": "#171A21",
+    "accentColor": "#66C0F4",
+    "secondaryColor": "#1B2838",
+    "iconKey": "IconSteam",
+    "officialWebsite": "https://store.steampowered.com",
+    "downloadPageUrl": "https://store.steampowered.com/about/",
+    "installerDirectUrl": "https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe",
+    "expectedPublisher": "Valve",
+    "expectedExecutableName": "steam.exe",
+    "isSupportedOnWindows": true,
+    "detection": {
+      "registryPaths": [
+        "SOFTWARE\\Valve\\Steam",
+        "SOFTWARE\\WOW6432Node\\Valve\\Steam",
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Steam"
+      ],
+      "knownExecutableNames": [ "steam.exe" ],
+      "defaultInstallDirectories": [
+        "C:\\Program Files (x86)\\Steam",
+        "C:\\Program Files\\Steam"
+      ],
+      "protocolSchemes": [ "steam" ],
+      "startMenuShortcutNames": [ "Steam.lnk" ],
+      "appPathNames": [ "steam.exe" ]
+    },
+    "execution": {
+      "protocolScheme": "steam://",
+      "defaultArguments": ""
+    },
+    "installation": {
+      "supportsSilentInstall": true,
+      "silentInstallArguments": "/S",
+      "expectedInstallerExtension": ".exe"
+    }
+  },
+  {
+    "id": "epic",
+    "name": "Epic Games Launcher",
+    "tagline": "Epic Games, Inc.",
+    "description": "Acesso à loja Epic Games, jogos gratuitos semanais e ecossistema Unreal Engine.",
+    "brandColor": "#121212",
+    "accentColor": "#0078F2",
+    "secondaryColor": "#202020",
+    "iconKey": "IconEpic",
+    "officialWebsite": "https://store.epicgames.com",
+    "downloadPageUrl": "https://store.epicgames.com/download",
+    "installerDirectUrl": "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi",
+    "expectedPublisher": "Epic Games Inc.",
+    "expectedExecutableName": "EpicGamesLauncher.exe",
+    "isSupportedOnWindows": true,
+    "detection": {
+      "registryPaths": [
+        "SOFTWARE\\Epic Games\\EpicGamesLauncher",
+        "SOFTWARE\\WOW6432Node\\Epic Games\\EpicGamesLauncher",
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{54707A2F-924A-4832-B83A-13A881270CF6}"
+      ],
+      "knownExecutableNames": [ "EpicGamesLauncher.exe" ],
+      "defaultInstallDirectories": [
+        "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win64",
+        "C:\\Program Files\\Epic Games\\Launcher\\Portal\\Binaries\\Win64",
+        "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win32"
+      ],
+      "protocolSchemes": [ "com.epicgames.launcher" ],
+      "startMenuShortcutNames": [ "Epic Games Launcher.lnk" ],
+      "appPathNames": [ "EpicGamesLauncher.exe" ]
+    },
+    "execution": {
+      "protocolScheme": "com.epicgames.launcher://",
+      "defaultArguments": ""
+    },
+    "installation": {
+      "supportsSilentInstall": true,
+      "silentInstallArguments": "/qn",
+      "expectedInstallerExtension": ".msi"
+    }
+  },
+  {
+    "id": "amazon",
+    "name": "Amazon Games",
+    "tagline": "Amazon Services LLC",
+    "description": "Instale e gerencie os jogos resgatados na sua assinatura Prime Gaming.",
+    "brandColor": "#1E1A29",
+    "accentColor": "#9D4EDD",
+    "secondaryColor": "#2A2438",
+    "iconKey": "IconAmazon",
+    "officialWebsite": "https://gaming.amazon.com",
+    "downloadPageUrl": "https://gaming.amazon.com/amazon-games-app",
+    "installerDirectUrl": "https://download.amazongames.com/AmazonGamesSetup.exe",
+    "expectedPublisher": "Amazon.com Services LLC",
+    "expectedExecutableName": "Amazon Games.exe",
+    "isSupportedOnWindows": true,
+    "detection": {
+      "registryPaths": [
+        "SOFTWARE\\Amazon\\Amazon Games",
+        "SOFTWARE\\WOW6432Node\\Amazon\\Amazon Games",
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Amazon Games"
+      ],
+      "knownExecutableNames": [ "Amazon Games.exe", "AmazonGames.exe" ],
+      "defaultInstallDirectories": [
+        "%LOCALAPPDATA%\\Amazon Games\\App",
+        "C:\\Program Files (x86)\\Amazon Games"
+      ],
+      "protocolSchemes": [ "amazon-games" ],
+      "startMenuShortcutNames": [ "Amazon Games.lnk" ],
+      "appPathNames": [ "Amazon Games.exe" ]
+    },
+    "execution": {
+      "protocolScheme": "amazon-games://",
+      "defaultArguments": ""
+    },
+    "installation": {
+      "supportsSilentInstall": false,
+      "expectedInstallerExtension": ".exe"
+    }
+  },
+  {
+    "id": "battlenet",
+    "name": "Battle.net",
+    "tagline": "Blizzard Entertainment",
+    "description": "Plataforma para títulos da Blizzard e Activision como World of Warcraft, Diablo e Overwatch.",
+    "brandColor": "#0E1726",
+    "accentColor": "#00AEFF",
+    "secondaryColor": "#18263E",
+    "iconKey": "IconBattleNet",
+    "officialWebsite": "https://battle.net",
+    "downloadPageUrl": "https://battle.net/download/getInstaller?os=win&app=battle.net",
+    "installerDirectUrl": "https://battle.net/download/getInstaller?os=win&app=battle.net",
+    "expectedPublisher": "Blizzard Entertainment, Inc.",
+    "expectedExecutableName": "Battle.net.exe",
+    "isSupportedOnWindows": true,
+    "detection": {
+      "registryPaths": [
+        "SOFTWARE\\Blizzard Entertainment\\Battle.net",
+        "SOFTWARE\\WOW6432Node\\Blizzard Entertainment\\Battle.net",
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Battle.net"
+      ],
+      "knownExecutableNames": [ "Battle.net.exe", "Battle.net Launcher.exe" ],
+      "defaultInstallDirectories": [
+        "C:\\Program Files (x86)\\Battle.net",
+        "C:\\Program Files\\Battle.net"
+      ],
+      "protocolSchemes": [ "battlenet" ],
+      "startMenuShortcutNames": [ "Battle.net.lnk" ],
+      "appPathNames": [ "Battle.net.exe" ]
+    },
+    "execution": {
+      "protocolScheme": "battlenet://",
+      "defaultArguments": ""
+    },
+    "installation": {
+      "supportsSilentInstall": false,
+      "expectedInstallerExtension": ".exe"
+    }
+  },
+  {
+    "id": "ubisoft",
+    "name": "Ubisoft Connect",
+    "tagline": "Ubisoft Entertainment",
+    "description": "Ecossistema para jogos da Ubisoft, incluindo franquias como Assassin's Creed e Rainbow Six.",
+    "brandColor": "#0B1526",
+    "accentColor": "#0070FF",
+    "secondaryColor": "#162540",
+    "iconKey": "IconUbisoft",
+    "officialWebsite": "https://ubisoftconnect.com",
+    "downloadPageUrl": "https://ubisoftconnect.com",
+    "installerDirectUrl": "https://ubi.li/4vxt9",
+    "expectedPublisher": "Ubisoft",
+    "expectedExecutableName": "UbisoftConnect.exe",
+    "isSupportedOnWindows": true,
+    "detection": {
+      "registryPaths": [
+        "SOFTWARE\\Ubisoft\\Launcher",
+        "SOFTWARE\\WOW6432Node\\Ubisoft\\Launcher",
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Uplay"
+      ],
+      "knownExecutableNames": [ "UbisoftConnect.exe", "Uplay.exe" ],
+      "defaultInstallDirectories": [
+        "C:\\Program Files (x86)\\Ubisoft\\Ubisoft Game Launcher",
+        "C:\\Program Files\\Ubisoft\\Ubisoft Game Launcher"
+      ],
+      "protocolSchemes": [ "uplay", "ubisoft-connect" ],
+      "startMenuShortcutNames": [ "Ubisoft Connect.lnk" ],
+      "appPathNames": [ "UbisoftConnect.exe" ]
+    },
+    "execution": {
+      "protocolScheme": "uplay://",
+      "defaultArguments": ""
+    },
+    "installation": {
+      "supportsSilentInstall": true,
+      "silentInstallArguments": "/S",
+      "expectedInstallerExtension": ".exe"
+    }
+  },
+  {
+    "id": "ea",
+    "name": "EA app",
+    "tagline": "Electronic Arts",
+    "description": "Nova experiência rápida e integrada para jogos da EA como FIFA, Battlefield e The Sims.",
+    "brandColor": "#1F1214",
+    "accentColor": "#FF4747",
+    "secondaryColor": "#2F1A1C",
+    "iconKey": "IconEA",
+    "officialWebsite": "https://www.ea.com/ea-app",
+    "downloadPageUrl": "https://www.ea.com/ea-app",
+    "installerDirectUrl": "https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EAappInstaller.exe",
+    "expectedPublisher": "Electronic Arts, Inc.",
+    "expectedExecutableName": "EADesktop.exe",
+    "isSupportedOnWindows": true,
+    "detection": {
+      "registryPaths": [
+        "SOFTWARE\\Electronic Arts\\EA Desktop",
+        "SOFTWARE\\WOW6432Node\\Electronic Arts\\EA Desktop",
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{ElectronicArts-EADesktop}"
+      ],
+      "knownExecutableNames": [ "EADesktop.exe", "EALauncher.exe" ],
+      "defaultInstallDirectories": [
+        "C:\\Program Files\\Electronic Arts\\EA Desktop\\EA Desktop",
+        "C:\\Program Files (x86)\\Electronic Arts\\EA Desktop\\EA Desktop"
+      ],
+      "protocolSchemes": [ "origin", "eadrop" ],
+      "startMenuShortcutNames": [ "EA.lnk", "EA app.lnk" ],
+      "appPathNames": [ "EADesktop.exe" ]
+    },
+    "execution": {
+      "protocolScheme": "origin://",
+      "defaultArguments": ""
+    },
+    "installation": {
+      "supportsSilentInstall": false,
+      "expectedInstallerExtension": ".exe"
+    }
+  },
+  {
+    "id": "heroic",
+    "name": "Heroic Games Launcher",
+    "tagline": "Heroic Open Source",
+    "description": "Cliente livre e intuitivo para rodar jogos da Epic Games, GOG e Prime Gaming no PC.",
+    "brandColor": "#1E122C",
+    "accentColor": "#A855F7",
+    "secondaryColor": "#2A1B3D",
+    "iconKey": "IconHeroic",
+    "officialWebsite": "https://heroicgameslauncher.com",
+    "downloadPageUrl": "https://heroicgameslauncher.com/downloads",
+    "installerDirectUrl": "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/latest/download/Heroic-Setup-x64.exe",
+    "expectedPublisher": "Heroic Games Launcher",
+    "expectedExecutableName": "Heroic.exe",
+    "isSupportedOnWindows": true,
+    "requiresDigitalSignature": false,
+    "isOpenSource": true,
+    "detection": {
+      "registryPaths": [
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Heroic",
+        "SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Heroic"
+      ],
+      "knownExecutableNames": [ "Heroic.exe" ],
+      "defaultInstallDirectories": [
+        "%LOCALAPPDATA%\\Programs\\heroic",
+        "C:\\Program Files\\Heroic Games Launcher"
+      ],
+      "protocolSchemes": [ "heroic" ],
+      "startMenuShortcutNames": [ "Heroic Games Launcher.lnk" ],
+      "appPathNames": [ "Heroic.exe" ]
+    },
+    "execution": {
+      "protocolScheme": "heroic://",
+      "defaultArguments": ""
+    },
+    "installation": {
+      "supportsSilentInstall": true,
+      "silentInstallArguments": "/S",
+      "expectedInstallerExtension": ".exe"
+    }
+  },
+  {
+    "id": "gog",
+    "name": "GOG GALAXY",
+    "tagline": "CD PROJEKT",
+    "description": "Gerenciador de jogos DRM-free com unificação de amigos, conquistas e jogos entre plataformas.",
+    "brandColor": "#1D132B",
+    "accentColor": "#9333EA",
+    "secondaryColor": "#2C1D42",
+    "iconKey": "IconGOG",
+    "officialWebsite": "https://www.gog.com/galaxy",
+    "downloadPageUrl": "https://www.gog.com/galaxy",
+    "installerDirectUrl": "https://cdn.gog.com/open/galaxy/client/2.0.73.27/galaxy_setup_2.0.73.27.exe",
+    "expectedPublisher": "GOG sp. z o.o.",
+    "expectedExecutableName": "GalaxyClient.exe",
+    "isSupportedOnWindows": true,
+    "detection": {
+      "registryPaths": [
+        "SOFTWARE\\GOG.com\\GalaxyClient",
+        "SOFTWARE\\WOW6432Node\\GOG.com\\GalaxyClient",
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{GalaxyClient_is1}"
+      ],
+      "knownExecutableNames": [ "GalaxyClient.exe" ],
+      "defaultInstallDirectories": [
+        "C:\\Program Files (x86)\\GOG GALAXY",
+        "C:\\Program Files\\GOG GALAXY"
+      ],
+      "protocolSchemes": [ "goggalaxy" ],
+      "startMenuShortcutNames": [ "GOG GALAXY.lnk" ],
+      "appPathNames": [ "GalaxyClient.exe" ]
+    },
+    "execution": {
+      "protocolScheme": "goggalaxy://",
+      "defaultArguments": ""
+    },
+    "installation": {
+      "supportsSilentInstall": true,
+      "silentInstallArguments": "/VERYSILENT /SUPPRESSMSGBOXES",
+      "expectedInstallerExtension": ".exe"
+    }
+  },
+  {
+    "id": "playnite",
+    "name": "Playnite",
+    "tagline": "Josef Nemec Open Source",
+    "description": "Centralizador open source com suporte a temas, emuladores e metadados de todas as lojas.",
+    "brandColor": "#241712",
+    "accentColor": "#EA580C",
+    "secondaryColor": "#382319",
+    "iconKey": "IconPlaynite",
+    "officialWebsite": "https://playnite.link",
+    "downloadPageUrl": "https://playnite.link",
+    "installerDirectUrl": "https://playnite.link/download/PlayniteInstaller.exe",
+    "expectedPublisher": "SignPath Foundation",
+    "expectedExecutableName": "Playnite.DesktopApp.exe",
+    "isSupportedOnWindows": true,
+    "requiresDigitalSignature": true,
+    "isOpenSource": true,
+    "detection": {
+      "registryPaths": [
+        "SOFTWARE\\Playnite",
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Playnite"
+      ],
+      "knownExecutableNames": [ "Playnite.DesktopApp.exe", "Playnite.FullscreenApp.exe" ],
+      "defaultInstallDirectories": [
+        "%LOCALAPPDATA%\\Playnite",
+        "C:\\Program Files\\Playnite"
+      ],
+      "protocolSchemes": [ "playnite" ],
+      "startMenuShortcutNames": [ "Playnite.lnk" ],
+      "appPathNames": [ "Playnite.DesktopApp.exe" ]
+    },
+    "execution": {
+      "protocolScheme": "playnite://",
+      "defaultArguments": ""
+    },
+    "installation": {
+      "supportsSilentInstall": true,
+      "silentInstallArguments": "/SILENT",
+      "expectedInstallerExtension": ".exe"
+    }
+  },
+  {
+    "id": "xbox",
+    "name": "Xbox App",
+    "tagline": "Microsoft Corporation",
+    "description": "O aplicativo oficial da Microsoft para PC Game Pass, jogos da Windows Store e nuvem Xbox Cloud Gaming.",
+    "brandColor": "#0D2114",
+    "accentColor": "#107C10",
+    "secondaryColor": "#153320",
+    "iconKey": "IconXbox",
+    "officialWebsite": "https://www.xbox.com/apps/xbox-app-for-pc",
+    "downloadPageUrl": "https://www.microsoft.com/store/productId/9MV0B5HZVK9Z",
+    "isWindowsStorePackage": true,
+    "packageFamilyName": "Microsoft.GamingApp_8wekyb3d8bbwe",
+    "expectedPublisher": "Microsoft Corporation",
+    "expectedExecutableName": "XboxPcAppCE.exe",
+    "isSupportedOnWindows": true,
+    "detection": {
+      "registryPaths": [],
+      "knownExecutableNames": [ "XboxPcAppCE.exe", "XboxPcAppFT.exe", "Xbox.exe" ],
+      "defaultInstallDirectories": [
+        "%LOCALAPPDATA%\\Microsoft\\WindowsApps\\Microsoft.GamingApp_8wekyb3d8bbwe",
+        "%LOCALAPPDATA%\\Microsoft\\WindowsApps"
+      ],
+      "protocolSchemes": [ "xbox", "ms-gamepass" ],
+      "startMenuShortcutNames": [],
+      "appPathNames": [ "XboxPcAppCE.exe", "XboxPcAppFT.exe", "Xbox.exe" ]
+    },
+    "execution": {
+      "protocolScheme": "xbox:",
+      "defaultArguments": ""
+    },
+    "installation": {
+      "supportsSilentInstall": false,
+      "expectedInstallerExtension": ".msix"
+    }
+  },
+  {
+    "id": "recomplauncher",
+    "name": "RecompLauncher",
+    "tagline": "Ruben Ripalda Open Source",
+    "description": "Launcher open-source para ports nativos e recompilações estáticas de jogos de console para PC (Zelda 64 Recompiled, etc.).",
+    "brandColor": "#0E1A2B",
+    "accentColor": "#34F2E8",
+    "secondaryColor": "#16283D",
+    "iconKey": "IconRecomp",
+    "officialWebsite": "https://recomplauncher.com/",
+    "downloadPageUrl": "https://github.com/elripalda/RecompLauncher/releases",
+    "installerDirectUrl": "https://recomplauncher.com/api/launcher-beta.php?a=download",
+    "expectedPublisher": "Ruben Ripalda",
+    "expectedExecutableName": "recomplauncher.exe",
+    "isSupportedOnWindows": true,
+    "requiresDigitalSignature": true,
+    "isOpenSource": true,
+    "detection": {
+      "registryPaths": [
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\RecompLauncher",
+        "SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\RecompLauncher"
+      ],
+      "knownExecutableNames": [ "recomplauncher.exe", "RecompLauncher.exe" ],
+      "defaultInstallDirectories": [
+        "%LOCALAPPDATA%\\RecompLauncher",
+        "%LOCALAPPDATA%\\Programs\\RecompLauncher",
+        "C:\\Program Files\\RecompLauncher"
+      ],
+      "protocolSchemes": [ "recomplauncher" ],
+      "startMenuShortcutNames": [ "RecompLauncher.lnk", "Recomp Launcher.lnk" ],
+      "appPathNames": [ "recomplauncher.exe", "RecompLauncher.exe" ]
+    },
+    "execution": {
+      "protocolScheme": "recomplauncher://",
+      "defaultArguments": ""
+    },
+    "installation": {
+      "supportsSilentInstall": true,
+      "silentInstallArguments": "/S",
+      "expectedInstallerExtension": ".exe"
+    }
+  }
+]
+
