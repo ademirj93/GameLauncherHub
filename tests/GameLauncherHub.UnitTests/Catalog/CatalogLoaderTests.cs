@@ -9,17 +9,21 @@ public class CatalogLoaderTests
     private readonly CatalogService _catalogService = new();
 
     [Fact]
-    public async Task Catalog_ShouldContainExactly11OfficialPlatforms()
+    public async Task Catalog_ShouldContainOfficialPlatformsAndEmulators()
     {
         var catalog = await _catalogService.GetCatalogAsync();
 
         Assert.NotNull(catalog);
-        Assert.Equal(11, catalog.Count);
+        Assert.True(catalog.Count >= 33);
 
         var expectedIds = new[]
         {
             "steam", "epic", "amazon", "battlenet", "ubisoft",
-            "ea", "heroic", "gog", "playnite", "xbox", "recomplauncher"
+            "ea", "heroic", "gog", "playnite", "xbox", "recomplauncher",
+            "cemu", "dolphin", "snes9x", "ppsspp", "vbam", "project64",
+            "vita3k", "ymir", "flycast", "redream", "kegafusion", "citra",
+            "citron", "eden", "sudachi", "retroarch", "retrobat",
+            "duckstation", "rpcs3", "pcsx2", "xenia", "xemu"
         };
 
         foreach (var id in expectedIds)

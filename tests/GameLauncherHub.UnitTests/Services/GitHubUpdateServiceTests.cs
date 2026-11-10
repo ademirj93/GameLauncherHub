@@ -8,6 +8,7 @@ public class GitHubUpdateServiceTests
 {
     [Theory]
     [InlineData("v0.12.0", 0, 12, 0)]
+    [InlineData("0.10.11", 0, 10, 11)]
     [InlineData("0.11.4", 0, 11, 4)]
     [InlineData("v1.0.0.5", 1, 0, 0)]
     [InlineData("release-2.5.1", 2, 5, 1)]

@@ -5,7 +5,7 @@
 # GameLauncher Hub
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Release-v0.11.4-00C853?style=for-the-badge&logo=windows" alt="Release" />
+  <img src="https://img.shields.io/badge/Release-v0.10.11-00C853?style=for-the-badge&logo=windows" alt="Release" />
   <img src="https://img.shields.io/badge/Developer-Ademir%20Junior-6366F1?style=for-the-badge" alt="Developer" />
   <img src="https://img.shields.io/badge/License-GNU%20GPLv3-blue?style=for-the-badge" alt="License" />
   <img src="https://img.shields.io/badge/.NET-10.0%20(LTS)-512BD4?style=for-the-badge&logo=dotnet" alt=".NET 10" />
@@ -20,7 +20,7 @@ Inspirado na identidade visual do *ArtCraftLauncher*, o GameLauncher Hub unifica
 
 ---
 
-## 🚀 Novidades da Release 0.11.4 (04/11/2026)
+## 🚀 Novidades da Release 0.10.11 (10/11/2026)
 
 - **Seleção Múltipla & Instalação em Lote:** Permite selecionar vários launchers disponíveis com checkboxes estilizados e disparar a instalação conjunta através de uma elegante barra flutuante.
 - **Ícones Vetoriais das Lojas Corrigidos:** Geometrias vetoriais nítidas renderizadas em tempo real para todas as 11 plataformas suportadas.

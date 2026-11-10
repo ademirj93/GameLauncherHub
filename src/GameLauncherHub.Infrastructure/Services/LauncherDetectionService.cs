@@ -87,6 +87,26 @@ public class LauncherDetectionService : ILauncherDetectionService
                 );
             }
 
+            // 4.B. Se possui caminho manual ou salvo em catálogo customizado e o arquivo existe fisicamente
+            if (!string.IsNullOrWhiteSpace(platform.DetectedExecutablePath) && System.IO.File.Exists(platform.DetectedExecutablePath))
+            {
+                string? version = null;
+                try
+                {
+                    var fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(platform.DetectedExecutablePath);
+                    version = fvi.FileVersion ?? fvi.ProductVersion;
+                }
+                catch { }
+
+                return new DetectionResult(
+                    IsInstalled: true,
+                    ExecutablePath: platform.DetectedExecutablePath,
+                    InstalledVersion: version ?? platform.DetectedVersion,
+                    IsRunning: isRunning,
+                    Notes: "Executável validado no disco local"
+                );
+            }
+
             // 5. Execução sequencial das estratégias de detecção de instalação
             foreach (var strategy in _strategies)
             {

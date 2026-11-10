@@ -96,6 +96,13 @@
                             <TextBlock Text=" • "
                                        FontSize="11"
                                        Foreground="{StaticResource TextMutedBrush}" />
+                            <TextBlock Text="{Binding EmulatorsCount, StringFormat='{}{0} Emuladores'}"
+                                       FontSize="11"
+                                       FontWeight="SemiBold"
+                                       Foreground="{StaticResource AccentIndigoBrush}" />
+                            <TextBlock Text=" • "
+                                       FontSize="11"
+                                       Foreground="{StaticResource TextMutedBrush}" />
                             <TextBlock Text="{Binding InstalledCount, StringFormat='{}{0} Instaladas'}"
                                        FontSize="11"
                                        FontWeight="Bold"
@@ -306,6 +313,18 @@
                                  Command="{Binding SetFilterCommand}"
                                  CommandParameter="Todos" />
 
+                    <RadioButton Content="🎮 Emuladores"
+                                 Style="{StaticResource FilterPillButton}"
+                                 Margin="6,0,0,0"
+                                 Command="{Binding SetFilterCommand}"
+                                 CommandParameter="Emuladores" />
+
+                    <RadioButton Content="🕹 Lojas / Launchers"
+                                 Style="{StaticResource FilterPillButton}"
+                                 Margin="6,0,0,0"
+                                 Command="{Binding SetFilterCommand}"
+                                 CommandParameter="Launchers" />
+
                     <RadioButton Content="★ Favoritos"
                                  Style="{StaticResource FilterPillButton}"
                                  Margin="6,0,0,0"
@@ -324,11 +343,26 @@
                                  Command="{Binding SetFilterCommand}"
                                  CommandParameter="Disponíveis" />
 
-                    <RadioButton Content="Incompatíveis"
-                                 Style="{StaticResource FilterPillButton}"
-                                 Margin="6,0,0,0"
-                                 Command="{Binding SetFilterCommand}"
-                                 CommandParameter="Incompatíveis" />
+                    <!-- Separador Vertical -->
+                    <Border Width="1"
+                            Height="24"
+                            Background="{StaticResource SurfaceBorderBrush}"
+                            Margin="10,0,10,0"
+                            VerticalAlignment="Center" />
+
+                    <!-- Botão de Adicionar Emulador Personalizado -->
+                    <Button Style="{StaticResource ModernActionButton}"
+                            Background="{StaticResource AccentIndigoBrush}"
+                            Height="30"
+                            Padding="10,0"
+                            Margin="0,0,10,0"
+                            ToolTip="Cadastrar novo emulador instalado ou portátil no Hub"
+                            Command="{Binding OpenAddEmulatorCommand}">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Path Width="10" Height="10" Stretch="Uniform" Fill="#FFFFFF" Data="{StaticResource IconPlus}" Margin="0,0,5,0" />
+                            <TextBlock Text="+ Emulador" FontSize="11" FontWeight="Bold" Foreground="#FFFFFF" />
+                        </StackPanel>
+                    </Button>
 
                     <!-- Separador Vertical -->
                     <Border Width="1"

@@ -98,11 +98,27 @@
 
                     <!-- Nome e Tagline da Plataforma -->
                     <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="12,0,8,0">
-                        <TextBlock Text="{Binding Name}"
-                                   FontWeight="Bold"
-                                   FontSize="15"
-                                   Foreground="{StaticResource TextPrimaryBrush}"
-                                   TextTrimming="CharacterEllipsis" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}"
+                                       FontWeight="Bold"
+                                       FontSize="15"
+                                       Foreground="{StaticResource TextPrimaryBrush}"
+                                       TextTrimming="CharacterEllipsis" />
+                            <!-- Badge de Sistema / Console Alvo (se for emulador) -->
+                            <Border Background="#1C2230"
+                                    BorderBrush="{Binding AccentColor, Converter={StaticResource HexToBrushConverter}}"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    Padding="5,1"
+                                    Margin="6,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Visibility="{Binding HasTargetSystem, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <TextBlock Text="{Binding TargetSystem}"
+                                           FontSize="9"
+                                           FontWeight="Bold"
+                                           Foreground="{Binding AccentColor, Converter={StaticResource HexToBrushConverter}}" />
+                            </Border>
+                        </StackPanel>
                         <TextBlock Text="{Binding Tagline}"
                                    FontSize="11"
                                    Foreground="{StaticResource TextMutedBrush}"
@@ -206,10 +222,11 @@
                                  BorderThickness="0" />
                 </StackPanel>
 
-                <!-- 4. Rodapé: Botão de Ação + Botão de Site Oficial -->
+                <!-- 4. Rodapé: Botão de Ação + Localizar Executável + Botão de Site Oficial -->
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
@@ -224,10 +241,23 @@
                                    FontSize="12" />
                     </Button>
 
-                    <!-- Botão de Acesso ao Site Oficial Autorizado -->
+                    <!-- Botão de Localizar Executável Local no Disco -->
                     <Button Grid.Column="1"
                             Style="{StaticResource GhostIconButton}"
-                            Margin="8,0,0,0"
+                            Margin="6,0,0,0"
+                            ToolTip="Localizar executável (.exe) no computador"
+                            Command="{Binding LocateExecutableCommand}">
+                        <Path Width="14"
+                              Height="14"
+                              Stretch="Uniform"
+                              Fill="{StaticResource TextSecondaryBrush}"
+                              Data="{StaticResource IconFolderOpen}" />
+                    </Button>
+
+                    <!-- Botão de Acesso ao Site Oficial Autorizado -->
+                    <Button Grid.Column="2"
+                            Style="{StaticResource GhostIconButton}"
+                            Margin="6,0,0,0"
                             ToolTip="Abrir página oficial autorizada"
                             Command="{Binding OpenWebsiteCommand}">
                         <Path Width="14"

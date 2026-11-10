@@ -396,6 +396,25 @@ public class LauncherOrchestratorService : ILauncherOrchestratorService
         OnPlatformChanged(platform);
     }
 
+    public async Task SetCustomExecutablePathAsync(string platformId, string executablePath, CancellationToken cancellationToken = default)
+    {
+        await _catalogService.SetCustomExecutablePathAsync(platformId, executablePath, cancellationToken);
+        var platform = _catalogService.GetById(platformId);
+        if (platform != null)
+        {
+            platform.DetectedExecutablePath = executablePath;
+            platform.State = LauncherState.INSTALLED;
+            platform.StatusMessage = "Configurado manualmente";
+            OnPlatformChanged(platform);
+        }
+    }
+
+    public async Task AddCustomPlatformAsync(LauncherPlatform platform, CancellationToken cancellationToken = default)
+    {
+        await _catalogService.AddOrUpdateCustomPlatformAsync(platform, cancellationToken);
+        OnPlatformChanged(platform);
+    }
+
     private void OnPlatformChanged(LauncherPlatform platform)
     {
         PlatformStateChanged?.Invoke(this, platform);

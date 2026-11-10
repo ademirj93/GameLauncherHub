@@ -48,6 +48,81 @@ public class CatalogService : ICatalogService
         }
     }
 
+    public async Task AddOrUpdateCustomPlatformAsync(LauncherPlatform platform, CancellationToken cancellationToken = default)
+    {
+        lock (_catalog)
+        {
+            var existingIndex = _catalog.FindIndex(p => string.Equals(p.Id, platform.Id, StringComparison.OrdinalIgnoreCase));
+            if (existingIndex >= 0)
+            {
+                _catalog[existingIndex] = platform;
+            }
+            else
+            {
+                _catalog.Add(platform);
+            }
+        }
+
+        await SaveCustomCatalogAsync(cancellationToken);
+    }
+
+    public async Task SetCustomExecutablePathAsync(string platformId, string executablePath, CancellationToken cancellationToken = default)
+    {
+        LauncherPlatform? target;
+        lock (_catalog)
+        {
+            target = _catalog.FirstOrDefault(p => string.Equals(p.Id, platformId, StringComparison.OrdinalIgnoreCase));
+            if (target != null)
+            {
+                target.DetectedExecutablePath = executablePath;
+                target.State = LauncherState.INSTALLED;
+                target.StatusMessage = "Configurado manualmente";
+            }
+        }
+
+        if (target != null)
+        {
+            await SaveCustomCatalogAsync(cancellationToken);
+        }
+    }
+
+    public async Task RemoveCustomPlatformAsync(string platformId, CancellationToken cancellationToken = default)
+    {
+        lock (_catalog)
+        {
+            _catalog.RemoveAll(p => string.Equals(p.Id, platformId, StringComparison.OrdinalIgnoreCase) && p.IsCustom);
+        }
+
+        await SaveCustomCatalogAsync(cancellationToken);
+    }
+
+    private async Task SaveCustomCatalogAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var dir = Path.GetDirectoryName(_customCatalogPath);
+            if (!string.IsNullOrWhiteSpace(dir) && !Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
+            List<LauncherPlatform> toSave;
+            lock (_catalog)
+            {
+                // Salva plataformas marcadas como IsCustom ou que tenham caminho manual alterado
+                toSave = _catalog.Where(p => p.IsCustom || !string.IsNullOrWhiteSpace(p.DetectedExecutablePath)).ToList();
+            }
+
+            var json = JsonSerializer.Serialize(toSave, JsonOptions);
+            await File.WriteAllTextAsync(_customCatalogPath, json, cancellationToken);
+            _logger?.LogInformation("Catálogo customizado salvo com sucesso em {Path}.", _customCatalogPath);
+        }
+        catch (Exception ex)
+        {
+            _logger?.LogError(ex, "Erro ao salvar catálogo customizado em {Path}.", _customCatalogPath);
+        }
+    }
+
     private void LoadCatalog()
     {
         lock (_catalog)
