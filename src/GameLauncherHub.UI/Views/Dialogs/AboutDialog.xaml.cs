@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Windows;
 using GameLauncherHub.Domain.Interfaces;
 using GameLauncherHub.Domain.Models;
@@ -25,6 +26,15 @@ public partial class AboutDialog : Window
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
+        var asm = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
+        var infoVer = asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+        if (!string.IsNullOrWhiteSpace(infoVer))
+        {
+            var cleanVer = infoVer.Split('+')[0].Trim();
+            VersionTextBlock.Text = $"Release {cleanVer}";
+            return;
+        }
+
         if (_updateService != null)
         {
             var version = _updateService.GetCurrentVersion();

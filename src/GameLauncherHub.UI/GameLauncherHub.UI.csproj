@@ -16,9 +16,10 @@
     <Description>Centralizador profissional de instalação e execução de plataformas de jogos para Windows</Description>
     <Company>Ademir Junior</Company>
     <Authors>Ademir Junior</Authors>
-    <Version>0.10.11</Version>
-    <FileVersion>0.10.11.0</FileVersion>
-    <AssemblyVersion>0.10.11.0</AssemblyVersion>
+    <Version>0.11.10-b2</Version>
+    <InformationalVersion>0.11.10b2</InformationalVersion>
+    <FileVersion>0.11.10.2</FileVersion>
+    <AssemblyVersion>0.11.10.2</AssemblyVersion>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
   </PropertyGroup>
 

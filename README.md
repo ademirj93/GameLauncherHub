@@ -5,7 +5,7 @@
 # GameLauncher Hub
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Release-v0.10.11-00C853?style=for-the-badge&logo=windows" alt="Release" />
+  <img src="https://img.shields.io/badge/Release-v0.11.10b2-00C853?style=for-the-badge&logo=windows" alt="Release" />
   <img src="https://img.shields.io/badge/Developer-Ademir%20Junior-6366F1?style=for-the-badge" alt="Developer" />
   <img src="https://img.shields.io/badge/License-GNU%20GPLv3-blue?style=for-the-badge" alt="License" />
   <img src="https://img.shields.io/badge/.NET-10.0%20(LTS)-512BD4?style=for-the-badge&logo=dotnet" alt=".NET 10" />
@@ -20,14 +20,12 @@ Inspirado na identidade visual do *ArtCraftLauncher*, o GameLauncher Hub unifica
 
 ---
 
-## 🚀 Novidades da Release 0.10.11 (10/11/2026)
+## 🚀 Novidades da Release 0.11.10b2 (10/11/2026)
 
-- **Seleção Múltipla & Instalação em Lote:** Permite selecionar vários launchers disponíveis com checkboxes estilizados e disparar a instalação conjunta através de uma elegante barra flutuante.
-- **Ícones Vetoriais das Lojas Corrigidos:** Geometrias vetoriais nítidas renderizadas em tempo real para todas as 11 plataformas suportadas.
-- **Execução Nativa do Xbox App:** Corrigido para abrir diretamente o aplicativo Xbox (`XboxPcAppCE.exe` / `xbox:`) no primeiro plano em vez de redirecionar para a Microsoft Store.
-- **Download Direto Amazon Games:** Configurado com a URL oficial `https://download.amazongames.com/AmazonGamesSetup.exe` e validação Authenticode da Amazon Services LLC.
-- **Identidade & Ícone do Sistema:** Ícone oficial do sistema (`icon.ico`) integrado no executável, nas janelas e no instalador Windows.
-- **Tela "Sobre o Aplicativo":** Nova janela com exibição do `logo.bmp`, dados da release, desenvolvedor e licença GNU.
+- **Suporte Expandido a Emuladores:** Área dedicada para emuladores com filtros de categoria ("🎮 Emuladores" e "🕹 Lojas / Launchers").
+- **Catálogo de Emulação Completo (21 emuladores):** Inclui ShadPS4 (PS4), Cemu (Wii U), Dolphin (GameCube/Wii), Snes9x, PPSSPP, VBA-M, Project64, Vita3K, Ymir (Saturn), Flycast, Redream, Kega Fusion, Citron Neo, Eden, RetroArch, RetroBat, DuckStation, RPCS3, PCSX2, Xenia e Xemu.
+- **Localização Manual de Executável (.exe):** Botão `📁 Localizar .exe` em cada card/linha com persistência local de customizações.
+- **Cadastro Customizado de Emuladores:** Modal `+ Emulador` para adicionar emuladores portáteis ou personalizados.
 
 ---
 

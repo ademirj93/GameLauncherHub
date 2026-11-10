@@ -14,22 +14,26 @@ public class CatalogLoaderTests
         var catalog = await _catalogService.GetCatalogAsync();
 
         Assert.NotNull(catalog);
-        Assert.True(catalog.Count >= 33);
+        Assert.True(catalog.Count >= 32);
 
         var expectedIds = new[]
         {
             "steam", "epic", "amazon", "battlenet", "ubisoft",
             "ea", "heroic", "gog", "playnite", "xbox", "recomplauncher",
             "cemu", "dolphin", "snes9x", "ppsspp", "vbam", "project64",
-            "vita3k", "ymir", "flycast", "redream", "kegafusion", "citra",
-            "citron", "eden", "sudachi", "retroarch", "retrobat",
-            "duckstation", "rpcs3", "pcsx2", "xenia", "xemu"
+            "vita3k", "ymir", "flycast", "redream", "kegafusion",
+            "citron", "eden", "retroarch", "retrobat",
+            "duckstation", "rpcs3", "pcsx2", "xenia", "xemu", "shadps4"
         };
 
         foreach (var id in expectedIds)
         {
             Assert.Contains(catalog, p => p.Id == id);
         }
+
+        // Citra e Sudachi removidos do catálogo padrão
+        Assert.DoesNotContain(catalog, p => p.Id == "citra");
+        Assert.DoesNotContain(catalog, p => p.Id == "sudachi");
 
         // Lutris não deve estar presente no catálogo do Windows
         Assert.DoesNotContain(catalog, p => p.Id == "lutris");
