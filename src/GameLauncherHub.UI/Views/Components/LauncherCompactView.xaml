@@ -46,6 +46,7 @@
                 <ColumnDefinition Width="Auto" /> <!-- Barra / Info de Progresso se ativo -->
                 <ColumnDefinition Width="Auto" /> <!-- Badge de Status -->
                 <ColumnDefinition Width="Auto" /> <!-- Botão Ação Principal -->
+                <ColumnDefinition Width="Auto" /> <!-- Botão Localizar .exe -->
                 <ColumnDefinition Width="Auto" /> <!-- Botão Site -->
             </Grid.ColumnDefinitions>
 
@@ -120,6 +121,20 @@
                                FontSize="14"
                                Foreground="{StaticResource TextPrimaryBrush}"
                                VerticalAlignment="Center" />
+                    <!-- Badge de Console / Sistema Alvo -->
+                    <Border Background="#1C2230"
+                            BorderBrush="{Binding AccentColor, Converter={StaticResource HexToBrushConverter}}"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="5,1"
+                            Margin="6,0,0,0"
+                            VerticalAlignment="Center"
+                            Visibility="{Binding HasTargetSystem, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBlock Text="{Binding TargetSystem}"
+                                   FontSize="9"
+                                   FontWeight="Bold"
+                                   Foreground="{Binding AccentColor, Converter={StaticResource HexToBrushConverter}}" />
+                    </Border>
                     <TextBlock Text="{Binding StatusMessage, StringFormat='• {0}', TargetNullValue=''}"
                                FontSize="11"
                                Foreground="{StaticResource TextMutedBrush}"
@@ -185,8 +200,23 @@
                            FontSize="11" />
             </Button>
 
-            <!-- 8. Botão Site Oficial -->
+            <!-- 8. Botão Localizar Executável -->
             <Button Grid.Column="7"
+                    Style="{StaticResource GhostIconButton}"
+                    Width="32" Height="32"
+                    Margin="6,0,0,0"
+                    VerticalAlignment="Center"
+                    ToolTip="Localizar executável (.exe) no computador"
+                    Command="{Binding LocateExecutableCommand}">
+                <Path Width="13"
+                      Height="13"
+                      Stretch="Uniform"
+                      Fill="{StaticResource TextSecondaryBrush}"
+                      Data="{StaticResource IconFolderOpen}" />
+            </Button>
+
+            <!-- 9. Botão Site Oficial -->
+            <Button Grid.Column="8"
                     Style="{StaticResource GhostIconButton}"
                     Width="32" Height="32"
                     Margin="6,0,0,0"

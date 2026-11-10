@@ -14,4 +14,6 @@ public interface ILauncherOrchestratorService
     Task ExecuteLauncherAsync(LauncherPlatform platform, CancellationToken cancellationToken = default);
     Task<string?> DownloadAndValidateInstallerAsync(LauncherPlatform platform, CancellationToken cancellationToken = default);
     Task DownloadAndInstallLauncherAsync(LauncherPlatform platform, CancellationToken cancellationToken = default);
+    Task SetCustomExecutablePathAsync(string platformId, string executablePath, CancellationToken cancellationToken = default);
+    Task AddCustomPlatformAsync(LauncherPlatform platform, CancellationToken cancellationToken = default);
 }

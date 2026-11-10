@@ -9,12 +9,14 @@ public class CatalogServiceTests
     private readonly CatalogService _catalogService = new();
 
     [Fact]
-    public async Task GetCatalogAsync_ShouldReturnExactly11Platforms()
+    public async Task GetCatalogAsync_ShouldReturnConfiguredPlatforms()
     {
         var catalog = await _catalogService.GetCatalogAsync();
 
         Assert.NotNull(catalog);
-        Assert.Equal(11, catalog.Count);
+        Assert.True(catalog.Count >= 33);
+        Assert.Contains(catalog, p => p.Category == "Emulator");
+        Assert.Contains(catalog, p => p.Category == "Launcher");
     }
 
     [Theory]
@@ -29,6 +31,15 @@ public class CatalogServiceTests
     [InlineData("playnite", "Playnite")]
     [InlineData("xbox", "Xbox App")]
     [InlineData("recomplauncher", "RecompLauncher")]
+    [InlineData("cemu", "Cemu")]
+    [InlineData("dolphin", "Dolphin")]
+    [InlineData("snes9x", "Snes9x / rasSnes9x")]
+    [InlineData("ppsspp", "PPSSPP")]
+    [InlineData("duckstation", "DuckStation")]
+    [InlineData("pcsx2", "PCSX2")]
+    [InlineData("rpcs3", "RPCS3")]
+    [InlineData("xenia", "Xenia")]
+    [InlineData("xemu", "Xemu")]
     public void GetById_ShouldFindConfiguredPlatforms(string id, string expectedName)
     {
         var platform = _catalogService.GetById(id);

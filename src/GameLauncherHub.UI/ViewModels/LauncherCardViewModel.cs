@@ -60,6 +60,11 @@ public partial class LauncherCardViewModel : ObservableObject
     public string OfficialWebsite => Model.OfficialWebsite;
     public bool IsSupportedOnWindows => Model.IsSupportedOnWindows;
     public string? UnsupportedReason => Model.UnsupportedReason;
+    public string Category => Model.Category;
+    public string? TargetSystem => Model.TargetSystem;
+    public bool IsEmulator => string.Equals(Model.Category, "Emulator", StringComparison.OrdinalIgnoreCase);
+    public bool HasTargetSystem => !string.IsNullOrWhiteSpace(Model.TargetSystem);
+    public string? DetectedExecutablePath => Model.DetectedExecutablePath;
 
     public LauncherCardViewModel(
         LauncherPlatform model,
@@ -162,7 +167,14 @@ public partial class LauncherCardViewModel : ObservableObject
             return;
         }
 
-        // 4. Download oficial, validação Authenticode e instalação
+        // 4. Se não possui instalador automatizado com URL direta (ex: emuladores portáteis com release no GitHub / site)
+        if (State == LauncherState.NOT_INSTALLED && string.IsNullOrWhiteSpace(Model.InstallerDirectUrl))
+        {
+            OpenWebsite();
+            return;
+        }
+
+        // 5. Download oficial, validação Authenticode e instalação
         if (State == LauncherState.NOT_INSTALLED || State == LauncherState.ERROR)
         {
             IsBusy = true;
@@ -175,6 +187,24 @@ public partial class LauncherCardViewModel : ObservableObject
             {
                 IsBusy = false;
             }
+        }
+    }
+
+    [RelayCommand]
+    private async Task LocateExecutableAsync()
+    {
+        var dialog = new Microsoft.Win32.OpenFileDialog
+        {
+            Title = $"Localizar executável de {Name}",
+            Filter = "Executáveis (*.exe)|*.exe|Todos os arquivos (*.*)|*.*",
+            CheckFileExists = true
+        };
+
+        if (dialog.ShowDialog() == true)
+        {
+            var selectedPath = dialog.FileName;
+            await _orchestratorService.SetCustomExecutablePathAsync(Model.Id, selectedPath);
+            SyncFromModel();
         }
     }
 

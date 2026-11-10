@@ -41,6 +41,9 @@ public class OrchestratorStateTransitionTests
         }
 
         public LauncherPlatform? GetById(string id) => null;
+        public Task AddOrUpdateCustomPlatformAsync(LauncherPlatform platform, CancellationToken cancellationToken = default) => Task.CompletedTask;
+        public Task SetCustomExecutablePathAsync(string platformId, string executablePath, CancellationToken cancellationToken = default) => Task.CompletedTask;
+        public Task RemoveCustomPlatformAsync(string platformId, CancellationToken cancellationToken = default) => Task.CompletedTask;
     }
 
     private class MockHistoryService : IOperationHistoryService

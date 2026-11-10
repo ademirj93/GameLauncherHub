@@ -62,6 +62,9 @@ public class LauncherPlatform
     public bool IsOpenSource { get; init; } = false;
 
     // Compatibilidade e Tipo
+    public string Category { get; set; } = "Launcher"; // "Launcher" ou "Emulator"
+    public string? TargetSystem { get; set; } // ex: "Nintendo Wii U", "Sony PlayStation 2", etc.
+    public bool IsCustom { get; set; } = false;
     public bool IsSupportedOnWindows { get; init; } = true;
     public string? UnsupportedReason { get; init; }
     public bool IsWindowsStorePackage { get; init; } = false;

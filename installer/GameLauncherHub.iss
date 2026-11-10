@@ -3,7 +3,7 @@
 ; ==============================================================================
 
 #define MyAppName "GameLauncher Hub"
-#define MyAppVersion "0.11.4"
+#define MyAppVersion "0.10.11"
 #define MyAppPublisher "Ademir Junior"
 #define MyAppURL "https://github.com/ademirjunior/GameLauncherHub"
 #define MyAppExeName "GameLauncherHub.UI.exe"

@@ -109,6 +109,7 @@ public partial class App : System.Windows.Application
         // 9. Views
         services.AddTransient<MainWindow>();
         services.AddTransient<UpdateDialog>();
+        services.AddTransient<AddEmulatorDialog>();
     }
 
     private void ConfigureUnhandledExceptionLogging()

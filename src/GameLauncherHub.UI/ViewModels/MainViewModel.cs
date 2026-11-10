@@ -51,6 +51,12 @@ public partial class MainViewModel : ObservableObject
     private int _favoriteCount;
 
     [ObservableProperty]
+    private int _emulatorsCount;
+
+    [ObservableProperty]
+    private int _launchersCount;
+
+    [ObservableProperty]
     private int _selectedCount;
 
     [ObservableProperty]
@@ -78,6 +84,7 @@ public partial class MainViewModel : ObservableObject
     public event Action? RequestOpenSettings;
     public event Action? RequestOpenHistory;
     public event Action? RequestOpenAbout;
+    public event Action? RequestOpenAddEmulatorDialog;
     public event Action<AppUpdateInfo>? RequestOpenUpdateDialog;
 
     public MainViewModel(
@@ -330,6 +337,12 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void OpenAddEmulator()
+    {
+        RequestOpenAddEmulatorDialog?.Invoke();
+    }
+
+    [RelayCommand]
     public async Task CheckForUpdatesAsync()
     {
         IsCheckingUpdates = true;
@@ -435,6 +448,14 @@ public partial class MainViewModel : ObservableObject
         {
             query = query.Where(c => c.IsFavorite);
         }
+        else if (SelectedFilter == "Emuladores")
+        {
+            query = query.Where(c => c.IsEmulator);
+        }
+        else if (SelectedFilter == "Launchers")
+        {
+            query = query.Where(c => !c.IsEmulator);
+        }
         else if (SelectedFilter == "Instalados")
         {
             query = query.Where(c => c.State == LauncherState.INSTALLED || c.State == LauncherState.RUNNING);
@@ -454,6 +475,7 @@ public partial class MainViewModel : ObservableObject
             query = query.Where(c =>
                 c.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
                 c.Tagline.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                (c.TargetSystem != null && c.TargetSystem.Contains(SearchText, StringComparison.OrdinalIgnoreCase)) ||
                 c.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
         }
 
@@ -469,6 +491,8 @@ public partial class MainViewModel : ObservableObject
         InstalledCount = _allCards.Count(c => c.State == LauncherState.INSTALLED || c.State == LauncherState.RUNNING);
         AvailableCount = _allCards.Count(c => c.State == LauncherState.NOT_INSTALLED);
         FavoriteCount = _allCards.Count(c => c.IsFavorite);
+        EmulatorsCount = _allCards.Count(c => c.IsEmulator);
+        LaunchersCount = _allCards.Count(c => !c.IsEmulator);
     }
 
     private void OnPlatformStateChanged(object? sender, LauncherPlatform platform)

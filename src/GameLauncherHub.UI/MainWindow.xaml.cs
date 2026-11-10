@@ -35,6 +35,7 @@ public partial class MainWindow : Window
         _viewModel.RequestOpenHistory += OnOpenHistory;
         _viewModel.RequestOpenAbout += OnOpenAbout;
         _viewModel.RequestOpenUpdateDialog += OnOpenUpdateDialog;
+        _viewModel.RequestOpenAddEmulatorDialog += OnOpenAddEmulatorDialog;
 
         Loaded += async (s, e) =>
         {
@@ -172,6 +173,20 @@ public partial class MainWindow : Window
             Owner = this
         };
         dialog.ShowDialog();
+    }
+
+    private void OnOpenAddEmulatorDialog()
+    {
+        var orchestrator = _serviceProvider.GetRequiredService<GameLauncherHub.Application.Interfaces.ILauncherOrchestratorService>();
+        var dialog = new AddEmulatorDialog(orchestrator)
+        {
+            Owner = this
+        };
+
+        if (dialog.ShowDialog() == true)
+        {
+            _ = _viewModel.LoadPlatformsCommand.ExecuteAsync(null);
+        }
     }
 
     private void MinimizeButton_Click(object sender, RoutedEventArgs e)

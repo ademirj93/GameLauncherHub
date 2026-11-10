@@ -1,441 +1,1663 @@
-[
-  {
-    "id": "steam",
-    "name": "Steam",
-    "tagline": "Valve Corporation",
-    "description": "A principal plataforma global de distribuição de jogos para PC, comunidade e oficina de mods.",
-    "brandColor": "#171A21",
-    "accentColor": "#66C0F4",
-    "secondaryColor": "#1B2838",
-    "iconKey": "IconSteam",
-    "officialWebsite": "https://store.steampowered.com",
-    "downloadPageUrl": "https://store.steampowered.com/about/",
-    "installerDirectUrl": "https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe",
-    "expectedPublisher": "Valve",
-    "expectedExecutableName": "steam.exe",
-    "isSupportedOnWindows": true,
-    "detection": {
-      "registryPaths": [
-        "SOFTWARE\\Valve\\Steam",
-        "SOFTWARE\\WOW6432Node\\Valve\\Steam",
-        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Steam"
-      ],
-      "knownExecutableNames": [ "steam.exe" ],
-      "defaultInstallDirectories": [
-        "C:\\Program Files (x86)\\Steam",
-        "C:\\Program Files\\Steam"
-      ],
-      "protocolSchemes": [ "steam" ],
-      "startMenuShortcutNames": [ "Steam.lnk" ],
-      "appPathNames": [ "steam.exe" ]
+﻿[
+    {
+        "id":  "steam",
+        "name":  "Steam",
+        "tagline":  "Valve Corporation",
+        "description":  "A principal plataforma global de distribuiÃ§Ã£o de jogos para PC, comunidade e oficina de mods.",
+        "brandColor":  "#171A21",
+        "accentColor":  "#66C0F4",
+        "secondaryColor":  "#1B2838",
+        "iconKey":  "IconSteam",
+        "officialWebsite":  "https://store.steampowered.com",
+        "downloadPageUrl":  "https://store.steampowered.com/about/",
+        "installerDirectUrl":  "https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe",
+        "expectedPublisher":  "Valve",
+        "expectedExecutableName":  "steam.exe",
+        "isSupportedOnWindows":  true,
+        "detection":  {
+                          "registryPaths":  [
+                                                "SOFTWARE\\Valve\\Steam",
+                                                "SOFTWARE\\WOW6432Node\\Valve\\Steam",
+                                                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Steam"
+                                            ],
+                          "knownExecutableNames":  [
+                                                       "steam.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Program Files (x86)\\Steam",
+                                                            "C:\\Program Files\\Steam"
+                                                        ],
+                          "protocolSchemes":  [
+                                                  "steam"
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Steam.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "steam.exe"
+                                           ]
+                      },
+        "execution":  {
+                          "protocolScheme":  "steam://",
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  true,
+                             "silentInstallArguments":  "/S",
+                             "expectedInstallerExtension":  ".exe"
+                         },
+        "category":  "Launcher"
     },
-    "execution": {
-      "protocolScheme": "steam://",
-      "defaultArguments": ""
+    {
+        "id":  "epic",
+        "name":  "Epic Games Launcher",
+        "tagline":  "Epic Games, Inc.",
+        "description":  "Acesso Ã  loja Epic Games, jogos gratuitos semanais e ecossistema Unreal Engine.",
+        "brandColor":  "#121212",
+        "accentColor":  "#0078F2",
+        "secondaryColor":  "#202020",
+        "iconKey":  "IconEpic",
+        "officialWebsite":  "https://store.epicgames.com",
+        "downloadPageUrl":  "https://store.epicgames.com/download",
+        "installerDirectUrl":  "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi",
+        "expectedPublisher":  "Epic Games Inc.",
+        "expectedExecutableName":  "EpicGamesLauncher.exe",
+        "isSupportedOnWindows":  true,
+        "detection":  {
+                          "registryPaths":  [
+                                                "SOFTWARE\\Epic Games\\EpicGamesLauncher",
+                                                "SOFTWARE\\WOW6432Node\\Epic Games\\EpicGamesLauncher",
+                                                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{54707A2F-924A-4832-B83A-13A881270CF6}"
+                                            ],
+                          "knownExecutableNames":  [
+                                                       "EpicGamesLauncher.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win64",
+                                                            "C:\\Program Files\\Epic Games\\Launcher\\Portal\\Binaries\\Win64",
+                                                            "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win32"
+                                                        ],
+                          "protocolSchemes":  [
+                                                  "com.epicgames.launcher"
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Epic Games Launcher.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "EpicGamesLauncher.exe"
+                                           ]
+                      },
+        "execution":  {
+                          "protocolScheme":  "com.epicgames.launcher://",
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  true,
+                             "silentInstallArguments":  "/qn",
+                             "expectedInstallerExtension":  ".msi"
+                         },
+        "category":  "Launcher"
     },
-    "installation": {
-      "supportsSilentInstall": true,
-      "silentInstallArguments": "/S",
-      "expectedInstallerExtension": ".exe"
-    }
-  },
-  {
-    "id": "epic",
-    "name": "Epic Games Launcher",
-    "tagline": "Epic Games, Inc.",
-    "description": "Acesso à loja Epic Games, jogos gratuitos semanais e ecossistema Unreal Engine.",
-    "brandColor": "#121212",
-    "accentColor": "#0078F2",
-    "secondaryColor": "#202020",
-    "iconKey": "IconEpic",
-    "officialWebsite": "https://store.epicgames.com",
-    "downloadPageUrl": "https://store.epicgames.com/download",
-    "installerDirectUrl": "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi",
-    "expectedPublisher": "Epic Games Inc.",
-    "expectedExecutableName": "EpicGamesLauncher.exe",
-    "isSupportedOnWindows": true,
-    "detection": {
-      "registryPaths": [
-        "SOFTWARE\\Epic Games\\EpicGamesLauncher",
-        "SOFTWARE\\WOW6432Node\\Epic Games\\EpicGamesLauncher",
-        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{54707A2F-924A-4832-B83A-13A881270CF6}"
-      ],
-      "knownExecutableNames": [ "EpicGamesLauncher.exe" ],
-      "defaultInstallDirectories": [
-        "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win64",
-        "C:\\Program Files\\Epic Games\\Launcher\\Portal\\Binaries\\Win64",
-        "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\\Win32"
-      ],
-      "protocolSchemes": [ "com.epicgames.launcher" ],
-      "startMenuShortcutNames": [ "Epic Games Launcher.lnk" ],
-      "appPathNames": [ "EpicGamesLauncher.exe" ]
+    {
+        "id":  "amazon",
+        "name":  "Amazon Games",
+        "tagline":  "Amazon Services LLC",
+        "description":  "Instale e gerencie os jogos resgatados na sua assinatura Prime Gaming.",
+        "brandColor":  "#1E1A29",
+        "accentColor":  "#9D4EDD",
+        "secondaryColor":  "#2A2438",
+        "iconKey":  "IconAmazon",
+        "officialWebsite":  "https://gaming.amazon.com",
+        "downloadPageUrl":  "https://gaming.amazon.com/amazon-games-app",
+        "installerDirectUrl":  "https://download.amazongames.com/AmazonGamesSetup.exe",
+        "expectedPublisher":  "Amazon.com Services LLC",
+        "expectedExecutableName":  "Amazon Games.exe",
+        "isSupportedOnWindows":  true,
+        "detection":  {
+                          "registryPaths":  [
+                                                "SOFTWARE\\Amazon\\Amazon Games",
+                                                "SOFTWARE\\WOW6432Node\\Amazon\\Amazon Games",
+                                                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Amazon Games"
+                                            ],
+                          "knownExecutableNames":  [
+                                                       "Amazon Games.exe",
+                                                       "AmazonGames.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "%LOCALAPPDATA%\\Amazon Games\\App",
+                                                            "C:\\Program Files (x86)\\Amazon Games"
+                                                        ],
+                          "protocolSchemes":  [
+                                                  "amazon-games"
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Amazon Games.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "Amazon Games.exe"
+                                           ]
+                      },
+        "execution":  {
+                          "protocolScheme":  "amazon-games://",
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "expectedInstallerExtension":  ".exe"
+                         },
+        "category":  "Launcher"
     },
-    "execution": {
-      "protocolScheme": "com.epicgames.launcher://",
-      "defaultArguments": ""
+    {
+        "id":  "battlenet",
+        "name":  "Battle.net",
+        "tagline":  "Blizzard Entertainment",
+        "description":  "Plataforma para tÃ­tulos da Blizzard e Activision como World of Warcraft, Diablo e Overwatch.",
+        "brandColor":  "#0E1726",
+        "accentColor":  "#00AEFF",
+        "secondaryColor":  "#18263E",
+        "iconKey":  "IconBattleNet",
+        "officialWebsite":  "https://battle.net",
+        "downloadPageUrl":  "https://battle.net/download/getInstaller?os=win\u0026app=battle.net",
+        "installerDirectUrl":  "https://battle.net/download/getInstaller?os=win\u0026app=battle.net",
+        "expectedPublisher":  "Blizzard Entertainment, Inc.",
+        "expectedExecutableName":  "Battle.net.exe",
+        "isSupportedOnWindows":  true,
+        "detection":  {
+                          "registryPaths":  [
+                                                "SOFTWARE\\Blizzard Entertainment\\Battle.net",
+                                                "SOFTWARE\\WOW6432Node\\Blizzard Entertainment\\Battle.net",
+                                                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Battle.net"
+                                            ],
+                          "knownExecutableNames":  [
+                                                       "Battle.net.exe",
+                                                       "Battle.net Launcher.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Program Files (x86)\\Battle.net",
+                                                            "C:\\Program Files\\Battle.net"
+                                                        ],
+                          "protocolSchemes":  [
+                                                  "battlenet"
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Battle.net.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "Battle.net.exe"
+                                           ]
+                      },
+        "execution":  {
+                          "protocolScheme":  "battlenet://",
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "expectedInstallerExtension":  ".exe"
+                         },
+        "category":  "Launcher"
     },
-    "installation": {
-      "supportsSilentInstall": true,
-      "silentInstallArguments": "/qn",
-      "expectedInstallerExtension": ".msi"
-    }
-  },
-  {
-    "id": "amazon",
-    "name": "Amazon Games",
-    "tagline": "Amazon Services LLC",
-    "description": "Instale e gerencie os jogos resgatados na sua assinatura Prime Gaming.",
-    "brandColor": "#1E1A29",
-    "accentColor": "#9D4EDD",
-    "secondaryColor": "#2A2438",
-    "iconKey": "IconAmazon",
-    "officialWebsite": "https://gaming.amazon.com",
-    "downloadPageUrl": "https://gaming.amazon.com/amazon-games-app",
-    "installerDirectUrl": "https://download.amazongames.com/AmazonGamesSetup.exe",
-    "expectedPublisher": "Amazon.com Services LLC",
-    "expectedExecutableName": "Amazon Games.exe",
-    "isSupportedOnWindows": true,
-    "detection": {
-      "registryPaths": [
-        "SOFTWARE\\Amazon\\Amazon Games",
-        "SOFTWARE\\WOW6432Node\\Amazon\\Amazon Games",
-        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Amazon Games"
-      ],
-      "knownExecutableNames": [ "Amazon Games.exe", "AmazonGames.exe" ],
-      "defaultInstallDirectories": [
-        "%LOCALAPPDATA%\\Amazon Games\\App",
-        "C:\\Program Files (x86)\\Amazon Games"
-      ],
-      "protocolSchemes": [ "amazon-games" ],
-      "startMenuShortcutNames": [ "Amazon Games.lnk" ],
-      "appPathNames": [ "Amazon Games.exe" ]
+    {
+        "id":  "ubisoft",
+        "name":  "Ubisoft Connect",
+        "tagline":  "Ubisoft Entertainment",
+        "description":  "Ecossistema para jogos da Ubisoft, incluindo franquias como Assassin\u0027s Creed e Rainbow Six.",
+        "brandColor":  "#0B1526",
+        "accentColor":  "#0070FF",
+        "secondaryColor":  "#162540",
+        "iconKey":  "IconUbisoft",
+        "officialWebsite":  "https://ubisoftconnect.com",
+        "downloadPageUrl":  "https://ubisoftconnect.com",
+        "installerDirectUrl":  "https://ubi.li/4vxt9",
+        "expectedPublisher":  "Ubisoft",
+        "expectedExecutableName":  "UbisoftConnect.exe",
+        "isSupportedOnWindows":  true,
+        "detection":  {
+                          "registryPaths":  [
+                                                "SOFTWARE\\Ubisoft\\Launcher",
+                                                "SOFTWARE\\WOW6432Node\\Ubisoft\\Launcher",
+                                                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Uplay"
+                                            ],
+                          "knownExecutableNames":  [
+                                                       "UbisoftConnect.exe",
+                                                       "Uplay.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Program Files (x86)\\Ubisoft\\Ubisoft Game Launcher",
+                                                            "C:\\Program Files\\Ubisoft\\Ubisoft Game Launcher"
+                                                        ],
+                          "protocolSchemes":  [
+                                                  "uplay",
+                                                  "ubisoft-connect"
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Ubisoft Connect.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "UbisoftConnect.exe"
+                                           ]
+                      },
+        "execution":  {
+                          "protocolScheme":  "uplay://",
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  true,
+                             "silentInstallArguments":  "/S",
+                             "expectedInstallerExtension":  ".exe"
+                         },
+        "category":  "Launcher"
     },
-    "execution": {
-      "protocolScheme": "amazon-games://",
-      "defaultArguments": ""
+    {
+        "id":  "ea",
+        "name":  "EA app",
+        "tagline":  "Electronic Arts",
+        "description":  "Nova experiÃªncia rÃ¡pida e integrada para jogos da EA como FIFA, Battlefield e The Sims.",
+        "brandColor":  "#1F1214",
+        "accentColor":  "#FF4747",
+        "secondaryColor":  "#2F1A1C",
+        "iconKey":  "IconEA",
+        "officialWebsite":  "https://www.ea.com/ea-app",
+        "downloadPageUrl":  "https://www.ea.com/ea-app",
+        "installerDirectUrl":  "https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EAappInstaller.exe",
+        "expectedPublisher":  "Electronic Arts, Inc.",
+        "expectedExecutableName":  "EADesktop.exe",
+        "isSupportedOnWindows":  true,
+        "detection":  {
+                          "registryPaths":  [
+                                                "SOFTWARE\\Electronic Arts\\EA Desktop",
+                                                "SOFTWARE\\WOW6432Node\\Electronic Arts\\EA Desktop",
+                                                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{ElectronicArts-EADesktop}"
+                                            ],
+                          "knownExecutableNames":  [
+                                                       "EADesktop.exe",
+                                                       "EALauncher.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Program Files\\Electronic Arts\\EA Desktop\\EA Desktop",
+                                                            "C:\\Program Files (x86)\\Electronic Arts\\EA Desktop\\EA Desktop"
+                                                        ],
+                          "protocolSchemes":  [
+                                                  "origin",
+                                                  "eadrop"
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "EA.lnk",
+                                                         "EA app.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "EADesktop.exe"
+                                           ]
+                      },
+        "execution":  {
+                          "protocolScheme":  "origin://",
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "expectedInstallerExtension":  ".exe"
+                         },
+        "category":  "Launcher"
     },
-    "installation": {
-      "supportsSilentInstall": false,
-      "expectedInstallerExtension": ".exe"
-    }
-  },
-  {
-    "id": "battlenet",
-    "name": "Battle.net",
-    "tagline": "Blizzard Entertainment",
-    "description": "Plataforma para títulos da Blizzard e Activision como World of Warcraft, Diablo e Overwatch.",
-    "brandColor": "#0E1726",
-    "accentColor": "#00AEFF",
-    "secondaryColor": "#18263E",
-    "iconKey": "IconBattleNet",
-    "officialWebsite": "https://battle.net",
-    "downloadPageUrl": "https://battle.net/download/getInstaller?os=win&app=battle.net",
-    "installerDirectUrl": "https://battle.net/download/getInstaller?os=win&app=battle.net",
-    "expectedPublisher": "Blizzard Entertainment, Inc.",
-    "expectedExecutableName": "Battle.net.exe",
-    "isSupportedOnWindows": true,
-    "detection": {
-      "registryPaths": [
-        "SOFTWARE\\Blizzard Entertainment\\Battle.net",
-        "SOFTWARE\\WOW6432Node\\Blizzard Entertainment\\Battle.net",
-        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Battle.net"
-      ],
-      "knownExecutableNames": [ "Battle.net.exe", "Battle.net Launcher.exe" ],
-      "defaultInstallDirectories": [
-        "C:\\Program Files (x86)\\Battle.net",
-        "C:\\Program Files\\Battle.net"
-      ],
-      "protocolSchemes": [ "battlenet" ],
-      "startMenuShortcutNames": [ "Battle.net.lnk" ],
-      "appPathNames": [ "Battle.net.exe" ]
+    {
+        "id":  "heroic",
+        "name":  "Heroic Games Launcher",
+        "tagline":  "Heroic Open Source",
+        "description":  "Cliente livre e intuitivo para rodar jogos da Epic Games, GOG e Prime Gaming no PC.",
+        "brandColor":  "#1E122C",
+        "accentColor":  "#A855F7",
+        "secondaryColor":  "#2A1B3D",
+        "iconKey":  "IconHeroic",
+        "officialWebsite":  "https://heroicgameslauncher.com",
+        "downloadPageUrl":  "https://heroicgameslauncher.com/downloads",
+        "installerDirectUrl":  "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/latest/download/Heroic-Setup-x64.exe",
+        "expectedPublisher":  "Heroic Games Launcher",
+        "expectedExecutableName":  "Heroic.exe",
+        "isSupportedOnWindows":  true,
+        "requiresDigitalSignature":  false,
+        "isOpenSource":  true,
+        "detection":  {
+                          "registryPaths":  [
+                                                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Heroic",
+                                                "SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Heroic"
+                                            ],
+                          "knownExecutableNames":  [
+                                                       "Heroic.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "%LOCALAPPDATA%\\Programs\\heroic",
+                                                            "C:\\Program Files\\Heroic Games Launcher"
+                                                        ],
+                          "protocolSchemes":  [
+                                                  "heroic"
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Heroic Games Launcher.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "Heroic.exe"
+                                           ]
+                      },
+        "execution":  {
+                          "protocolScheme":  "heroic://",
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  true,
+                             "silentInstallArguments":  "/S",
+                             "expectedInstallerExtension":  ".exe"
+                         },
+        "category":  "Launcher"
     },
-    "execution": {
-      "protocolScheme": "battlenet://",
-      "defaultArguments": ""
+    {
+        "id":  "gog",
+        "name":  "GOG GALAXY",
+        "tagline":  "CD PROJEKT",
+        "description":  "Gerenciador de jogos DRM-free com unificaÃ§Ã£o de amigos, conquistas e jogos entre plataformas.",
+        "brandColor":  "#1D132B",
+        "accentColor":  "#9333EA",
+        "secondaryColor":  "#2C1D42",
+        "iconKey":  "IconGOG",
+        "officialWebsite":  "https://www.gog.com/galaxy",
+        "downloadPageUrl":  "https://www.gog.com/galaxy",
+        "installerDirectUrl":  "https://cdn.gog.com/open/galaxy/client/2.0.73.27/galaxy_setup_2.0.73.27.exe",
+        "expectedPublisher":  "GOG sp. z o.o.",
+        "expectedExecutableName":  "GalaxyClient.exe",
+        "isSupportedOnWindows":  true,
+        "detection":  {
+                          "registryPaths":  [
+                                                "SOFTWARE\\GOG.com\\GalaxyClient",
+                                                "SOFTWARE\\WOW6432Node\\GOG.com\\GalaxyClient",
+                                                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{GalaxyClient_is1}"
+                                            ],
+                          "knownExecutableNames":  [
+                                                       "GalaxyClient.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Program Files (x86)\\GOG GALAXY",
+                                                            "C:\\Program Files\\GOG GALAXY"
+                                                        ],
+                          "protocolSchemes":  [
+                                                  "goggalaxy"
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "GOG GALAXY.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "GalaxyClient.exe"
+                                           ]
+                      },
+        "execution":  {
+                          "protocolScheme":  "goggalaxy://",
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  true,
+                             "silentInstallArguments":  "/VERYSILENT /SUPPRESSMSGBOXES",
+                             "expectedInstallerExtension":  ".exe"
+                         },
+        "category":  "Launcher"
     },
-    "installation": {
-      "supportsSilentInstall": false,
-      "expectedInstallerExtension": ".exe"
-    }
-  },
-  {
-    "id": "ubisoft",
-    "name": "Ubisoft Connect",
-    "tagline": "Ubisoft Entertainment",
-    "description": "Ecossistema para jogos da Ubisoft, incluindo franquias como Assassin's Creed e Rainbow Six.",
-    "brandColor": "#0B1526",
-    "accentColor": "#0070FF",
-    "secondaryColor": "#162540",
-    "iconKey": "IconUbisoft",
-    "officialWebsite": "https://ubisoftconnect.com",
-    "downloadPageUrl": "https://ubisoftconnect.com",
-    "installerDirectUrl": "https://ubi.li/4vxt9",
-    "expectedPublisher": "Ubisoft",
-    "expectedExecutableName": "UbisoftConnect.exe",
-    "isSupportedOnWindows": true,
-    "detection": {
-      "registryPaths": [
-        "SOFTWARE\\Ubisoft\\Launcher",
-        "SOFTWARE\\WOW6432Node\\Ubisoft\\Launcher",
-        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Uplay"
-      ],
-      "knownExecutableNames": [ "UbisoftConnect.exe", "Uplay.exe" ],
-      "defaultInstallDirectories": [
-        "C:\\Program Files (x86)\\Ubisoft\\Ubisoft Game Launcher",
-        "C:\\Program Files\\Ubisoft\\Ubisoft Game Launcher"
-      ],
-      "protocolSchemes": [ "uplay", "ubisoft-connect" ],
-      "startMenuShortcutNames": [ "Ubisoft Connect.lnk" ],
-      "appPathNames": [ "UbisoftConnect.exe" ]
+    {
+        "id":  "playnite",
+        "name":  "Playnite",
+        "tagline":  "Josef Nemec Open Source",
+        "description":  "Centralizador open source com suporte a temas, emuladores e metadados de todas as lojas.",
+        "brandColor":  "#241712",
+        "accentColor":  "#EA580C",
+        "secondaryColor":  "#382319",
+        "iconKey":  "IconPlaynite",
+        "officialWebsite":  "https://playnite.link",
+        "downloadPageUrl":  "https://playnite.link",
+        "installerDirectUrl":  "https://playnite.link/download/PlayniteInstaller.exe",
+        "expectedPublisher":  "SignPath Foundation",
+        "expectedExecutableName":  "Playnite.DesktopApp.exe",
+        "isSupportedOnWindows":  true,
+        "requiresDigitalSignature":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "registryPaths":  [
+                                                "SOFTWARE\\Playnite",
+                                                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Playnite"
+                                            ],
+                          "knownExecutableNames":  [
+                                                       "Playnite.DesktopApp.exe",
+                                                       "Playnite.FullscreenApp.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "%LOCALAPPDATA%\\Playnite",
+                                                            "C:\\Program Files\\Playnite"
+                                                        ],
+                          "protocolSchemes":  [
+                                                  "playnite"
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Playnite.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "Playnite.DesktopApp.exe"
+                                           ]
+                      },
+        "execution":  {
+                          "protocolScheme":  "playnite://",
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  true,
+                             "silentInstallArguments":  "/SILENT",
+                             "expectedInstallerExtension":  ".exe"
+                         },
+        "category":  "Launcher"
     },
-    "execution": {
-      "protocolScheme": "uplay://",
-      "defaultArguments": ""
-    },
-    "installation": {
-      "supportsSilentInstall": true,
-      "silentInstallArguments": "/S",
-      "expectedInstallerExtension": ".exe"
-    }
-  },
-  {
-    "id": "ea",
-    "name": "EA app",
-    "tagline": "Electronic Arts",
-    "description": "Nova experiência rápida e integrada para jogos da EA como FIFA, Battlefield e The Sims.",
-    "brandColor": "#1F1214",
-    "accentColor": "#FF4747",
-    "secondaryColor": "#2F1A1C",
-    "iconKey": "IconEA",
-    "officialWebsite": "https://www.ea.com/ea-app",
-    "downloadPageUrl": "https://www.ea.com/ea-app",
-    "installerDirectUrl": "https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EAappInstaller.exe",
-    "expectedPublisher": "Electronic Arts, Inc.",
-    "expectedExecutableName": "EADesktop.exe",
-    "isSupportedOnWindows": true,
-    "detection": {
-      "registryPaths": [
-        "SOFTWARE\\Electronic Arts\\EA Desktop",
-        "SOFTWARE\\WOW6432Node\\Electronic Arts\\EA Desktop",
-        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{ElectronicArts-EADesktop}"
-      ],
-      "knownExecutableNames": [ "EADesktop.exe", "EALauncher.exe" ],
-      "defaultInstallDirectories": [
-        "C:\\Program Files\\Electronic Arts\\EA Desktop\\EA Desktop",
-        "C:\\Program Files (x86)\\Electronic Arts\\EA Desktop\\EA Desktop"
-      ],
-      "protocolSchemes": [ "origin", "eadrop" ],
-      "startMenuShortcutNames": [ "EA.lnk", "EA app.lnk" ],
-      "appPathNames": [ "EADesktop.exe" ]
-    },
-    "execution": {
-      "protocolScheme": "origin://",
-      "defaultArguments": ""
-    },
-    "installation": {
-      "supportsSilentInstall": false,
-      "expectedInstallerExtension": ".exe"
-    }
-  },
-  {
-    "id": "heroic",
-    "name": "Heroic Games Launcher",
-    "tagline": "Heroic Open Source",
-    "description": "Cliente livre e intuitivo para rodar jogos da Epic Games, GOG e Prime Gaming no PC.",
-    "brandColor": "#1E122C",
-    "accentColor": "#A855F7",
-    "secondaryColor": "#2A1B3D",
-    "iconKey": "IconHeroic",
-    "officialWebsite": "https://heroicgameslauncher.com",
-    "downloadPageUrl": "https://heroicgameslauncher.com/downloads",
-    "installerDirectUrl": "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/latest/download/Heroic-Setup-x64.exe",
-    "expectedPublisher": "Heroic Games Launcher",
-    "expectedExecutableName": "Heroic.exe",
-    "isSupportedOnWindows": true,
-    "requiresDigitalSignature": false,
-    "isOpenSource": true,
-    "detection": {
-      "registryPaths": [
-        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Heroic",
-        "SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Heroic"
-      ],
-      "knownExecutableNames": [ "Heroic.exe" ],
-      "defaultInstallDirectories": [
-        "%LOCALAPPDATA%\\Programs\\heroic",
-        "C:\\Program Files\\Heroic Games Launcher"
-      ],
-      "protocolSchemes": [ "heroic" ],
-      "startMenuShortcutNames": [ "Heroic Games Launcher.lnk" ],
-      "appPathNames": [ "Heroic.exe" ]
-    },
-    "execution": {
-      "protocolScheme": "heroic://",
-      "defaultArguments": ""
-    },
-    "installation": {
-      "supportsSilentInstall": true,
-      "silentInstallArguments": "/S",
-      "expectedInstallerExtension": ".exe"
-    }
-  },
-  {
-    "id": "gog",
-    "name": "GOG GALAXY",
-    "tagline": "CD PROJEKT",
-    "description": "Gerenciador de jogos DRM-free com unificação de amigos, conquistas e jogos entre plataformas.",
-    "brandColor": "#1D132B",
-    "accentColor": "#9333EA",
-    "secondaryColor": "#2C1D42",
-    "iconKey": "IconGOG",
-    "officialWebsite": "https://www.gog.com/galaxy",
-    "downloadPageUrl": "https://www.gog.com/galaxy",
-    "installerDirectUrl": "https://cdn.gog.com/open/galaxy/client/2.0.73.27/galaxy_setup_2.0.73.27.exe",
-    "expectedPublisher": "GOG sp. z o.o.",
-    "expectedExecutableName": "GalaxyClient.exe",
-    "isSupportedOnWindows": true,
-    "detection": {
-      "registryPaths": [
-        "SOFTWARE\\GOG.com\\GalaxyClient",
-        "SOFTWARE\\WOW6432Node\\GOG.com\\GalaxyClient",
-        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{GalaxyClient_is1}"
-      ],
-      "knownExecutableNames": [ "GalaxyClient.exe" ],
-      "defaultInstallDirectories": [
-        "C:\\Program Files (x86)\\GOG GALAXY",
-        "C:\\Program Files\\GOG GALAXY"
-      ],
-      "protocolSchemes": [ "goggalaxy" ],
-      "startMenuShortcutNames": [ "GOG GALAXY.lnk" ],
-      "appPathNames": [ "GalaxyClient.exe" ]
-    },
-    "execution": {
-      "protocolScheme": "goggalaxy://",
-      "defaultArguments": ""
-    },
-    "installation": {
-      "supportsSilentInstall": true,
-      "silentInstallArguments": "/VERYSILENT /SUPPRESSMSGBOXES",
-      "expectedInstallerExtension": ".exe"
-    }
-  },
-  {
-    "id": "playnite",
-    "name": "Playnite",
-    "tagline": "Josef Nemec Open Source",
-    "description": "Centralizador open source com suporte a temas, emuladores e metadados de todas as lojas.",
-    "brandColor": "#241712",
-    "accentColor": "#EA580C",
-    "secondaryColor": "#382319",
-    "iconKey": "IconPlaynite",
-    "officialWebsite": "https://playnite.link",
-    "downloadPageUrl": "https://playnite.link",
-    "installerDirectUrl": "https://playnite.link/download/PlayniteInstaller.exe",
-    "expectedPublisher": "SignPath Foundation",
-    "expectedExecutableName": "Playnite.DesktopApp.exe",
-    "isSupportedOnWindows": true,
-    "requiresDigitalSignature": true,
-    "isOpenSource": true,
-    "detection": {
-      "registryPaths": [
-        "SOFTWARE\\Playnite",
-        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Playnite"
-      ],
-      "knownExecutableNames": [ "Playnite.DesktopApp.exe", "Playnite.FullscreenApp.exe" ],
-      "defaultInstallDirectories": [
-        "%LOCALAPPDATA%\\Playnite",
-        "C:\\Program Files\\Playnite"
-      ],
-      "protocolSchemes": [ "playnite" ],
-      "startMenuShortcutNames": [ "Playnite.lnk" ],
-      "appPathNames": [ "Playnite.DesktopApp.exe" ]
-    },
-    "execution": {
-      "protocolScheme": "playnite://",
-      "defaultArguments": ""
-    },
-    "installation": {
-      "supportsSilentInstall": true,
-      "silentInstallArguments": "/SILENT",
-      "expectedInstallerExtension": ".exe"
-    }
-  },
-  {
-    "id": "xbox",
-    "name": "Xbox App",
-    "tagline": "Microsoft Corporation",
-    "description": "O aplicativo oficial da Microsoft para PC Game Pass, jogos da Windows Store e nuvem Xbox Cloud Gaming.",
-    "brandColor": "#0D2114",
-    "accentColor": "#107C10",
-    "secondaryColor": "#153320",
-    "iconKey": "IconXbox",
-    "officialWebsite": "https://www.xbox.com/apps/xbox-app-for-pc",
-    "downloadPageUrl": "https://www.microsoft.com/store/productId/9MV0B5HZVK9Z",
-    "isWindowsStorePackage": true,
-    "packageFamilyName": "Microsoft.GamingApp_8wekyb3d8bbwe",
-    "expectedPublisher": "Microsoft Corporation",
-    "expectedExecutableName": "XboxPcAppCE.exe",
-    "isSupportedOnWindows": true,
-    "detection": {
-      "registryPaths": [],
-      "knownExecutableNames": [ "XboxPcAppCE.exe", "XboxPcAppFT.exe", "Xbox.exe" ],
-      "defaultInstallDirectories": [
-        "%LOCALAPPDATA%\\Microsoft\\WindowsApps\\Microsoft.GamingApp_8wekyb3d8bbwe",
-        "%LOCALAPPDATA%\\Microsoft\\WindowsApps"
-      ],
-      "protocolSchemes": [ "xbox", "ms-gamepass" ],
-      "startMenuShortcutNames": [],
-      "appPathNames": [ "XboxPcAppCE.exe", "XboxPcAppFT.exe", "Xbox.exe" ]
-    },
-    "execution": {
-      "protocolScheme": "xbox:",
-      "defaultArguments": ""
-    },
-    "installation": {
-      "supportsSilentInstall": false,
-      "expectedInstallerExtension": ".msix"
-    }
-  },
-  {
-    "id": "recomplauncher",
-    "name": "RecompLauncher",
-    "tagline": "Ruben Ripalda Open Source",
-    "description": "Launcher open-source para ports nativos e recompilações estáticas de jogos de console para PC (Zelda 64 Recompiled, etc.).",
-    "brandColor": "#0E1A2B",
-    "accentColor": "#34F2E8",
-    "secondaryColor": "#16283D",
-    "iconKey": "IconRecomp",
-    "officialWebsite": "https://recomplauncher.com/",
-    "downloadPageUrl": "https://github.com/elripalda/RecompLauncher/releases",
-    "installerDirectUrl": "https://recomplauncher.com/api/launcher-beta.php?a=download",
-    "expectedPublisher": "Ruben Ripalda",
-    "expectedExecutableName": "recomplauncher.exe",
-    "isSupportedOnWindows": true,
-    "requiresDigitalSignature": true,
-    "isOpenSource": true,
-    "detection": {
-      "registryPaths": [
-        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\RecompLauncher",
-        "SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\RecompLauncher"
-      ],
-      "knownExecutableNames": [ "recomplauncher.exe", "RecompLauncher.exe" ],
-      "defaultInstallDirectories": [
-        "%LOCALAPPDATA%\\RecompLauncher",
-        "%LOCALAPPDATA%\\Programs\\RecompLauncher",
-        "C:\\Program Files\\RecompLauncher"
-      ],
-      "protocolSchemes": [ "recomplauncher" ],
-      "startMenuShortcutNames": [ "RecompLauncher.lnk", "Recomp Launcher.lnk" ],
-      "appPathNames": [ "recomplauncher.exe", "RecompLauncher.exe" ]
-    },
-    "execution": {
-      "protocolScheme": "recomplauncher://",
-      "defaultArguments": ""
-    },
-    "installation": {
-      "supportsSilentInstall": true,
-      "silentInstallArguments": "/S",
-      "expectedInstallerExtension": ".exe"
-    }
-  }
-]
+    {
+        "id":  "xbox",
+        "name":  "Xbox App",
+        "tagline":  "Microsoft Corporation",
+        "description":  "O aplicativo oficial da Microsoft para PC Game Pass, jogos da Windows Store e nuvem Xbox Cloud Gaming.",
+        "brandColor":  "#0D2114",
+        "accentColor":  "#107C10",
+        "secondaryColor":  "#153320",
+        "iconKey":  "IconXbox",
+        "officialWebsite":  "https://www.xbox.com/apps/xbox-app-for-pc",
+        "downloadPageUrl":  "https://www.microsoft.com/store/productId/9MV0B5HZVK9Z",
+        "isWindowsStorePackage":  true,
+        "packageFamilyName":  "Microsoft.GamingApp_8wekyb3d8bbwe",
+        "expectedPublisher":  "Microsoft Corporation",
+        "expectedExecutableName":  "XboxPcAppCE.exe",
+        "isSupportedOnWindows":  true,
+        "detection":  {
+                          "registryPaths":  [
 
+                                            ],
+                          "knownExecutableNames":  [
+                                                       "XboxPcAppCE.exe",
+                                                       "XboxPcAppFT.exe",
+                                                       "Xbox.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "%LOCALAPPDATA%\\Microsoft\\WindowsApps\\Microsoft.GamingApp_8wekyb3d8bbwe",
+                                                            "%LOCALAPPDATA%\\Microsoft\\WindowsApps"
+                                                        ],
+                          "protocolSchemes":  [
+                                                  "xbox",
+                                                  "ms-gamepass"
+                                              ],
+                          "startMenuShortcutNames":  [
+
+                                                     ],
+                          "appPathNames":  [
+                                               "XboxPcAppCE.exe",
+                                               "XboxPcAppFT.exe",
+                                               "Xbox.exe"
+                                           ]
+                      },
+        "execution":  {
+                          "protocolScheme":  "xbox:",
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "expectedInstallerExtension":  ".msix"
+                         },
+        "category":  "Launcher"
+    },
+    {
+        "id":  "recomplauncher",
+        "name":  "RecompLauncher",
+        "tagline":  "Ruben Ripalda Open Source",
+        "description":  "Launcher open-source para ports nativos e recompilaÃ§Ãµes estÃ¡ticas de jogos de console para PC (Zelda 64 Recompiled, etc.).",
+        "brandColor":  "#0E1A2B",
+        "accentColor":  "#34F2E8",
+        "secondaryColor":  "#16283D",
+        "iconKey":  "IconRecomp",
+        "officialWebsite":  "https://recomplauncher.com/",
+        "downloadPageUrl":  "https://github.com/elripalda/RecompLauncher/releases",
+        "installerDirectUrl":  "https://recomplauncher.com/api/launcher-beta.php?a=download",
+        "expectedPublisher":  "Ruben Ripalda",
+        "expectedExecutableName":  "recomplauncher.exe",
+        "isSupportedOnWindows":  true,
+        "requiresDigitalSignature":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "registryPaths":  [
+                                                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\RecompLauncher",
+                                                "SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\RecompLauncher"
+                                            ],
+                          "knownExecutableNames":  [
+                                                       "recomplauncher.exe",
+                                                       "RecompLauncher.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "%LOCALAPPDATA%\\RecompLauncher",
+                                                            "%LOCALAPPDATA%\\Programs\\RecompLauncher",
+                                                            "C:\\Program Files\\RecompLauncher"
+                                                        ],
+                          "protocolSchemes":  [
+                                                  "recomplauncher"
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "RecompLauncher.lnk",
+                                                         "Recomp Launcher.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "recomplauncher.exe",
+                                               "RecompLauncher.exe"
+                                           ]
+                      },
+        "execution":  {
+                          "protocolScheme":  "recomplauncher://",
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  true,
+                             "silentInstallArguments":  "/S",
+                             "expectedInstallerExtension":  ".exe"
+                         },
+        "category":  "Launcher"
+    },
+    {
+        "id":  "cemu",
+        "name":  "Cemu",
+        "category":  "Emulator",
+        "targetSystem":  "Nintendo Wii U",
+        "tagline":  "Emulador Nintendo Wii U",
+        "description":  "Emulador altamente otimizado para Nintendo Wii U, com suporte a resolucoes 4K+, mods graficos e alta compatibilidade.",
+        "brandColor":  "#0A2B49",
+        "accentColor":  "#00A2ED",
+        "secondaryColor":  "#051626",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://cemu.info",
+        "downloadPageUrl":  "https://cemu.info/#download",
+        "expectedExecutableName":  "Cemu.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "Cemu.exe",
+                                                       "cemu.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "%LOCALAPPDATA%\\Cemu",
+                                                            "C:\\Emulators\\Cemu",
+                                                            "D:\\Emulators\\Cemu",
+                                                            "%USERPROFILE%\\Emulators\\Cemu",
+                                                            "%ProgramFiles%\\Cemu"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Cemu.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "Cemu.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "dolphin",
+        "name":  "Dolphin",
+        "category":  "Emulator",
+        "targetSystem":  "Nintendo GameCube \u0026 Wii",
+        "tagline":  "Emulador GameCube \u0026 Wii",
+        "description":  "O consagrado emulador de Nintendo GameCube e Wii com melhorias visuais em HD, suporte a controles originais e netplay.",
+        "brandColor":  "#151B2B",
+        "accentColor":  "#3873B3",
+        "secondaryColor":  "#0B0E17",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://dolphin-emu.org",
+        "downloadPageUrl":  "https://dolphin-emu.org/download/",
+        "expectedExecutableName":  "Dolphin.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "Dolphin.exe",
+                                                       "DolphinWx.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Program Files\\Dolphin",
+                                                            "%LOCALAPPDATA%\\Dolphin",
+                                                            "C:\\Emulators\\Dolphin",
+                                                            "D:\\Emulators\\Dolphin",
+                                                            "%USERPROFILE%\\Emulators\\Dolphin"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Dolphin.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "Dolphin.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".exe"
+                         }
+    },
+    {
+        "id":  "snes9x",
+        "name":  "Snes9x / rasSnes9x",
+        "category":  "Emulator",
+        "targetSystem":  "Super Nintendo (SNES)",
+        "tagline":  "Super Nintendo \u0026 RetroAchievements",
+        "description":  "Emulador leve e de alta fidelidade para Super Nintendo / Super Famicom com suporte nativo a conquistas do RetroAchievements.",
+        "brandColor":  "#261633",
+        "accentColor":  "#8B5CF6",
+        "secondaryColor":  "#130A1A",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://www.snes9x.com",
+        "downloadPageUrl":  "https://github.com/snes9xgit/snes9x/releases",
+        "expectedExecutableName":  "snes9x-x64.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "snes9x-x64.exe",
+                                                       "snes9x.exe",
+                                                       "RA_Snes9x.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Emulators\\Snes9x",
+                                                            "D:\\Emulators\\Snes9x",
+                                                            "%USERPROFILE%\\Emulators\\Snes9x",
+                                                            "%LOCALAPPDATA%\\Snes9x"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Snes9x.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "snes9x-x64.exe",
+                                               "snes9x.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "ppsspp",
+        "name":  "PPSSPP",
+        "category":  "Emulator",
+        "targetSystem":  "Sony PSP",
+        "tagline":  "Emulador de Sony PlayStation Portable",
+        "description":  "Execute jogos de PSP em resolucao Full HD e 4K no PC com suporte a savestates, filtros de textura e controles modernos.",
+        "brandColor":  "#082242",
+        "accentColor":  "#0096D6",
+        "secondaryColor":  "#041121",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://www.ppsspp.org",
+        "downloadPageUrl":  "https://www.ppsspp.org/download/",
+        "expectedExecutableName":  "PPSSPPWindows64.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "PPSSPPWindows64.exe",
+                                                       "PPSSPPWindows.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Program Files\\PPSSPP",
+                                                            "C:\\Emulators\\PPSSPP",
+                                                            "D:\\Emulators\\PPSSPP",
+                                                            "%USERPROFILE%\\Emulators\\PPSSPP",
+                                                            "%LOCALAPPDATA%\\PPSSPP"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "PPSSPP.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "PPSSPPWindows64.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "vbam",
+        "name":  "RAVBA / VBA-M",
+        "category":  "Emulator",
+        "targetSystem":  "Game Boy, GBC \u0026 GBA",
+        "tagline":  "Game Boy Advance \u0026 RetroAchievements",
+        "description":  "Emulador consolidado para a linha Game Boy, Color e Advance com filtros de pos-processamento e integracao RetroAchievements.",
+        "brandColor":  "#261033",
+        "accentColor":  "#A855F7",
+        "secondaryColor":  "#14071C",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://vba-m.com",
+        "downloadPageUrl":  "https://github.com/visualboyadvance-m/visualboyadvance-m/releases",
+        "expectedExecutableName":  "visualboyadvance-m.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "visualboyadvance-m.exe",
+                                                       "vbam.exe",
+                                                       "RA_VBA.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Emulators\\VBA-M",
+                                                            "C:\\Emulators\\RAVBA",
+                                                            "D:\\Emulators\\VBA-M",
+                                                            "%USERPROFILE%\\Emulators\\VBA-M"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "VisualBoyAdvance-M.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "visualboyadvance-m.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "project64",
+        "name":  "RAProject64 / Project64",
+        "category":  "Emulator",
+        "targetSystem":  "Nintendo 64",
+        "tagline":  "Emulador de Nintendo 64",
+        "description":  "Emulador classico para Nintendo 64 com plugins avancados de video e audio, packs de texturas e suporte a RetroAchievements.",
+        "brandColor":  "#132417",
+        "accentColor":  "#10B981",
+        "secondaryColor":  "#09120B",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://www.pj64-emu.com",
+        "downloadPageUrl":  "https://www.pj64-emu.com",
+        "expectedExecutableName":  "Project64.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "Project64.exe",
+                                                       "RA_Project64.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Program Files (x86)\\Project64",
+                                                            "C:\\Program Files\\Project64",
+                                                            "C:\\Emulators\\Project64",
+                                                            "D:\\Emulators\\Project64",
+                                                            "%USERPROFILE%\\Emulators\\Project64"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Project64.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "Project64.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".exe"
+                         }
+    },
+    {
+        "id":  "vita3k",
+        "name":  "Vita3K",
+        "category":  "Emulator",
+        "targetSystem":  "Sony PS Vita",
+        "tagline":  "Emulador de PlayStation Vita",
+        "description":  "O primeiro emulador open-source funcional de PlayStation Vita para Windows com aceleracao de hardware via Vulkan.",
+        "brandColor":  "#071E3D",
+        "accentColor":  "#0284C7",
+        "secondaryColor":  "#030F1F",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://vita3k.org",
+        "downloadPageUrl":  "https://vita3k.org/#download",
+        "expectedExecutableName":  "Vita3K.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "Vita3K.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "%APPDATA%\\Vita3K",
+                                                            "C:\\Emulators\\Vita3K",
+                                                            "D:\\Emulators\\Vita3K",
+                                                            "%USERPROFILE%\\Emulators\\Vita3K"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Vita3K.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "Vita3K.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "ymir",
+        "name":  "Ymir",
+        "category":  "Emulator",
+        "targetSystem":  "Sega Saturn",
+        "tagline":  "Emulador cycle-accurate de Sega Saturn",
+        "description":  "Emulador moderno com foco em altissima fidelidade de ciclo para a arquitetura complexa do Sega Saturn.",
+        "brandColor":  "#241C10",
+        "accentColor":  "#F59E0B",
+        "secondaryColor":  "#120E08",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://github.com/exjam/ymir",
+        "downloadPageUrl":  "https://github.com/exjam/ymir/releases",
+        "expectedExecutableName":  "ymir.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "ymir.exe",
+                                                       "ymir-gui.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Emulators\\Ymir",
+                                                            "D:\\Emulators\\Ymir",
+                                                            "%USERPROFILE%\\Emulators\\Ymir"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Ymir.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "ymir.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "flycast",
+        "name":  "Flycast",
+        "category":  "Emulator",
+        "targetSystem":  "Sega Dreamcast \u0026 Arcade",
+        "tagline":  "Sega Dreamcast, NAOMI \u0026 Atomiswave",
+        "description":  "Emulador multi-sistema rapido com renderizacao Vulkan, suporte a widescreen, netplay e alta compatibilidade.",
+        "brandColor":  "#241829",
+        "accentColor":  "#EA580C",
+        "secondaryColor":  "#120B14",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://github.com/flyinghead/flycast",
+        "downloadPageUrl":  "https://flyinghead.github.io/flycast-builds/",
+        "expectedExecutableName":  "flycast.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "flycast.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Emulators\\Flycast",
+                                                            "D:\\Emulators\\Flycast",
+                                                            "%USERPROFILE%\\Emulators\\Flycast"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Flycast.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "flycast.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "redream",
+        "name":  "Redream",
+        "category":  "Emulator",
+        "targetSystem":  "Sega Dreamcast",
+        "tagline":  "Emulador Dreamcast de Alta Definicao",
+        "description":  "Emulador plug-and-play para Sega Dreamcast com interface fluida, renderizacao em 4K e excelente desempenho.",
+        "brandColor":  "#260E12",
+        "accentColor":  "#EF4444",
+        "secondaryColor":  "#140608",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://redream.io",
+        "downloadPageUrl":  "https://redream.io/download",
+        "expectedExecutableName":  "redream.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  false,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "redream.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Emulators\\Redream",
+                                                            "D:\\Emulators\\Redream",
+                                                            "%USERPROFILE%\\Emulators\\Redream",
+                                                            "%LOCALAPPDATA%\\Redream"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Redream.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "redream.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "kegafusion",
+        "name":  "Kega Fusion",
+        "category":  "Emulator",
+        "targetSystem":  "Sega Mega Drive \u0026 Master System",
+        "tagline":  "Multi-emulador classico da Sega",
+        "description":  "Emulador de referencia para Sega Mega Drive / Genesis, 32X, Mega CD e Master System.",
+        "brandColor":  "#15181E",
+        "accentColor":  "#3B82F6",
+        "secondaryColor":  "#0B0C0F",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://www.carpeludum.com/kega-fusion/",
+        "downloadPageUrl":  "https://www.carpeludum.com/kega-fusion/",
+        "expectedExecutableName":  "Fusion.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  false,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "Fusion.exe",
+                                                       "KegaFusion.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Emulators\\KegaFusion",
+                                                            "D:\\Emulators\\KegaFusion",
+                                                            "%USERPROFILE%\\Emulators\\KegaFusion"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Kega Fusion.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "Fusion.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "citra",
+        "name":  "Citra",
+        "category":  "Emulator",
+        "targetSystem":  "Nintendo 3DS",
+        "tagline":  "Emulador de Nintendo 3DS",
+        "description":  "O emulador de referencia para Nintendo 3DS no Windows com layout personalizavel de telas e resolucao aprimorada.",
+        "brandColor":  "#2E1C0A",
+        "accentColor":  "#F59E0B",
+        "secondaryColor":  "#170E05",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://github.com/PabloMK7/citra",
+        "downloadPageUrl":  "https://github.com/PabloMK7/citra/releases",
+        "expectedExecutableName":  "citra-qt.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "citra-qt.exe",
+                                                       "citra.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "%LOCALAPPDATA%\\Citra\\nightly-mingw",
+                                                            "%APPDATA%\\Citra",
+                                                            "C:\\Emulators\\Citra",
+                                                            "D:\\Emulators\\Citra",
+                                                            "%USERPROFILE%\\Emulators\\Citra"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Citra.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "citra-qt.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "citron",
+        "name":  "Citron",
+        "category":  "Emulator",
+        "targetSystem":  "Nintendo Switch",
+        "tagline":  "Emulador moderno de Nintendo Switch",
+        "description":  "Emulador otimizado e veloz para Nintendo Switch com suporte avancado a Vulkan e compatibilidade aprimorada.",
+        "brandColor":  "#261C08",
+        "accentColor":  "#EAB308",
+        "secondaryColor":  "#120E04",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://citron-emu.org",
+        "downloadPageUrl":  "https://citron-emu.org/download",
+        "expectedExecutableName":  "citron.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "citron.exe",
+                                                       "citron-qt.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "%LOCALAPPDATA%\\Citron",
+                                                            "C:\\Emulators\\Citron",
+                                                            "D:\\Emulators\\Citron",
+                                                            "%USERPROFILE%\\Emulators\\Citron"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Citron.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "citron.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "eden",
+        "name":  "Eden",
+        "category":  "Emulator",
+        "targetSystem":  "Nintendo Switch",
+        "tagline":  "Emulador Switch da Comunidade",
+        "description":  "Projeto comunitario de emulacao de Nintendo Switch com atualizacoes constantes de desempenho e correcoes graficas.",
+        "brandColor":  "#0B2417",
+        "accentColor":  "#10B981",
+        "secondaryColor":  "#05120B",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://github.com/eden-emulator",
+        "downloadPageUrl":  "https://github.com/eden-emulator/releases",
+        "expectedExecutableName":  "eden.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "eden.exe",
+                                                       "eden-qt.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "%LOCALAPPDATA%\\Eden",
+                                                            "C:\\Emulators\\Eden",
+                                                            "D:\\Emulators\\Eden",
+                                                            "%USERPROFILE%\\Emulators\\Eden"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Eden.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "eden.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "sudachi",
+        "name":  "Sudachi",
+        "category":  "Emulator",
+        "targetSystem":  "Nintendo Switch",
+        "tagline":  "Emulador Neoterico de Nintendo Switch",
+        "description":  "Fork aprimorado com correcoes especificas de renderizacao e compatibilidade com lancamentos recentes da plataforma.",
+        "brandColor":  "#21102A",
+        "accentColor":  "#D946EF",
+        "secondaryColor":  "#100814",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://sudachi.emuplace.app",
+        "downloadPageUrl":  "https://github.com/sudachi-emu/sudachi/releases",
+        "expectedExecutableName":  "sudachi.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "sudachi.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "%LOCALAPPDATA%\\Sudachi",
+                                                            "C:\\Emulators\\Sudachi",
+                                                            "D:\\Emulators\\Sudachi",
+                                                            "%USERPROFILE%\\Emulators\\Sudachi"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Sudachi.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "sudachi.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "retroarch",
+        "name":  "RetroArch",
+        "category":  "Emulator",
+        "targetSystem":  "Multi-sistema (Cores Libretro)",
+        "tagline":  "Frontend unificado de emulacao",
+        "description":  "A mais completa central de emulacao com dezenas de consoles, shaders CRT avancados, netplay e conquistas integradas.",
+        "brandColor":  "#171B26",
+        "accentColor":  "#6366F1",
+        "secondaryColor":  "#0B0D12",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://www.retroarch.com",
+        "downloadPageUrl":  "https://www.retroarch.com/?page=platforms",
+        "expectedExecutableName":  "retroarch.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "retroarch.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Program Files\\RetroArch",
+                                                            "%APPDATA%\\RetroArch",
+                                                            "C:\\Emulators\\RetroArch",
+                                                            "D:\\Emulators\\RetroArch",
+                                                            "%USERPROFILE%\\Emulators\\RetroArch"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "RetroArch.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "retroarch.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".exe"
+                         }
+    },
+    {
+        "id":  "retrobat",
+        "name":  "RetroBat",
+        "category":  "Emulator",
+        "targetSystem":  "Frontend Multi-emulador PC",
+        "tagline":  "Lancador visual de emuladores para Windows",
+        "description":  "Interface visual rica e integrada pronta para executar emuladores e ROMs com EmulationStation no Windows.",
+        "brandColor":  "#260E12",
+        "accentColor":  "#E11D48",
+        "secondaryColor":  "#140608",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://www.retrobat.org",
+        "downloadPageUrl":  "https://www.retrobat.org/download/",
+        "expectedExecutableName":  "retrobat.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "retrobat.exe",
+                                                       "RetroBat.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\RetroBat",
+                                                            "D:\\RetroBat",
+                                                            "C:\\Emulators\\RetroBat",
+                                                            "D:\\Emulators\\RetroBat",
+                                                            "%USERPROFILE%\\RetroBat"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "RetroBat.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "retrobat.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".exe"
+                         }
+    },
+    {
+        "id":  "duckstation",
+        "name":  "DuckStation",
+        "category":  "Emulator",
+        "targetSystem":  "Sony PlayStation 1 (PSone)",
+        "tagline":  "Emulador de alta precisao de PS1",
+        "description":  "Emulador de PlayStation 1 veloz com suporte a resolucoes ate 4K, correcao PGXP para poligonos estaveis e interface moderna.",
+        "brandColor":  "#261A08",
+        "accentColor":  "#F59E0B",
+        "secondaryColor":  "#140D04",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://github.com/stenzek/duckstation",
+        "downloadPageUrl":  "https://github.com/stenzek/duckstation/releases",
+        "expectedExecutableName":  "duckstation-qt-x64-ReleaseLTCG.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "duckstation-qt-x64-ReleaseLTCG.exe",
+                                                       "duckstation.exe",
+                                                       "duckstation-nogui-x64-ReleaseLTCG.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Emulators\\DuckStation",
+                                                            "D:\\Emulators\\DuckStation",
+                                                            "%USERPROFILE%\\Emulators\\DuckStation",
+                                                            "%LOCALAPPDATA%\\DuckStation"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "DuckStation.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "duckstation-qt-x64-ReleaseLTCG.exe",
+                                               "duckstation.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "rpcs3",
+        "name":  "RPCS3",
+        "category":  "Emulator",
+        "targetSystem":  "Sony PlayStation 3",
+        "tagline":  "O emulador open-source de PS3",
+        "description":  "Emulador open-source de PlayStation 3 no Windows, com suporte a Vulkan, 60fps+, upscaling e milhares de jogos compativeis.",
+        "brandColor":  "#0A162B",
+        "accentColor":  "#3B82F6",
+        "secondaryColor":  "#050B14",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://rpcs3.net",
+        "downloadPageUrl":  "https://rpcs3.net/download",
+        "expectedExecutableName":  "rpcs3.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "rpcs3.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Emulators\\RPCS3",
+                                                            "D:\\Emulators\\RPCS3",
+                                                            "%USERPROFILE%\\Emulators\\RPCS3",
+                                                            "%LOCALAPPDATA%\\RPCS3"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "RPCS3.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "rpcs3.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".7z"
+                         }
+    },
+    {
+        "id":  "pcsx2",
+        "name":  "PCSX2",
+        "category":  "Emulator",
+        "targetSystem":  "Sony PlayStation 2",
+        "tagline":  "O principal emulador de PS2",
+        "description":  "Emulador maduro de PlayStation 2 com interface Qt moderna, suporte a Vulkan/DirectX 12, savestates e resolucoes HD.",
+        "brandColor":  "#08172E",
+        "accentColor":  "#2563EB",
+        "secondaryColor":  "#040B17",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://pcsx2.net",
+        "downloadPageUrl":  "https://pcsx2.net/downloads/",
+        "expectedExecutableName":  "pcsx2-qtx64.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "pcsx2-qtx64.exe",
+                                                       "pcsx2.exe",
+                                                       "pcsx2-qt.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Program Files\\PCSX2",
+                                                            "C:\\Emulators\\PCSX2",
+                                                            "D:\\Emulators\\PCSX2",
+                                                            "%USERPROFILE%\\Emulators\\PCSX2",
+                                                            "%LOCALAPPDATA%\\Programs\\PCSX2"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "PCSX2.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "pcsx2-qtx64.exe",
+                                               "pcsx2.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".exe"
+                         }
+    },
+    {
+        "id":  "xenia",
+        "name":  "Xenia",
+        "category":  "Emulator",
+        "targetSystem":  "Microsoft Xbox 360",
+        "tagline":  "Emulador de Xbox 360 para Windows",
+        "description":  "Emulador open-source de Xbox 360 no PC com renderizacao DirectX 12 e Vulkan, alta performance e patches para desbloquear framerates.",
+        "brandColor":  "#0B1F11",
+        "accentColor":  "#107C10",
+        "secondaryColor":  "#051009",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://xenia.jp",
+        "downloadPageUrl":  "https://xenia.jp/download/",
+        "expectedExecutableName":  "xenia.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "xenia.exe",
+                                                       "xenia_canary.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Emulators\\Xenia",
+                                                            "D:\\Emulators\\Xenia",
+                                                            "%USERPROFILE%\\Emulators\\Xenia",
+                                                            "%LOCALAPPDATA%\\Xenia"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "Xenia.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "xenia.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "xemu",
+        "name":  "Xemu",
+        "category":  "Emulator",
+        "targetSystem":  "Microsoft Xbox Original",
+        "tagline":  "Emulador de Xbox Original (1a Geracao)",
+        "description":  "Emulador de baixa latencia para o Xbox original, com rede virtualizada, audio digital, suporte a shaders e alta precisao.",
+        "brandColor":  "#0D2110",
+        "accentColor":  "#22C55E",
+        "secondaryColor":  "#061008",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://xemu.app",
+        "downloadPageUrl":  "https://xemu.app/#download",
+        "expectedExecutableName":  "xemu.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "xemu.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "C:\\Program Files\\xemu",
+                                                            "C:\\Emulators\\xemu",
+                                                            "D:\\Emulators\\xemu",
+                                                            "%USERPROFILE%\\Emulators\\xemu",
+                                                            "%LOCALAPPDATA%\\xemu"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "xemu.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "xemu.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    }
+]

@@ -9,5 +9,8 @@ public interface ICatalogService
 {
     Task<IReadOnlyList<LauncherPlatform>> GetCatalogAsync(CancellationToken cancellationToken = default);
     LauncherPlatform? GetById(string id);
+    Task AddOrUpdateCustomPlatformAsync(LauncherPlatform platform, CancellationToken cancellationToken = default);
+    Task SetCustomExecutablePathAsync(string platformId, string executablePath, CancellationToken cancellationToken = default);
+    Task RemoveCustomPlatformAsync(string platformId, CancellationToken cancellationToken = default);
 }
 
