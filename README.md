@@ -5,7 +5,7 @@
 # GameLauncher Hub
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Release-v0.10.11-00C853?style=for-the-badge&logo=windows" alt="Release" />
+  <img src="https://img.shields.io/badge/Release-v0.11.10b2-00C853?style=for-the-badge&logo=windows" alt="Release" />
   <img src="https://img.shields.io/badge/Developer-Ademir%20Junior-6366F1?style=for-the-badge" alt="Developer" />
   <img src="https://img.shields.io/badge/License-GNU%20GPLv3-blue?style=for-the-badge" alt="License" />
   <img src="https://img.shields.io/badge/.NET-10.0%20(LTS)-512BD4?style=for-the-badge&logo=dotnet" alt=".NET 10" />
