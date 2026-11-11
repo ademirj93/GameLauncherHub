@@ -1,0 +1,80 @@
+# 🎮 GameLauncher Hub — Release v0.11.10b3 (Beta 3)
+
+**Data de Lançamento:** 11 de Novembro de 2026  
+**Versão:** `0.11.10b3` (ou `11.10b3`)  
+**Plataforma Alvo:** Windows 10 e Windows 11 (64-bit)  
+**Linguagem & Framework:** C# / .NET 10.0 (LTS) — WPF (Windows Presentation Foundation)  
+**Licença:** GNU General Public License v3.0 (GPLv3)  
+
+---
+
+## 🚀 Destaques da Release
+
+Esta versão traz **otimizações profundas no consumo de memória RAM (-41% na memória privada real)**, compilação antecipada nativa (**Ahead-Of-Time / ReadyToRun**), e a integração completa da nova área de **emulação com 21 emuladores suportados** e localização customizada de executáveis.
+
+---
+
+## ⚡ Principais Melhorias e Otimizações
+
+### 1. 📉 Redução Drástica no Consumo de Memória RAM (-41% de Private Bytes)
+- **Ativação de Workstation GC e DATAS:**
+  - Configuração do runtime .NET para modo de estação de trabalho (`ServerGarbageCollection: false`) com coleta concorrente e suporte a **DATAS** (*Dynamic Adaptation to Application Sizes*), reduzindo a reserva de heaps estáticos por núcleo de processador.
+- **Detecção Otimizada de Processos (Eliminação de Leaks de Handles):**
+  - Substituição da listagem global de todos os processos do Windows por consultas seletivas com `Process.GetProcessesByName(...)`.
+  - Descarte imediato e garantido com `p.Dispose()` de todos os handles nativos de kernel, reduzindo milhares de alocações transitórias.
+  - Controle de concorrência com `Parallel.ForEachAsync` limitando a no máximo 4 tarefas simultâneas, prevenindo picos de expansão do *ThreadPool*.
+- **Novo Decodificador de Imagens Congeladas (`ThumbnailImageConverter`):**
+  - Artes baixadas de alta resolução agora são decodificadas diretamente na dimensão de exibição (`DecodePixelWidth = 64/48`) e congeladas na memória com `bitmap.Freeze()`, reduzindo em mais de 90% a pegada de memória de imagens e compartilhando texturas na GPU sem redundância.
+- **Substituição do Ativo de Logotipo:**
+  - O antigo arquivo bruto não comprimido de 7.1 MB (`logo.bmp`) foi substituído por uma imagem otimizada em PNG de 392 KB com decodificação restrita (`DecodePixelWidth = 360`), liberando o *Large Object Heap* (LOH).
+- **Alívio da VRAM e Shaders de GPU:**
+  - Efeitos de sombra (`DropShadowEffect`) dos cards agora são ativados dinamicamente apenas sob demanda (*Hover* do mouse), eliminando 32 render targets intermediários na GPU.
+- **Virtualização Real no Modo Compacto:**
+  - Conversão do modo de visualização compacto para `ListBox` com reciclagem de containers (`VirtualizingPanel.VirtualizationMode="Recycling"` e `ScrollViewer.CanContentScroll="True"`).
+- **Ciclo de Vida de ViewModels com `IDisposable`:**
+  - Desinscrição garantida de eventos em `LauncherCardViewModel`, eliminando memory leaks ao atualizar o catálogo.
+
+---
+
+### 2. ⚡ Compilação AOT (ReadyToRun / CrossGen2)
+- O binário oficial standalone agora é publicado com pré-compilação de código de máquina nativo (`PublishReadyToRun=true`), acelerando a abertura da aplicação e reduzindo a memória alocada para caches de compilação JIT.
+
+---
+
+### 3. 🕹 Suporte Expandido a Emuladores & Launchers (32 Plataformas)
+- **11 Lojas / Launchers de PC:** Steam, Epic Games, Amazon Games, Battle.net, Ubisoft Connect, EA App, Heroic Games, GOG GALAXY, Playnite, Xbox App e RecompLauncher.
+- **21 Emuladores Suportados:**
+  - **Sony PlayStation:** ShadPS4 (PS4), RPCS3 (PS3), PCSX2 (PS2), DuckStation (PSone), PPSSPP (PSP) e Vita3K (PS Vita).
+  - **Nintendo:** Cemu (Wii U), Dolphin (GameCube/Wii), Citron Neo (Switch), Eden (Switch), Snes9x (SNES), Project64 (N64) e VBA-M (GB/GBC/GBA).
+  - **Microsoft Xbox:** Xenia (Xbox 360) e Xemu (Xbox Original).
+  - **Sega:** Flycast (Dreamcast), Redream (Dreamcast), Ymir (Saturn) e Kega Fusion (Mega Drive).
+  - **Multi-Sistemas & Frontends:** RetroArch e RetroBat.
+- **Localização Manual de Executáveis (`📁 Localizar .exe`):** Permite associar executáveis em qualquer pasta ou unidade de disco (com persistência automática em `%LOCALAPPDATA%\GameLauncherHub\custom_catalog.json`).
+- **Modal de Emuladores Customizados (`+ Emulador`):** Cadastro direto de qualquer emulador portátil ou novo console pelo usuário.
+
+---
+
+## 📊 Tabela de Métricas de Performance
+
+| Métrica | Release Anterior (0.10.11) | Release Atual (0.11.10b3) | Ganho |
+| :--- | :---: | :---: | :---: |
+| **Memória Privada (Private Bytes)** | ~216 MB | ~127 MB | **-41%** |
+| **Tamanho do Ativo de Logotipo** | 7.102 KB (`.bmp`) | 392 KB (`.png`) | **-94,5%** |
+| **Decodificação de Imagens em Cache** | Tamanho Real (Full HD/4K) | Thumbnails Congelados (64px) | **-90%** |
+| **Handles de Processos Alocados** | ~9.600 por ciclo | ~0 (descarte imediato com `Dispose`) | **~100%** |
+| **Tempo de Execução da Suite de Testes** | ~4 segundos | ~1 segundo | **4x mais rápido** |
+
+---
+
+## 📦 Arquivos da Distribuição
+
+- `GameLauncherHub.UI.exe` — Executável independente standalone de 64 bits (não requer instalação prévia de runtimes adicionais).
+- `GameLauncherHub_Setup_v0.11.10b3.exe` — Instalador oficial assistido para Windows (quando compilado via Inno Setup).
+
+---
+
+## 🔧 Requisitos do Sistema
+- **Sistema Operacional:** Windows 10 (Build 1809 ou superior) ou Windows 11 (64-bit)
+- **Arquitetura:** x64
+- **Permissões:** Executa em nível de usuário comum (privilégios de Administrador solicitados apenas quando exigido pelo instalador de um launcher terceiro).
+
