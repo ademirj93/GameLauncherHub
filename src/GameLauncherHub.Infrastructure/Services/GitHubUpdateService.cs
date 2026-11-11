@@ -56,12 +56,26 @@ public class GitHubUpdateService : IAppUpdateService
         try
         {
             var assembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
-            var version = assembly.GetName().Version;
-            if (version != null && (version.Major > 0 || version.Minor > 0 || version.Build > 0))
+
+            // 1. Tenta obter do InformationalVersion (ex: "0.11.10b3", "11.10b3")
+            var infoVer = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+            if (!string.IsNullOrWhiteSpace(infoVer))
             {
-                return new Version(version.Major, version.Minor, Math.Max(0, version.Build));
+                var clean = infoVer.Split('+')[0].Trim();
+                if (TryParseSemanticVersion(clean, out var parsedInfo))
+                {
+                    return parsedInfo;
+                }
             }
 
+            // 2. Tenta obter do Assembly Name Version (ex: 0.11.10.3)
+            var version = assembly.GetName().Version;
+            if (version != null && (version.Major > 0 || version.Minor > 0 || version.Build > 0 || version.Revision > 0))
+            {
+                return NormalizeVersion(version);
+            }
+
+            // 3. Fallback no FileVersionInfo do executável
             var processPath = Environment.ProcessPath;
             if (!string.IsNullOrEmpty(processPath) && File.Exists(processPath))
             {
@@ -82,7 +96,7 @@ public class GitHubUpdateService : IAppUpdateService
         }
 
         // Versão de fallback alinhada ao projeto
-        return new Version(0, 11, 10, 3);
+        return new Version(0, 11, 11, 1);
     }
 
     /// <inheritdoc />
@@ -318,7 +332,29 @@ public class GitHubUpdateService : IAppUpdateService
     }
 
     /// <summary>
-    /// Analisa strings no formato SemVer ou tags git (ex: "v0.12.0", "0.12.1", "release-1.0.0") em um objeto System.Version.
+    /// Normaliza uma instância de Version para o padrão do GameLauncher Hub (série 0.X.Y).
+    /// Assegura compatibilidade entre notações como 11.10.3.0 e 0.11.10.3.
+    /// </summary>
+    public static Version NormalizeVersion(Version version)
+    {
+        if (version == null) return new Version(0, 0, 0, 0);
+
+        if (version.Major >= 10 && version.Minor <= 99)
+        {
+            var rev = version.Build >= 0 ? version.Build : Math.Max(0, version.Revision);
+            return new Version(0, version.Major, version.Minor, rev);
+        }
+
+        return new Version(
+            Math.Max(0, version.Major),
+            Math.Max(0, version.Minor),
+            Math.Max(0, version.Build),
+            Math.Max(0, version.Revision));
+    }
+
+    /// <summary>
+    /// Analisa strings no formato SemVer ou tags git (ex: "v11.10b3", "v0.11.10b3", "0.10.11", "release-1.0.0") em um objeto System.Version.
+    /// Garante que "v11.10b3", "11.10b3", "v0.11.10b3" e "0.11.10.3" mapeiem de forma equivalente para (0, 11, 10, 3).
     /// </summary>
     public static bool TryParseSemanticVersion(string rawTag, out Version version)
     {
@@ -326,16 +362,58 @@ public class GitHubUpdateService : IAppUpdateService
         if (string.IsNullOrWhiteSpace(rawTag))
             return false;
 
-        var match = Regex.Match(rawTag, @"(\d+)\.(\d+)(?:\.(\d+))?(?:\.(\d+))?");
+        var clean = rawTag.Trim();
+        if (clean.StartsWith("release-", StringComparison.OrdinalIgnoreCase))
+        {
+            clean = clean.Substring("release-".Length).Trim();
+        }
+        clean = clean.TrimStart('v', 'V');
+
+        // Regex para capturar números e sufixo de pré-lançamento/beta
+        var match = Regex.Match(clean, @"^(\d+)\.(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:[.\-_]?([a-zA-Z]+)(\d*))?");
         if (!match.Success)
             return false;
 
-        var major = int.Parse(match.Groups[1].Value);
-        var minor = int.Parse(match.Groups[2].Value);
-        var build = match.Groups[3].Success ? int.Parse(match.Groups[3].Value) : 0;
-        var revision = match.Groups[4].Success ? int.Parse(match.Groups[4].Value) : 0;
+        var p1 = int.Parse(match.Groups[1].Value);
+        var p2 = int.Parse(match.Groups[2].Value);
+        int? p3 = match.Groups[3].Success ? int.Parse(match.Groups[3].Value) : null;
+        int? p4 = match.Groups[4].Success ? int.Parse(match.Groups[4].Value) : null;
 
-        version = new Version(major, minor, build, revision);
+        int beta = 0;
+        if (match.Groups[6].Success && !string.IsNullOrEmpty(match.Groups[6].Value))
+        {
+            int.TryParse(match.Groups[6].Value, out beta);
+        }
+
+        // Caso 1: Dois segmentos principais (ex: "11.10b3" ou "11.10" ou "1.0")
+        if (!p3.HasValue)
+        {
+            if (p1 == 0)
+            {
+                version = new Version(0, p2, 0, beta);
+                return true;
+            }
+            if (p1 >= 10)
+            {
+                // Notação abreviada da série 0.X (ex: 11.10b3 -> 0.11.10.3)
+                version = new Version(0, p1, p2, beta);
+                return true;
+            }
+
+            version = new Version(p1, p2, beta, 0);
+            return true;
+        }
+
+        // Caso 2: Três ou mais segmentos
+        if (p1 == 0)
+        {
+            int rev = beta > 0 ? beta : (p4 ?? 0);
+            version = new Version(0, p2, p3.Value, rev);
+            return true;
+        }
+
+        int standardRev = beta > 0 ? beta : (p4 ?? 0);
+        version = new Version(p1, p2, p3.Value, standardRev);
         return true;
     }
 

@@ -38,7 +38,8 @@ public partial class AboutDialog : Window
         if (_updateService != null)
         {
             var version = _updateService.GetCurrentVersion();
-            VersionTextBlock.Text = $"Release {version.Major}.{version.Minor}.{version.Build}";
+            var revSuffix = version.Revision > 0 ? $"b{version.Revision}" : string.Empty;
+            VersionTextBlock.Text = $"Release {version.Major}.{version.Minor}.{version.Build}{revSuffix}";
         }
     }
 
