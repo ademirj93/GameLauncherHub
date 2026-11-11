@@ -1,0 +1,9 @@
+{
+  "configProperties": {
+    "System.GC.Server": false,
+    "System.GC.Concurrent": true,
+    "System.GC.AdaptationMode": 1,
+    "System.Runtime.TieredCompilation": true
+  }
+}
+

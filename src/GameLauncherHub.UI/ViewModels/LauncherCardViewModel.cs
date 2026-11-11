@@ -11,7 +11,7 @@ namespace GameLauncherHub.UI.ViewModels;
 /// <summary>
 /// ViewModel reativo para o Card e Linha Compacta de uma plataforma individual.
 /// </summary>
-public partial class LauncherCardViewModel : ObservableObject
+public partial class LauncherCardViewModel : ObservableObject, IDisposable
 {
     private readonly ILauncherOrchestratorService _orchestratorService;
     private readonly ILauncherFavoritesService _favoritesService;
@@ -240,5 +240,12 @@ public partial class LauncherCardViewModel : ObservableObject
         {
             IsBusy = false;
         }
+    }
+
+    public void Dispose()
+    {
+        _favoritesService.FavoritesChanged -= OnFavoritesChanged;
+        SelectionChanged = null;
+        GC.SuppressFinalize(this);
     }
 }

@@ -28,16 +28,20 @@ public class ProcessDetectionStrategy : IDetectionStrategy
 
         try
         {
-            var processes = Process.GetProcesses();
-
             foreach (var exeName in platform.Detection.KnownExecutableNames)
             {
                 var processNameWithoutExtension = Path.GetFileNameWithoutExtension(exeName);
-                var matchedProcess = processes.FirstOrDefault(p =>
-                    string.Equals(p.ProcessName, processNameWithoutExtension, StringComparison.OrdinalIgnoreCase));
+                if (string.IsNullOrWhiteSpace(processNameWithoutExtension))
+                    continue;
 
-                if (matchedProcess != null)
+                // Process.GetProcessesByName consulta diretamente o kernel sem enumerar centenas de processos desnecessários
+                var matches = Process.GetProcessesByName(processNameWithoutExtension);
+                if (matches.Length == 0)
+                    continue;
+
+                try
                 {
+                    var matchedProcess = matches[0];
                     string? verifiedPath = null;
                     string? version = null;
 
@@ -62,6 +66,14 @@ public class ProcessDetectionStrategy : IDetectionStrategy
                         StrategyUsed: StrategyName,
                         Details: $"Processo em execução ativo (PID: {matchedProcess.Id})"
                     ));
+                }
+                finally
+                {
+                    // Descarta imediatamente os handles nativos alocados para evitar retenção de memória e leaks
+                    foreach (var p in matches)
+                    {
+                        try { p.Dispose(); } catch { }
+                    }
                 }
             }
         }

@@ -445,12 +445,19 @@
                 </ItemsControl>
             </ScrollViewer>
 
-            <!-- 3.B. Visualização Compacta (Horizontal Rows) -->
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Disabled"
-                          Padding="24,14,24,80">
-                <ScrollViewer.Style>
-                    <Style TargetType="ScrollViewer">
+            <!-- 3.B. Visualização Compacta (Virtualizada com Reciclagem de Containers) -->
+            <ListBox ItemsSource="{Binding FilteredCards}"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     Padding="24,14,24,80"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     ScrollViewer.CanContentScroll="True"
+                     VirtualizingPanel.IsVirtualizing="True"
+                     VirtualizingPanel.VirtualizationMode="Recycling"
+                     VirtualizingPanel.ScrollUnit="Pixel">
+                <ListBox.Style>
+                    <Style TargetType="ListBox">
                         <Setter Property="Visibility" Value="Collapsed" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ViewMode}" Value="Compact">
@@ -458,20 +465,29 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </ScrollViewer.Style>
-                <ItemsControl ItemsSource="{Binding FilteredCards}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel Orientation="Vertical" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <components:LauncherCompactView />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+                </ListBox.Style>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="Margin" Value="0" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Focusable" Value="False" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <components:LauncherCompactView />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
             <!-- BARRA DE AÇÕES FLUTUANTE DE INSTALAÇÃO EM LOTE -->
             <Border VerticalAlignment="Bottom"

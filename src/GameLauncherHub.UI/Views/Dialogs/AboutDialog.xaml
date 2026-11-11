@@ -80,11 +80,16 @@
                                               Direction="270"
                                               Color="#000000" />
                         </Border.Effect>
-                        <Image Source="/Resources/logo.bmp"
-                               MaxHeight="120"
+                        <Image MaxHeight="120"
                                MaxWidth="360"
                                Stretch="Uniform"
-                               RenderOptions.BitmapScalingMode="HighQuality" />
+                               RenderOptions.BitmapScalingMode="HighQuality">
+                            <Image.Source>
+                                <BitmapImage UriSource="/Resources/logo.png"
+                                             DecodePixelWidth="360"
+                                             CacheOption="OnLoad" />
+                            </Image.Source>
+                        </Image>
                     </Border>
 
                     <!-- Nome e Release Badge -->

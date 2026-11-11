@@ -1,5 +1,6 @@
 using System.Windows;
 using GameLauncherHub.Domain.Interfaces;
+using GameLauncherHub.Infrastructure.Services;
 using GameLauncherHub.UI.ViewModels;
 using GameLauncherHub.UI.Views.Dialogs;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +41,9 @@ public partial class MainWindow : Window
         Loaded += async (s, e) =>
         {
             await _viewModel.InitializeAsync();
+
+            // Otimização de Working Set após estabilização do carregamento inicial
+            MemoryOptimizer.SchedulePostStartupTrim(2000);
         };
 
         // Integração com eventos da bandeja do sistema (System Tray)
@@ -94,6 +98,11 @@ public partial class MainWindow : Window
                 {
                     // Fallback para minimização normal do Windows
                 }
+                finally
+                {
+                    // Ao minimizar, executa compactação de memória em segundo plano
+                    MemoryOptimizer.TrimMemory();
+                }
             }
         };
 
@@ -112,6 +121,7 @@ public partial class MainWindow : Window
                 {
                     e.Cancel = true;
                     Hide();
+                    MemoryOptimizer.TrimMemory();
                     return;
                 }
             }

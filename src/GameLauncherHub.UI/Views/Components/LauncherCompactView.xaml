@@ -16,6 +16,7 @@
         <converters:StateToProgressVisibilityConverter x:Key="StateToProgressVisibilityConverter" />
         <converters:IconKeyToGeometryConverter x:Key="IconKeyToGeometryConverter" />
         <converters:StringNotEmptyToVisibilityConverter x:Key="StringNotEmptyToVisibilityConverter" />
+        <converters:ThumbnailImageConverter x:Key="ThumbnailImageConverter" />
     </UserControl.Resources>
 
     <Border BorderThickness="1"
@@ -95,8 +96,8 @@
                     Margin="0,0,12,0"
                     ClipToBounds="True">
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <!-- Arte SteamGridDB -->
-                    <Image Source="{Binding ArtworkPath}"
+                    <!-- Arte SteamGridDB com thumbnail reduzido -->
+                    <Image Source="{Binding ArtworkPath, Converter={StaticResource ThumbnailImageConverter}, ConverterParameter=48}"
                            Width="26"
                            Height="26"
                            Stretch="Uniform"

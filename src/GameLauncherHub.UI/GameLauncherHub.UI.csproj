@@ -21,14 +21,18 @@
     <FileVersion>0.11.10.2</FileVersion>
     <AssemblyVersion>0.11.10.2</AssemblyVersion>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+    
+    <!-- Otimizações Críticas de Consumo de Memória (Workstation GC & DATAS) -->
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+    <GarbageCollectionAdaptationMode>1</GarbageCollectionAdaptationMode>
+    <TieredCompilation>true</TieredCompilation>
+    <TieredPGO>true</TieredPGO>
   </PropertyGroup>
 
   <ItemGroup>
     <Resource Include="Resources\icon.ico" />
-    <Resource Include="Resources\logo.bmp" />
-    <None Update="Resources\logo.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Resource Include="Resources\logo.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -48,41 +48,51 @@ public class LauncherExecutionService : ILauncherExecutionService
 
                 // Procura processo com janela gráfica ativa para restaurar
                 var matchingProcesses = GetMatchingProcesses(platform);
-                var activeWindowProcess = matchingProcesses.FirstOrDefault(p =>
+                try
                 {
-                    try { return p.MainWindowHandle != IntPtr.Zero; } catch { return false; }
-                });
+                    var activeWindowProcess = matchingProcesses.FirstOrDefault(p =>
+                    {
+                        try { return p.MainWindowHandle != IntPtr.Zero; } catch { return false; }
+                    });
 
-                if (activeWindowProcess != null)
-                {
-                    try
-                    {
-                        ShowWindowAsync(activeWindowProcess.MainWindowHandle, SW_RESTORE);
-                        SetForegroundWindow(activeWindowProcess.MainWindowHandle);
-                        return new ExecutionResult(true, activeWindowProcess.Id, "Janela do launcher ativada e trazida para o primeiro plano.");
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogWarning(ex, "Falha ao ativar janela do processo PID {Pid}", activeWindowProcess.Id);
-                    }
-                }
-                else if (matchingProcesses.Count > 0)
-                {
-                    // Processo rodando em segundo plano sem janela gráfica (instância órfã/zombie, comum em Tauri/WebView2)
-                    _logger.LogWarning("Processo de {Name} detectado sem interface ativa. Encerrando instância órfã para liberar recursos...", platform.Name);
-                    foreach (var proc in matchingProcesses)
+                    if (activeWindowProcess != null)
                     {
                         try
                         {
-                            proc.Kill();
-                            proc.WaitForExit(1500);
+                            ShowWindowAsync(activeWindowProcess.MainWindowHandle, SW_RESTORE);
+                            SetForegroundWindow(activeWindowProcess.MainWindowHandle);
+                            return new ExecutionResult(true, activeWindowProcess.Id, "Janela do launcher ativada e trazida para o primeiro plano.");
                         }
-                        catch (Exception exKill)
+                        catch (Exception ex)
                         {
-                            _logger.LogDebug(exKill, "Falha ao finalizar processo órfão PID {Pid}", proc.Id);
+                            _logger.LogWarning(ex, "Falha ao ativar janela do processo PID {Pid}", activeWindowProcess.Id);
                         }
                     }
-                    isAlreadyRunning = false;
+                    else if (matchingProcesses.Count > 0)
+                    {
+                        // Processo rodando em segundo plano sem janela gráfica (instância órfã/zombie, comum em Tauri/WebView2)
+                        _logger.LogWarning("Processo de {Name} detectado sem interface ativa. Encerrando instância órfã para liberar recursos...", platform.Name);
+                        foreach (var proc in matchingProcesses)
+                        {
+                            try
+                            {
+                                proc.Kill();
+                                proc.WaitForExit(1500);
+                            }
+                            catch (Exception exKill)
+                            {
+                                _logger.LogDebug(exKill, "Falha ao finalizar processo órfão PID {Pid}", proc.Id);
+                            }
+                        }
+                        isAlreadyRunning = false;
+                    }
+                }
+                finally
+                {
+                    foreach (var proc in matchingProcesses)
+                    {
+                        try { proc.Dispose(); } catch { }
+                    }
                 }
             }
 

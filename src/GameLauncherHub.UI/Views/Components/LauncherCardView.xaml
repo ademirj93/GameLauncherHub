@@ -16,6 +16,7 @@
         <converters:StateToProgressVisibilityConverter x:Key="StateToProgressVisibilityConverter" />
         <converters:IconKeyToGeometryConverter x:Key="IconKeyToGeometryConverter" />
         <converters:StringNotEmptyToVisibilityConverter x:Key="StringNotEmptyToVisibilityConverter" />
+        <converters:ThumbnailImageConverter x:Key="ThumbnailImageConverter" />
     </UserControl.Resources>
 
     <Border x:Name="CardBorder"
@@ -29,22 +30,24 @@
             <Style TargetType="Border">
                 <Setter Property="Background" Value="{StaticResource SurfaceBackgroundBrush}" />
                 <Setter Property="BorderBrush" Value="{StaticResource SurfaceBorderBrush}" />
+                <Setter Property="Effect" Value="{x:Null}" />
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
                         <Setter Property="Background" Value="{StaticResource SurfaceHoverBrush}" />
                         <Setter Property="BorderBrush" Value="{StaticResource SurfaceBorderHoverBrush}" />
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect BlurRadius="16"
+                                                  Opacity="0.4"
+                                                  ShadowDepth="3"
+                                                  Direction="270"
+                                                  Color="#000000" />
+                            </Setter.Value>
+                        </Setter>
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
         </Border.Style>
-
-        <Border.Effect>
-            <DropShadowEffect BlurRadius="18"
-                              Opacity="0.35"
-                              ShadowDepth="4"
-                              Direction="270"
-                              Color="#000000" />
-        </Border.Effect>
 
         <Grid>
             <!-- Faixa superior com a cor de marca da plataforma -->
@@ -78,8 +81,8 @@
                             BorderThickness="1"
                             ClipToBounds="True">
                         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <!-- Arte do SteamGridDB em alta resolução (se baixada e em cache) -->
-                            <Image Source="{Binding ArtworkPath}"
+                            <!-- Arte do SteamGridDB em alta resolução com decodificação thumbnail congelada (baixo consumo de RAM) -->
+                            <Image Source="{Binding ArtworkPath, Converter={StaticResource ThumbnailImageConverter}, ConverterParameter=64}"
                                    Width="32"
                                    Height="32"
                                    Stretch="Uniform"
