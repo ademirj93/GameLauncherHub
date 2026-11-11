@@ -54,6 +54,13 @@ Esta versão traz **otimizações profundas no consumo de memória RAM (-41% na 
 
 ---
 
+### 4. 🔄 Correção Definitiva do Auto-Updater (Normalização SemVer & Beta)
+- **Eliminação do Loop de Atualização:** Corrigido o comparador semântico de versões no `GitHubUpdateService`, que tratava a tag `v11.10b3` como versão maior 11 e a versão local `0.11.10b3` como versão maior 0, fazendo com que a aplicação continuasse solicitando atualização mesmo após a instalação da nova release.
+- **Normalização Automática de Tags:** Assegurada compatibilidade bidirecional entre notações como `v11.10b3`, `0.11.10b3`, `0.11.10.3` e `11.10b3`, permitindo que o sistema reconheça imediatamente a versão instalada e só avise quando houver uma versão genuinamente mais recente (ex: `v11.10b4` ou `0.11.11`).
+- **Exibição Elegante da Versão:** O diálogo de atualização e a tela "Sobre" agora exibem a versão formatada de forma clara e amigável (ex: `Instalada: v0.11.10b3 ➔ Nova: v11.10b4`).
+
+---
+
 ## 📊 Tabela de Métricas de Performance
 
 | Métrica | Release Anterior (0.10.11) | Release Atual (0.11.10b3) | Ganho |

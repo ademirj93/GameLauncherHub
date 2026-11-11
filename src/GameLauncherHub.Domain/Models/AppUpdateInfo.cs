@@ -78,6 +78,26 @@ public class AppUpdateInfo
     public string? ErrorMessage { get; set; }
 
     /// <summary>
+    /// Retorna a versão instalada formatada para exibição amigável (ex: "v0.11.10b3").
+    /// </summary>
+    public string FormattedCurrentVersion => FormatVersionString(CurrentVersion);
+
+    /// <summary>
+    /// Retorna a versão remota mais recente formatada para exibição amigável.
+    /// </summary>
+    public string FormattedLatestVersion => !string.IsNullOrEmpty(TagName) ? TagName : FormatVersionString(LatestVersion);
+
+    private static string FormatVersionString(Version? v)
+    {
+        if (v == null) return "v0.0.0";
+        if (v.Revision > 0)
+        {
+            return $"v{v.Major}.{v.Minor}.{v.Build}b{v.Revision}";
+        }
+        return $"v{v.Major}.{v.Minor}.{v.Build}";
+    }
+
+    /// <summary>
     /// Retorna o tamanho formatado para exibição visual (ex: "48.5 MB").
     /// </summary>
     public string FormattedSize

@@ -5,7 +5,7 @@
 # GameLauncher Hub
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Release-v0.11.10b3-00C853?style=for-the-badge&logo=windows" alt="Release" />
+  <img src="https://img.shields.io/badge/Release-v0.11.11b1-00C853?style=for-the-badge&logo=windows" alt="Release" />
   <img src="https://img.shields.io/badge/Developer-Ademir%20Junior-6366F1?style=for-the-badge" alt="Developer" />
   <img src="https://img.shields.io/badge/License-GNU%20GPLv3-blue?style=for-the-badge" alt="License" />
   <img src="https://img.shields.io/badge/.NET-10.0%20(LTS)-512BD4?style=for-the-badge&logo=dotnet" alt=".NET 10" />
@@ -20,8 +20,12 @@ Inspirado na identidade visual do *ArtCraftLauncher*, o GameLauncher Hub unifica
 
 ---
 
-## 🚀 Novidades da Release 0.11.10b3 (11/11/2026)
+## 🚀 Novidades da Release 0.11.11b1 (11/11/2026)
 
+- **Correção Definitiva do Auto-Updater e Prevenção de Falsos-Positivos:**
+  - Normalização semântica bidirecional no comparador de releases do GitHub, resolvendo a divergência de tags (`v11.10b3` vs `0.11.10b3`) e prevenindo loop de atualização contínuo após instalar novas versões.
+  - Reconhecimento automático de números de versão beta/rc (`b1`, `b2`, `b3`...).
+  - Exibição aprimorada das versões instalada e remota na interface.
 - **Otimização Massiva de Consumo de RAM (-41% na memória privada):**
   - Ativação do modo **Workstation GC** e **DATAS** (.NET Dynamic Adaptation to Application Sizes).
   - Consulta seletiva de processos com `Process.GetProcessesByName(...)` e descarte imediato de handles nativos (`Dispose()`), eliminando milhares de alocações desnecessárias.

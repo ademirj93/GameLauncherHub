@@ -109,7 +109,7 @@
                                 Padding="10,2"
                                 Margin="0,0,8,0">
                             <TextBlock x:Name="VersionTextBlock"
-                                       Text="Release 0.11.10b3"
+                                       Text="Release 0.11.11b1"
                                        FontSize="11"
                                        FontWeight="Bold"
                                        Foreground="{StaticResource SuccessEmeraldBrush}" />

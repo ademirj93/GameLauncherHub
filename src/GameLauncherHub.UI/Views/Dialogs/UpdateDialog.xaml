@@ -99,7 +99,7 @@
                                             CornerRadius="6"
                                             Padding="8,3"
                                             Margin="0,0,8,0">
-                                        <TextBlock Text="{Binding UpdateInfo.CurrentVersion, StringFormat='Instalada: v{0}'}"
+                                        <TextBlock Text="{Binding UpdateInfo.FormattedCurrentVersion, StringFormat='Instalada: {0}'}"
                                                    FontSize="11"
                                                    Foreground="{StaticResource TextSecondaryBrush}" />
                                     </Border>

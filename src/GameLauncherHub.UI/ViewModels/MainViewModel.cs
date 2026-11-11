@@ -379,12 +379,12 @@ public partial class MainViewModel : ObservableObject
             }
             else
             {
-                var v = updateInfo.CurrentVersion;
-                StatusMessage = $"Você já está utilizando a versão mais recente do GameLauncher Hub (v{v.Major}.{v.Minor}.{v.Build}).";
+                var verDisplay = updateInfo.FormattedCurrentVersion;
+                StatusMessage = $"Você já está utilizando a versão mais recente do GameLauncher Hub ({verDisplay}).";
                 System.Windows.Application.Current?.Dispatcher?.Invoke(() =>
                 {
                     System.Windows.MessageBox.Show(
-                        $"Você já está utilizando a versão mais recente do GameLauncher Hub (v{v.Major}.{v.Minor}.{v.Build}).\n\nNenhuma atualização necessária no momento.",
+                        $"Você já está utilizando a versão mais recente do GameLauncher Hub ({verDisplay}).\n\nNenhuma atualização necessária no momento.",
                         "Verificação de Atualização",
                         System.Windows.MessageBoxButton.OK,
                         System.Windows.MessageBoxImage.Information);

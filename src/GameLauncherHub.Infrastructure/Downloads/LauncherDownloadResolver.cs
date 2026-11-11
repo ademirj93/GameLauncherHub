@@ -87,7 +87,7 @@ public class LauncherDownloadResolver : ILauncherDownloadResolver
 
             // 3. Inspeção HTTP via ResponseHeadersRead
             using var request = new HttpRequestMessage(HttpMethod.Get, downloadUrl);
-            request.Headers.Add("User-Agent", "GameLauncherHub/0.11.10b3 (+https://github.com/ademirjunior/GameLauncherHub)");
+            request.Headers.Add("User-Agent", "GameLauncherHub/0.11.11b1 (+https://github.com/ademirjunior/GameLauncherHub)");
 
             using var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
 
@@ -176,7 +176,7 @@ public class LauncherDownloadResolver : ILauncherDownloadResolver
                 var apiUrl = $"https://api.github.com/repos/{owner}/{repo}/releases/latest";
 
                 using var apiReq = new HttpRequestMessage(HttpMethod.Get, apiUrl);
-                apiReq.Headers.Add("User-Agent", "GameLauncherHub/0.11.10b3 (+https://github.com/ademirjunior/GameLauncherHub)");
+                apiReq.Headers.Add("User-Agent", "GameLauncherHub/0.11.11b1 (+https://github.com/ademirjunior/GameLauncherHub)");
 
                 using var apiResp = await _httpClient.SendAsync(apiReq, cancellationToken);
                 if (apiResp.IsSuccessStatusCode)
