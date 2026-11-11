@@ -154,6 +154,11 @@ public partial class MainViewModel : ObservableObject
         {
             var platforms = await _orchestratorService.LoadAndDetectAllAsync();
 
+            foreach (var existingCard in _allCards)
+            {
+                existingCard.SelectionChanged -= OnCardSelectionChanged;
+                existingCard.Dispose();
+            }
             _allCards.Clear();
             foreach (var platform in platforms)
             {

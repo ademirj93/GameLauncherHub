@@ -53,9 +53,17 @@ public class LauncherOrchestratorService : ILauncherOrchestratorService
     {
         var platforms = await _catalogService.GetCatalogAsync(cancellationToken);
 
-        // Executa detecções em paralelo para desempenho rápido
-        var tasks = platforms.Select(platform => RefreshPlatformStatusAsync(platform, cancellationToken));
-        await Task.WhenAll(tasks);
+        // Controla o paralelismo para evitar explosão de threads no ThreadPool e consumo excessivo de memória
+        var parallelOptions = new ParallelOptions
+        {
+            MaxDegreeOfParallelism = Math.Clamp(Environment.ProcessorCount, 2, 4),
+            CancellationToken = cancellationToken
+        };
+
+        await Parallel.ForEachAsync(platforms, parallelOptions, async (platform, ct) =>
+        {
+            await RefreshPlatformStatusAsync(platform, ct);
+        });
 
         return platforms;
     }

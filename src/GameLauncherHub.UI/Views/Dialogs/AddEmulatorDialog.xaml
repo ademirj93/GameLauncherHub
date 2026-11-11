@@ -113,6 +113,7 @@
                         <ComboBoxItem Content="Sony PlayStation 1 (PSone)" />
                         <ComboBoxItem Content="Sony PlayStation 2" />
                         <ComboBoxItem Content="Sony PlayStation 3" />
+                        <ComboBoxItem Content="Sony PlayStation 4" />
                         <ComboBoxItem Content="Sony PlayStation Portable (PSP)" />
                         <ComboBoxItem Content="Sony PlayStation Vita" />
                         <ComboBoxItem Content="Microsoft Xbox Original" />

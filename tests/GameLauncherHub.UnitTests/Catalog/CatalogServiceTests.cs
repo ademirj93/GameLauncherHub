@@ -14,7 +14,7 @@ public class CatalogServiceTests
         var catalog = await _catalogService.GetCatalogAsync();
 
         Assert.NotNull(catalog);
-        Assert.True(catalog.Count >= 33);
+        Assert.True(catalog.Count >= 32);
         Assert.Contains(catalog, p => p.Category == "Emulator");
         Assert.Contains(catalog, p => p.Category == "Launcher");
     }
@@ -40,6 +40,8 @@ public class CatalogServiceTests
     [InlineData("rpcs3", "RPCS3")]
     [InlineData("xenia", "Xenia")]
     [InlineData("xemu", "Xemu")]
+    [InlineData("citron", "Citron Neo")]
+    [InlineData("shadps4", "shadPS4")]
     public void GetById_ShouldFindConfiguredPlatforms(string id, string expectedName)
     {
         var platform = _catalogService.GetById(id);

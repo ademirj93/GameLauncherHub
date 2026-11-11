@@ -770,8 +770,8 @@
         "accentColor":  "#A855F7",
         "secondaryColor":  "#14071C",
         "iconKey":  "IconGamepad",
-        "officialWebsite":  "https://vba-m.com",
-        "downloadPageUrl":  "https://github.com/visualboyadvance-m/visualboyadvance-m/releases",
+        "officialWebsite":  "https://visualboyadvance.org/",
+        "downloadPageUrl":  "https://visualboyadvance.org/",
         "expectedExecutableName":  "visualboyadvance-m.exe",
         "isSupportedOnWindows":  true,
         "isOpenSource":  true,
@@ -921,8 +921,8 @@
         "accentColor":  "#F59E0B",
         "secondaryColor":  "#120E08",
         "iconKey":  "IconGamepad",
-        "officialWebsite":  "https://github.com/exjam/ymir",
-        "downloadPageUrl":  "https://github.com/exjam/ymir/releases",
+        "officialWebsite":  "https://github.com/ymir-emu/Ymir",
+        "downloadPageUrl":  "https://github.com/ymir-emu/Ymir/releases",
         "expectedExecutableName":  "ymir.exe",
         "isSupportedOnWindows":  true,
         "isOpenSource":  true,
@@ -1106,69 +1106,18 @@
                          }
     },
     {
-        "id":  "citra",
-        "name":  "Citra",
-        "category":  "Emulator",
-        "targetSystem":  "Nintendo 3DS",
-        "tagline":  "Emulador de Nintendo 3DS",
-        "description":  "O emulador de referencia para Nintendo 3DS no Windows com layout personalizavel de telas e resolucao aprimorada.",
-        "brandColor":  "#2E1C0A",
-        "accentColor":  "#F59E0B",
-        "secondaryColor":  "#170E05",
-        "iconKey":  "IconGamepad",
-        "officialWebsite":  "https://github.com/PabloMK7/citra",
-        "downloadPageUrl":  "https://github.com/PabloMK7/citra/releases",
-        "expectedExecutableName":  "citra-qt.exe",
-        "isSupportedOnWindows":  true,
-        "isOpenSource":  true,
-        "detection":  {
-                          "knownExecutableNames":  [
-                                                       "citra-qt.exe",
-                                                       "citra.exe"
-                                                   ],
-                          "defaultInstallDirectories":  [
-                                                            "%LOCALAPPDATA%\\Citra\\nightly-mingw",
-                                                            "%APPDATA%\\Citra",
-                                                            "C:\\Emulators\\Citra",
-                                                            "D:\\Emulators\\Citra",
-                                                            "%USERPROFILE%\\Emulators\\Citra"
-                                                        ],
-                          "protocolSchemes":  [
-
-                                              ],
-                          "startMenuShortcutNames":  [
-                                                         "Citra.lnk"
-                                                     ],
-                          "appPathNames":  [
-                                               "citra-qt.exe"
-                                           ],
-                          "registryPaths":  [
-
-                                            ]
-                      },
-        "execution":  {
-                          "protocolScheme":  null,
-                          "defaultArguments":  ""
-                      },
-        "installation":  {
-                             "supportsSilentInstall":  false,
-                             "silentInstallArguments":  null,
-                             "expectedInstallerExtension":  ".zip"
-                         }
-    },
-    {
         "id":  "citron",
-        "name":  "Citron",
+        "name":  "Citron Neo",
         "category":  "Emulator",
         "targetSystem":  "Nintendo Switch",
-        "tagline":  "Emulador moderno de Nintendo Switch",
+        "tagline":  "Emulador moderno de Nintendo Switch (Citron Neo)",
         "description":  "Emulador otimizado e veloz para Nintendo Switch com suporte avancado a Vulkan e compatibilidade aprimorada.",
         "brandColor":  "#261C08",
         "accentColor":  "#EAB308",
         "secondaryColor":  "#120E04",
         "iconKey":  "IconGamepad",
-        "officialWebsite":  "https://citron-emu.org",
-        "downloadPageUrl":  "https://citron-emu.org/download",
+        "officialWebsite":  "https://www.citronneo.org/",
+        "downloadPageUrl":  "https://www.citronneo.org/",
         "expectedExecutableName":  "citron.exe",
         "isSupportedOnWindows":  true,
         "isOpenSource":  true,
@@ -1217,8 +1166,8 @@
         "accentColor":  "#10B981",
         "secondaryColor":  "#05120B",
         "iconKey":  "IconGamepad",
-        "officialWebsite":  "https://github.com/eden-emulator",
-        "downloadPageUrl":  "https://github.com/eden-emulator/releases",
+        "officialWebsite":  "https://eden-emu.dev/",
+        "downloadPageUrl":  "https://eden-emu.dev/downloads/",
         "expectedExecutableName":  "eden.exe",
         "isSupportedOnWindows":  true,
         "isOpenSource":  true,
@@ -1241,55 +1190,6 @@
                                                      ],
                           "appPathNames":  [
                                                "eden.exe"
-                                           ],
-                          "registryPaths":  [
-
-                                            ]
-                      },
-        "execution":  {
-                          "protocolScheme":  null,
-                          "defaultArguments":  ""
-                      },
-        "installation":  {
-                             "supportsSilentInstall":  false,
-                             "silentInstallArguments":  null,
-                             "expectedInstallerExtension":  ".zip"
-                         }
-    },
-    {
-        "id":  "sudachi",
-        "name":  "Sudachi",
-        "category":  "Emulator",
-        "targetSystem":  "Nintendo Switch",
-        "tagline":  "Emulador Neoterico de Nintendo Switch",
-        "description":  "Fork aprimorado com correcoes especificas de renderizacao e compatibilidade com lancamentos recentes da plataforma.",
-        "brandColor":  "#21102A",
-        "accentColor":  "#D946EF",
-        "secondaryColor":  "#100814",
-        "iconKey":  "IconGamepad",
-        "officialWebsite":  "https://sudachi.emuplace.app",
-        "downloadPageUrl":  "https://github.com/sudachi-emu/sudachi/releases",
-        "expectedExecutableName":  "sudachi.exe",
-        "isSupportedOnWindows":  true,
-        "isOpenSource":  true,
-        "detection":  {
-                          "knownExecutableNames":  [
-                                                       "sudachi.exe"
-                                                   ],
-                          "defaultInstallDirectories":  [
-                                                            "%LOCALAPPDATA%\\Sudachi",
-                                                            "C:\\Emulators\\Sudachi",
-                                                            "D:\\Emulators\\Sudachi",
-                                                            "%USERPROFILE%\\Emulators\\Sudachi"
-                                                        ],
-                          "protocolSchemes":  [
-
-                                              ],
-                          "startMenuShortcutNames":  [
-                                                         "Sudachi.lnk"
-                                                     ],
-                          "appPathNames":  [
-                                               "sudachi.exe"
                                            ],
                           "registryPaths":  [
 
@@ -1645,6 +1545,59 @@
                                                      ],
                           "appPathNames":  [
                                                "xemu.exe"
+                                           ],
+                          "registryPaths":  [
+
+                                            ]
+                      },
+        "execution":  {
+                          "protocolScheme":  null,
+                          "defaultArguments":  ""
+                      },
+        "installation":  {
+                             "supportsSilentInstall":  false,
+                             "silentInstallArguments":  null,
+                             "expectedInstallerExtension":  ".zip"
+                         }
+    },
+    {
+        "id":  "shadps4",
+        "name":  "shadPS4",
+        "category":  "Emulator",
+        "targetSystem":  "Sony PlayStation 4",
+        "tagline":  "Emulador de Sony PlayStation 4",
+        "description":  "Emulador open-source de PlayStation 4 para Windows com renderizacao Vulkan, suporte a titulos comerciais e mods graficos.",
+        "brandColor":  "#0A1D3A",
+        "accentColor":  "#0070D1",
+        "secondaryColor":  "#050F1E",
+        "iconKey":  "IconGamepad",
+        "officialWebsite":  "https://shadps4.net",
+        "downloadPageUrl":  "https://github.com/shadps4-emu/shadPS4/releases",
+        "expectedExecutableName":  "shadps4.exe",
+        "isSupportedOnWindows":  true,
+        "isOpenSource":  true,
+        "detection":  {
+                          "knownExecutableNames":  [
+                                                       "shadPS4.exe",
+                                                       "shadps4.exe",
+                                                       "shadPS4-qt.exe"
+                                                   ],
+                          "defaultInstallDirectories":  [
+                                                            "%LOCALAPPDATA%\\shadPS4",
+                                                            "C:\\Emulators\\shadPS4",
+                                                            "D:\\Emulators\\shadPS4",
+                                                            "%USERPROFILE%\\Emulators\\shadPS4",
+                                                            "C:\\Emulators\\shadps4"
+                                                        ],
+                          "protocolSchemes":  [
+
+                                              ],
+                          "startMenuShortcutNames":  [
+                                                         "shadPS4.lnk"
+                                                     ],
+                          "appPathNames":  [
+                                               "shadps4.exe",
+                                               "shadPS4.exe"
                                            ],
                           "registryPaths":  [
 

@@ -5,7 +5,7 @@
 param (
     [switch]$SelfContained = $true,
     [switch]$SingleFile = $true,
-    [switch]$ReadyToRun = $false,
+    [switch]$ReadyToRun = $true,
     [switch]$BuildInstaller = $true,
     [string]$Runtime = "win-x64",
     [string]$Configuration = "Release"
@@ -68,7 +68,6 @@ $publishArgs = @(
 if ($SingleFile) {
     $publishArgs += "-p:PublishSingleFile=true"
     $publishArgs += "-p:IncludeNativeLibrariesForSelfExtract=true"
-    $publishArgs += "-p:EnableCompressionInSingleFile=true"
 }
 
 if ($ReadyToRun) {
@@ -96,9 +95,9 @@ Write-Host "`n--> Copiando recursos complementares para distribuicao..." -Foregr
 $resourcesDir = Join-Path $publishOutputDir "Resources"
 New-Item -ItemType Directory -Path $resourcesDir -Force | Out-Null
 
-if (Test-Path (Join-Path $repoRoot "logo.bmp")) {
-    Copy-Item (Join-Path $repoRoot "logo.bmp") -Destination $publishOutputDir -Force
-    Copy-Item (Join-Path $repoRoot "logo.bmp") -Destination $resourcesDir -Force
+$logoPng = Join-Path $repoRoot "src\GameLauncherHub.UI\Resources\logo.png"
+if (Test-Path $logoPng) {
+    Copy-Item $logoPng -Destination $resourcesDir -Force
 }
 
 if (Test-Path (Join-Path $repoRoot "icon.ico")) {

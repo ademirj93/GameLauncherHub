@@ -5,7 +5,7 @@
 # GameLauncher Hub
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Release-v0.11.10b2-00C853?style=for-the-badge&logo=windows" alt="Release" />
+  <img src="https://img.shields.io/badge/Release-v0.11.10b3-00C853?style=for-the-badge&logo=windows" alt="Release" />
   <img src="https://img.shields.io/badge/Developer-Ademir%20Junior-6366F1?style=for-the-badge" alt="Developer" />
   <img src="https://img.shields.io/badge/License-GNU%20GPLv3-blue?style=for-the-badge" alt="License" />
   <img src="https://img.shields.io/badge/.NET-10.0%20(LTS)-512BD4?style=for-the-badge&logo=dotnet" alt=".NET 10" />
@@ -20,14 +20,20 @@ Inspirado na identidade visual do *ArtCraftLauncher*, o GameLauncher Hub unifica
 
 ---
 
-## 🚀 Novidades da Release 0.10.11 (10/11/2026)
+## 🚀 Novidades da Release 0.11.10b3 (11/11/2026)
 
-- **Seleção Múltipla & Instalação em Lote:** Permite selecionar vários launchers disponíveis com checkboxes estilizados e disparar a instalação conjunta através de uma elegante barra flutuante.
-- **Ícones Vetoriais das Lojas Corrigidos:** Geometrias vetoriais nítidas renderizadas em tempo real para todas as 11 plataformas suportadas.
-- **Execução Nativa do Xbox App:** Corrigido para abrir diretamente o aplicativo Xbox (`XboxPcAppCE.exe` / `xbox:`) no primeiro plano em vez de redirecionar para a Microsoft Store.
-- **Download Direto Amazon Games:** Configurado com a URL oficial `https://download.amazongames.com/AmazonGamesSetup.exe` e validação Authenticode da Amazon Services LLC.
-- **Identidade & Ícone do Sistema:** Ícone oficial do sistema (`icon.ico`) integrado no executável, nas janelas e no instalador Windows.
-- **Tela "Sobre o Aplicativo":** Nova janela com exibição do `logo.bmp`, dados da release, desenvolvedor e licença GNU.
+- **Otimização Massiva de Consumo de RAM (-41% na memória privada):**
+  - Ativação do modo **Workstation GC** e **DATAS** (.NET Dynamic Adaptation to Application Sizes).
+  - Consulta seletiva de processos com `Process.GetProcessesByName(...)` e descarte imediato de handles nativos (`Dispose()`), eliminando milhares de alocações desnecessárias.
+  - Novo conversor `ThumbnailImageConverter` com decodificação restrita (`DecodePixelWidth = 64/48`) e congelamento de bitmaps (`bitmap.Freeze()`).
+  - Efeitos de sombra dos cards (`DropShadowEffect`) aplicados dinamicamente apenas sob demanda (*Hover*), aliviando dezenas de buffers gráficos da GPU e VRAM.
+  - Virtualização nativa de interface com reciclagem de containers (`VirtualizingPanel.VirtualizationMode="Recycling"`) no modo compacto.
+  - Substituição do recurso `logo.bmp` (7.1 MB) por `logo.png` (392 KB) proporcional.
+  - Eliminação de memory leaks em ViewModels com implementação de `IDisposable`.
+- **Compilação AOT Ahead-Of-Time (ReadyToRun):**
+  - Publicação com CrossGen2 pré-compilando o código de máquina para inicialização ultra-rápida e menor consumo de heap JIT.
+- **Catálogo de Emulação e Launchers Atualizado:**
+  - Adicionado suporte completo ao ShadPS4 (PS4), Citron Neo, Eden, VBA-M, Ymir e remoção de emuladores descontinuados.
 
 ---
 
