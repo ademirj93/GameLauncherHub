@@ -35,8 +35,8 @@ public class OfficialDownloadCatalogService : IOfficialDownloadCatalogService
             ExpectedPublisher = "Epic Games Inc.",
             ExpectedFileExtension = ".msi",
             SupportsSilentInstall = true,
-            SilentInstallArguments = "/qn",
-            WhitelistedDomains = new[] { "epicgames.com", "ol.epicgames.com" },
+            SilentInstallArguments = "/qn /norestart",
+            WhitelistedDomains = new[] { "epicgames.com", "ol.epicgames.com", "akamaized.net", "epicgames-download1.akamaized.net", "epicgamescdn.com", "unrealengine.com" },
             Description = "Pacote MSI oficial do inicializador da Epic Games."
         },
         ["amazon"] = new()
@@ -57,12 +57,12 @@ public class OfficialDownloadCatalogService : IOfficialDownloadCatalogService
             PlatformId = "battlenet",
             PlatformName = "Battle.net",
             OfficialWebsite = "https://battle.net",
-            OfficialDownloadPageUrl = "https://battle.net/download/getInstaller?os=win&app=battle.net",
-            DirectInstallerUrl = "https://battle.net/download/getInstaller?os=win&app=battle.net",
+            OfficialDownloadPageUrl = "https://battle.net/download/getInstaller?os=win&installer=Battle.net-Setup.exe",
+            DirectInstallerUrl = "https://battle.net/download/getInstaller?os=win&installer=Battle.net-Setup.exe",
             ExpectedPublisher = "Blizzard Entertainment, Inc.",
             ExpectedFileExtension = ".exe",
             SupportsSilentInstall = false,
-            WhitelistedDomains = new[] { "battle.net", "blizzard.com" },
+            WhitelistedDomains = new[] { "battle.net", "blizzard.com", "akamaized.net", "akamaihd.net", "blzddist1-a.akamaihd.net" },
             Description = "Instalador oficial do ecossistema Blizzard Battle.net."
         },
         ["ubisoft"] = new()
@@ -114,12 +114,12 @@ public class OfficialDownloadCatalogService : IOfficialDownloadCatalogService
             PlatformName = "GOG GALAXY",
             OfficialWebsite = "https://www.gog.com/galaxy",
             OfficialDownloadPageUrl = "https://www.gog.com/galaxy",
-            DirectInstallerUrl = "https://cdn.gog.com/open/galaxy/client/2.0.73.27/galaxy_setup_2.0.73.27.exe",
+            DirectInstallerUrl = "https://webinstallers.gog-statics.com/download/GOG_Galaxy_2.0.exe",
             ExpectedPublisher = "GOG sp. z o.o.",
             ExpectedFileExtension = ".exe",
             SupportsSilentInstall = true,
-            SilentInstallArguments = "/VERYSILENT /SUPPRESSMSGBOXES",
-            WhitelistedDomains = new[] { "gog.com", "cdn.gog.com" },
+            SilentInstallArguments = "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART",
+            WhitelistedDomains = new[] { "gog.com", "cdn.gog.com", "gog-statics.com", "webinstallers.gog-statics.com", "content-system.gog.com" },
             Description = "Instalador oficial do cliente DRM-free GOG GALAXY."
         },
         ["playnite"] = new()

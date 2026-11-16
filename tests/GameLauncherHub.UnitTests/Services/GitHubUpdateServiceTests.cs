@@ -28,6 +28,8 @@ public class GitHubUpdateServiceTests
     [InlineData("v11.11b1", 0, 11, 11, 1)]
     [InlineData("0.11.11-b1", 0, 11, 11, 1)]
     [InlineData("0.11.11.1", 0, 11, 11, 1)]
+    [InlineData("0.11.16", 0, 11, 16, 0)]
+    [InlineData("v0.11.16", 0, 11, 16, 0)]
     public void TryParseSemanticVersion_ValidStrings_ShouldParseCorrectly(
         string rawTag, int expectedMajor, int expectedMinor, int expectedBuild, int expectedRevision)
     {

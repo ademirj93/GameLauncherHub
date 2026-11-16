@@ -13,11 +13,22 @@ Write-Host "==========================================================" -Foregro
 Write-Host "  GAMELAUNCHER HUB - SCRIPT DE BUILD E TESTES" -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
 
-# 1. Localizacao do executavel dotnet
+# 1. Localizacao do executavel dotnet e configuracao de ambiente
 $dotnet = "dotnet"
 if (Test-Path "$env:USERPROFILE\.dotnet\dotnet.exe") {
     $dotnet = "$env:USERPROFILE\.dotnet\dotnet.exe"
     $env:PATH = "$env:USERPROFILE\.dotnet;$env:PATH"
+}
+
+try {
+    # Garante compatibilidade de diretorio AppData/NuGet em ambientes restritos
+    $testPath = "$env:APPDATA\NuGet"
+    $null = [System.IO.Directory]::Exists($testPath)
+} catch {
+    $localAppData = Join-Path $PSScriptRoot "..\.appdata"
+    $env:APPDATA = $localAppData
+    $env:DOTNET_CLI_HOME = Join-Path $PSScriptRoot "..\.dotnet_home"
+    $env:NUGET_PACKAGES = Join-Path $PSScriptRoot "..\.nuget\packages"
 }
 
 try {

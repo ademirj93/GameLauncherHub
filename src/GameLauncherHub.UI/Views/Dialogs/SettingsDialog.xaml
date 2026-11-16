@@ -319,6 +319,13 @@
                                       Foreground="{StaticResource TextPrimaryBrush}"
                                       Cursor="Hand" />
 
+                            <CheckBox Content="Iniciar minimizado na bandeja ao inicializar com o sistema"
+                                      IsChecked="{Binding StartMinimizedOnStartup}"
+                                      IsEnabled="{Binding LaunchOnStartup}"
+                                      Foreground="{StaticResource TextSecondaryBrush}"
+                                      Margin="24,8,0,0"
+                                      Cursor="Hand" />
+
                             <CheckBox Content="Verificar automaticamente novos launchers instalados ao iniciar"
                                       IsChecked="{Binding AutoCheckInstallationsOnStartup}"
                                       Foreground="{StaticResource TextPrimaryBrush}"

@@ -69,5 +69,24 @@ public class SettingsAndHistoryServiceTests
         await settingsService.SaveSettingsAsync(settings);
         Assert.Equal("AllInstalled", settingsService.CurrentSettings.TrayDisplayMode);
     }
+
+    [Fact]
+    public async Task SettingsService_StartMinimizedOnStartup_ShouldPersistCorrectly()
+    {
+        var settingsService = new SettingsService(NullLogger<SettingsService>.Instance);
+        var settings = await settingsService.LoadSettingsAsync();
+
+        Assert.True(settings.StartMinimizedOnStartup);
+
+        settings.StartMinimizedOnStartup = false;
+        await settingsService.SaveSettingsAsync(settings);
+
+        Assert.False(settingsService.CurrentSettings.StartMinimizedOnStartup);
+
+        // Reverte para o estado padrão
+        settings.StartMinimizedOnStartup = true;
+        await settingsService.SaveSettingsAsync(settings);
+        Assert.True(settingsService.CurrentSettings.StartMinimizedOnStartup);
+    }
 }
 

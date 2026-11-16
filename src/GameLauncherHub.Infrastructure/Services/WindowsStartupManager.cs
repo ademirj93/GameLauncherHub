@@ -30,7 +30,24 @@ public static class WindowsStartupManager
         }
     }
 
-    public static void SetLaunchOnStartup(bool enable, ILogger? logger = null)
+    public static bool IsStartMinimizedConfigured()
+    {
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            return false;
+
+        try
+        {
+            using var key = Registry.CurrentUser.OpenSubKey(RunKeyPath);
+            var value = key?.GetValue(AppName) as string;
+            return value != null && value.Contains("--minimized", StringComparison.OrdinalIgnoreCase);
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public static void SetLaunchOnStartup(bool enable, bool startMinimized = true, ILogger? logger = null)
     {
         if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             return;
@@ -45,8 +62,12 @@ public static class WindowsStartupManager
                 var exePath = Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName;
                 if (!string.IsNullOrWhiteSpace(exePath) && File.Exists(exePath))
                 {
-                    key.SetValue(AppName, $"\"{exePath}\" --minimized");
-                    logger?.LogInformation("Inicialização automática com o Windows configurada: {Path}", exePath);
+                    var command = startMinimized
+                        ? $"\"{exePath}\" --minimized"
+                        : $"\"{exePath}\"";
+
+                    key.SetValue(AppName, command);
+                    logger?.LogInformation("Inicialização automática com o Windows configurada: {Command}", command);
                 }
             }
             else

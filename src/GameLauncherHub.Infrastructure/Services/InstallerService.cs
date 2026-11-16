@@ -103,6 +103,11 @@ public class InstallerService : IInstallerService
             _logger?.LogWarning("Acompanhamento da instalação de {Name} cancelado.", platform.Name);
             return new InstallationResult(false, "Operação de instalação cancelada.");
         }
+        catch (System.ComponentModel.Win32Exception winEx) when (winEx.NativeErrorCode == 1223)
+        {
+            _logger?.LogInformation("Instalação de {Name} cancelada pelo usuário no prompt UAC.", platform.Name);
+            return new InstallationResult(false, "Instalação cancelada no controle de conta de usuário (UAC).");
+        }
         catch (Exception ex)
         {
             _logger?.LogError(ex, "Erro ao executar instalador de {Name}", platform.Name);

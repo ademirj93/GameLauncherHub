@@ -11,6 +11,7 @@ public class AppSettings
 
     // Inicialização & Sistema
     public bool LaunchOnStartup { get; set; } = false;
+    public bool StartMinimizedOnStartup { get; set; } = true;
     public bool MinimizeToTray { get; set; } = true;
     public bool CloseToTray { get; set; } = true;
     public bool EnableSystemTray { get; set; } = true;

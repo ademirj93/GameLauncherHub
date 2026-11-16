@@ -18,6 +18,15 @@ public partial class MainWindow : Window
     private readonly ISettingsService _settingsService;
     private readonly ISystemTrayService _systemTrayService;
     private bool _isExplicitExit;
+    private bool _isInitialized;
+
+    public async Task InitializeViewModelAsync()
+    {
+        if (_isInitialized) return;
+        _isInitialized = true;
+        await _viewModel.InitializeAsync();
+        MemoryOptimizer.SchedulePostStartupTrim(2000);
+    }
 
     public MainWindow(
         MainViewModel viewModel,
@@ -40,16 +49,13 @@ public partial class MainWindow : Window
 
         Loaded += async (s, e) =>
         {
-            await _viewModel.InitializeAsync();
-
-            // Otimização de Working Set após estabilização do carregamento inicial
-            MemoryOptimizer.SchedulePostStartupTrim(2000);
+            await InitializeViewModelAsync();
         };
 
         // Integração com eventos da bandeja do sistema (System Tray)
         _systemTrayService.RequestShowWindow += () =>
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.Invoke(async () =>
             {
                 Show();
                 if (WindowState == WindowState.Minimized)
@@ -58,6 +64,7 @@ public partial class MainWindow : Window
                 }
                 Activate();
                 Focus();
+                await InitializeViewModelAsync();
             });
         };
 

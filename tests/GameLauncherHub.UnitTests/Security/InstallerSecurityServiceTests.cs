@@ -132,6 +132,9 @@ public class InstallerSecurityServiceTests
     [InlineData("Valve Corp.", "Valve", true)]
     [InlineData("Open Source Developer Ruben Ripalda", "Ruben Ripalda", true)]
     [InlineData("Blizzard Entertainment, Inc.", "Blizzard Entertainment, Inc.", true)]
+    [InlineData("GOG sp. z o.o.", "GOG sp. z o.o.", true)]
+    [InlineData("GOG Sp. z o.o.", "GOG sp. z o.o.", true)]
+    [InlineData("GOG", "GOG sp. z o.o.", true)]
     [InlineData("Malicious Imposter", "Valve", false)]
     [InlineData("Random Publisher", "Epic Games", false)]
     public void IsPublisherMatch_ShouldValidateCorrectly(string actual, string expected, bool shouldMatch)
