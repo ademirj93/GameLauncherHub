@@ -42,13 +42,9 @@ public class LauncherDownloadResolver : ILauncherDownloadResolver
     {
         try
         {
-            // 1. Identifica a URL canônica a ser testada
-            string? downloadUrl = platform.InstallerDirectUrl;
-            if (string.IsNullOrWhiteSpace(downloadUrl))
-            {
-                var source = _catalogService.GetSourceByPlatformId(platform.Id);
-                downloadUrl = source?.DirectInstallerUrl;
-            }
+            // 1. Identifica a URL canônica a ser testada (prioriza catálogo oficial centralizado, com fallback para configuração local)
+            var source = _catalogService.GetSourceByPlatformId(platform.Id);
+            string? downloadUrl = source?.DirectInstallerUrl ?? platform.InstallerDirectUrl;
 
             if (string.IsNullOrWhiteSpace(downloadUrl))
             {
@@ -87,7 +83,7 @@ public class LauncherDownloadResolver : ILauncherDownloadResolver
 
             // 3. Inspeção HTTP via ResponseHeadersRead
             using var request = new HttpRequestMessage(HttpMethod.Get, downloadUrl);
-            request.Headers.Add("User-Agent", "GameLauncherHub/0.11.11b1 (+https://github.com/ademirjunior/GameLauncherHub)");
+            request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 GameLauncherHub/1.0");
 
             using var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
 
@@ -176,7 +172,7 @@ public class LauncherDownloadResolver : ILauncherDownloadResolver
                 var apiUrl = $"https://api.github.com/repos/{owner}/{repo}/releases/latest";
 
                 using var apiReq = new HttpRequestMessage(HttpMethod.Get, apiUrl);
-                apiReq.Headers.Add("User-Agent", "GameLauncherHub/0.11.11b1 (+https://github.com/ademirjunior/GameLauncherHub)");
+                apiReq.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 GameLauncherHub/1.0");
 
                 using var apiResp = await _httpClient.SendAsync(apiReq, cancellationToken);
                 if (apiResp.IsSuccessStatusCode)

@@ -43,6 +43,45 @@ public class OfficialDownloadCatalogServiceTests
         Assert.Contains("download.amazongames.com", amazon.WhitelistedDomains);
     }
 
+    [Fact]
+    public void GOG_MustHaveDirectInstallerUrlAndValidWhitelistedDomains()
+    {
+        var gog = _catalogService.GetSourceByPlatformId("gog");
+
+        Assert.NotNull(gog);
+        Assert.Equal("https://webinstallers.gog-statics.com/download/GOG_Galaxy_2.0.exe", gog.DirectInstallerUrl);
+        Assert.Equal("GOG sp. z o.o.", gog.ExpectedPublisher);
+        Assert.Contains("gog-statics.com", gog.WhitelistedDomains);
+        Assert.Contains("webinstallers.gog-statics.com", gog.WhitelistedDomains);
+        Assert.Contains("content-system.gog.com", gog.WhitelistedDomains);
+    }
+
+    [Fact]
+    public void EpicGames_MustHaveDirectInstallerUrlAndAkamaiWhitelistedDomains()
+    {
+        var epic = _catalogService.GetSourceByPlatformId("epic");
+
+        Assert.NotNull(epic);
+        Assert.Contains("EpicGamesLauncherInstaller.msi", epic.DirectInstallerUrl);
+        Assert.Equal("Epic Games Inc.", epic.ExpectedPublisher);
+        Assert.Contains("akamaized.net", epic.WhitelistedDomains);
+        Assert.Contains("epicgames-download1.akamaized.net", epic.WhitelistedDomains);
+        Assert.Contains("epicgamescdn.com", epic.WhitelistedDomains);
+    }
+
+    [Fact]
+    public void BattleNet_MustHaveDirectInstallerUrlAndAkamaiWhitelistedDomains()
+    {
+        var battlenet = _catalogService.GetSourceByPlatformId("battlenet");
+
+        Assert.NotNull(battlenet);
+        Assert.Contains("Battle.net-Setup.exe", battlenet.DirectInstallerUrl);
+        Assert.Equal("Blizzard Entertainment, Inc.", battlenet.ExpectedPublisher);
+        Assert.Contains("akamaihd.net", battlenet.WhitelistedDomains);
+        Assert.Contains("akamaized.net", battlenet.WhitelistedDomains);
+        Assert.Contains("blzddist1-a.akamaihd.net", battlenet.WhitelistedDomains);
+    }
+
     [Theory]
     [InlineData("amazon", "download.amazongames.com", true)]
     [InlineData("amazon", "arcus-uswest.amazon.com", true)]
@@ -50,6 +89,13 @@ public class OfficialDownloadCatalogServiceTests
     [InlineData("amazon", "malicious-site.com", false)]
     [InlineData("steam", "cdn.cloudflare.steamstatic.com", true)]
     [InlineData("steam", "fake-steam.com", false)]
+    [InlineData("gog", "webinstallers.gog-statics.com", true)]
+    [InlineData("gog", "cdn.gog.com", true)]
+    [InlineData("gog", "content-system.gog.com", true)]
+    [InlineData("epic", "epicgames-download1.akamaized.net", true)]
+    [InlineData("epic", "launcher-public-service-prod06.ol.epicgames.com", true)]
+    [InlineData("battlenet", "blzddist1-a.akamaihd.net", true)]
+    [InlineData("battlenet", "us.cdn.blizzard.com", true)]
     public void IsDomainAuthorized_ShouldAccuratelyValidateDomains(string platformId, string domain, bool expected)
     {
         bool isAuthorized = _catalogService.IsDomainAuthorized(platformId, domain);

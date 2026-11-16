@@ -1,0 +1,65 @@
+# 🎮 GameLauncher Hub — Release v0.11.16
+
+**Data de Lançamento:** 16 de Novembro de 2026 (16/11/26)  
+**Versão:** `0.11.16`  
+**Plataforma Alvo:** Windows 10 e Windows 11 (64-bit)  
+**Linguagem & Framework:** C# / .NET 10.0 (LTS) — WPF (Windows Presentation Foundation)  
+**Licença:** GNU General Public License v3.0 (GPLv3)  
+
+---
+
+## 🚀 Destaques da Release
+
+Esta versão introduz a **correção e estabilização completa dos downloads e instalações dos launchers oficiais GOG Galaxy, Epic Games e Battle.net**, além do **suporte completo para inicialização silenciosa minimizada no System Tray junto com o Windows**, configurável pelo usuário.
+
+---
+
+## ⚡ Principais Melhorias e Correções
+
+### 1. 🌐 Correção de Downloads Oficiais e Whitelists de CDNs
+- **GOG GALAXY:**
+  - Migração para a URL oficial permanente do instalador web: `https://webinstallers.gog-statics.com/download/GOG_Galaxy_2.0.exe`.
+  - Homologação de domínios seguros: adicionados `gog-statics.com`, `webinstallers.gog-statics.com` e `content-system.gog.com` na lista de domínios autorizados pela política de segurança.
+  - Parâmetros silenciosos otimizados: `/VERYSILENT /SUPPRESSMSGBOXES /NORESTART`.
+- **Epic Games Launcher:**
+  - Adição de suporte a redirecionamentos Akamai: homologados `akamaized.net`, `epicgames-download1.akamaized.net`, `epicgamescdn.com` e `unrealengine.com`.
+  - O pacote MSI oficial agora é inspecionado e baixado sem bloqueios falso-positivos na validação de domínio.
+  - Parâmetros do instalador MSI atualizados para `/qn /norestart`.
+- **Blizzard Battle.net:**
+  - Endpoint canônico padronizado: `https://battle.net/download/getInstaller?os=win&installer=Battle.net-Setup.exe`.
+  - Homologados os domínios de entrega da CDN Blizzard/Akamai: `blzddist1-a.akamaihd.net`, `akamaized.net` e `akamaihd.net`.
+- **Prevenção de Bloqueios WAF (User-Agent):**
+  - Implementação de cabeçalho `User-Agent` de cliente Windows padrão em `HttpDownloadManager` e `LauncherDownloadResolver`, prevenindo erros de acesso HTTP 403 (Forbidden) por firewalls de borda (Cloudflare e Akamai).
+- **Resiliência na Validação Authenticode:**
+  - Tratamento aprimorado de tokens de razão social e reconhecimento automático de certificados emitidos por `GOG sp. z o.o.`, `Epic Games Inc.` e `Blizzard Entertainment, Inc.`.
+- **Detecção Pós-Instalação Resiliente:**
+  - Adicionado ciclo de verificação assíncrona com retentativas após a execução do instalador para suportar gravadores de registro com término assíncrono.
+- **Tratamento Seguro de UAC:**
+  - Tratamento explícito do cancelamento de elevação administrativa no prompt UAC (Win32 erro 1223) sem gerar exceções não tratadas.
+
+---
+
+### 2. 🪟 Inicialização com o Sistema: Início Minimizado no System Tray
+- **Preferência Configurável pelo Usuário:**
+  - Nova opção na tela de Configurações: *"Iniciar minimizado na bandeja ao inicializar com o sistema"*.
+  - Ativação reativa vinculada à opção de inicializar com o Windows.
+- **Tratamento de Argumentos de Inicialização:**
+  - `App.xaml.cs` e `MainWindow.xaml.cs` agora processam parâmetros `--minimized`, `-minimized` e `/minimized`.
+- **Carregamento Oculto e Fluido:**
+  - A aplicação não pisca nem exibe a janela principal ao iniciar com o sistema, mantendo o processo ativo no System Tray com todos os dados e atalhos já carregados em segundo plano.
+  - Ao dar duplo clique no ícone da bandeja, a janela principal é exibida instantaneamente sem atrasos de carregamento.
+
+---
+
+### 3. 📦 Detalhes do Binário Standalone
+
+- **Arquivo:** `GameLauncherHub.UI.exe`
+- **Tamanho:** 186.04 MB (195.077.995 bytes)
+- **Tipo de Distribuição:** Standalone (Self-Contained & Single-File)
+- **Otimização:** Compilado com ReadyToRun (CrossGen2 AOT)
+- **Checksum SHA-256:**
+  ```text
+  CA6D41568B078C8FA25E896B6BF249FD545F204876D29A014879C7C52789FE71
+  ```
+- **Localização:** `publish/win-x64/GameLauncherHub.UI.exe`
+- **Requisitos:** Windows 10 (1809+) ou Windows 11 (64-bit). Não requer .NET SDK pré-instalado.

@@ -170,14 +170,33 @@ public class InstallerSecurityService : IInstallerSecurityService
         {
             bool publisherMatches = IsPublisherMatch(publisherName, platform.ExpectedPublisher);
 
-            // Fundações e CAs comunitárias reconhecidas para distribuição de código aberto (ex: SignPath Foundation para Playnite)
-            if (!publisherMatches && (platform.IsOpenSource || string.Equals(platform.Id, "playnite", StringComparison.OrdinalIgnoreCase)))
+            // Aliases de editor conhecidos para plataformas oficiais
+            if (!publisherMatches)
             {
-                if (publisherName.Contains("SignPath Foundation", StringComparison.OrdinalIgnoreCase) ||
-                    publisherName.Contains("Open Source Developer", StringComparison.OrdinalIgnoreCase) ||
-                    publisherName.Contains("Certum", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(platform.Id, "gog", StringComparison.OrdinalIgnoreCase) &&
+                    (publisherName.Contains("GOG", StringComparison.OrdinalIgnoreCase) || publisherName.Contains("CD PROJEKT", StringComparison.OrdinalIgnoreCase)))
                 {
                     publisherMatches = true;
+                }
+                else if (string.Equals(platform.Id, "epic", StringComparison.OrdinalIgnoreCase) &&
+                    publisherName.Contains("Epic Games", StringComparison.OrdinalIgnoreCase))
+                {
+                    publisherMatches = true;
+                }
+                else if (string.Equals(platform.Id, "battlenet", StringComparison.OrdinalIgnoreCase) &&
+                    publisherName.Contains("Blizzard", StringComparison.OrdinalIgnoreCase))
+                {
+                    publisherMatches = true;
+                }
+                // Fundações e CAs comunitárias reconhecidas para distribuição de código aberto (ex: SignPath Foundation para Playnite)
+                else if (platform.IsOpenSource || string.Equals(platform.Id, "playnite", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (publisherName.Contains("SignPath Foundation", StringComparison.OrdinalIgnoreCase) ||
+                        publisherName.Contains("Open Source Developer", StringComparison.OrdinalIgnoreCase) ||
+                        publisherName.Contains("Certum", StringComparison.OrdinalIgnoreCase))
+                    {
+                        publisherMatches = true;
+                    }
                 }
             }
 
@@ -267,7 +286,8 @@ public class InstallerSecurityService : IInstallerSecurityService
         // 2. Extração e correspondência de tokens semânticos ignorando sufixos corporativos
         var stopWords = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
-            "inc", "inc.", "corp", "corp.", "corporation", "llc", "llc.", "ltd", "ltd.", "services", "gmbh", "sarl", "co", "co.", "company", "com", ".com"
+            "inc", "inc.", "corp", "corp.", "corporation", "llc", "llc.", "ltd", "ltd.", "services", "gmbh", "sarl", "co", "co.", "company", "com", ".com",
+            "sp", "z", "o.o.", "o.o", "sa", "s.a."
         };
 
         static string[] ExtractSignificantTokens(string input, HashSet<string> stops)

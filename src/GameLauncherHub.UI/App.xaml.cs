@@ -52,9 +52,38 @@ public partial class App : System.Windows.Application
             });
         };
 
-        // 3. Apresenta a janela principal
+        // 3. Avalia argumentos de linha de comando e preferências de inicialização com o Windows
+        bool hasMinimizedArg = e.Args != null && e.Args.Any(a =>
+            string.Equals(a, "--minimized", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(a, "-minimized", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(a, "/minimized", StringComparison.OrdinalIgnoreCase));
+
+        var settingsService = _serviceProvider.GetRequiredService<ISettingsService>();
+        var settings = settingsService.CurrentSettings;
+
+        bool shouldStartMinimized = hasMinimizedArg ||
+            (settings.LaunchOnStartup && settings.StartMinimizedOnStartup && WindowsStartupManager.IsStartMinimizedConfigured());
+
         var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-        mainWindow.Show();
+
+        if (shouldStartMinimized)
+        {
+            if (settings.EnableSystemTray && settings.MinimizeToTray)
+            {
+                // Inicia silenciosamente na bandeja do sistema (System Tray) sem exibir a janela na tela
+                mainWindow.WindowState = WindowState.Minimized;
+                _ = mainWindow.InitializeViewModelAsync();
+            }
+            else
+            {
+                mainWindow.WindowState = WindowState.Minimized;
+                mainWindow.Show();
+            }
+        }
+        else
+        {
+            mainWindow.Show();
+        }
     }
 
     private static void ConfigureServices(IServiceCollection services)

@@ -96,7 +96,7 @@ public class GitHubUpdateService : IAppUpdateService
         }
 
         // Versão de fallback alinhada ao projeto
-        return new Version(0, 11, 11, 1);
+        return new Version(0, 11, 16, 0);
     }
 
     /// <inheritdoc />

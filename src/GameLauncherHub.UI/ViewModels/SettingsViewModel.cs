@@ -32,6 +32,9 @@ public partial class SettingsViewModel : ObservableObject
     private bool _launchOnStartup;
 
     [ObservableProperty]
+    private bool _startMinimizedOnStartup = true;
+
+    [ObservableProperty]
     private bool _enableSystemTray = true;
 
     [ObservableProperty]
@@ -143,6 +146,9 @@ public partial class SettingsViewModel : ObservableObject
         DownloadDirectory = settings.DownloadDirectory;
         AutoCleanupInstallers = settings.AutoCleanupInstallers;
         LaunchOnStartup = WindowsStartupManager.IsLaunchOnStartupEnabled();
+        StartMinimizedOnStartup = LaunchOnStartup
+            ? WindowsStartupManager.IsStartMinimizedConfigured()
+            : settings.StartMinimizedOnStartup;
         EnableSystemTray = settings.EnableSystemTray;
         CloseToTray = settings.CloseToTray;
         MinimizeToTray = settings.MinimizeToTray;
@@ -253,6 +259,7 @@ public partial class SettingsViewModel : ObservableObject
         settings.DownloadDirectory = DownloadDirectory;
         settings.AutoCleanupInstallers = AutoCleanupInstallers;
         settings.LaunchOnStartup = LaunchOnStartup;
+        settings.StartMinimizedOnStartup = StartMinimizedOnStartup;
         settings.EnableSystemTray = EnableSystemTray;
         settings.CloseToTray = CloseToTray;
         settings.MinimizeToTray = MinimizeToTray;
@@ -275,7 +282,7 @@ public partial class SettingsViewModel : ObservableObject
         }
 
         await _settingsService.SaveSettingsAsync(settings);
-        WindowsStartupManager.SetLaunchOnStartup(LaunchOnStartup);
+        WindowsStartupManager.SetLaunchOnStartup(LaunchOnStartup, StartMinimizedOnStartup);
 
         StatusMessage = "Configurações salvas com sucesso!";
         RequestClose?.Invoke();
@@ -294,6 +301,7 @@ public partial class SettingsViewModel : ObservableObject
         DownloadDirectory = Path.Combine(appFolder, "Downloads");
         AutoCleanupInstallers = true;
         LaunchOnStartup = false;
+        StartMinimizedOnStartup = true;
         EnableSystemTray = true;
         CloseToTray = true;
         MinimizeToTray = true;

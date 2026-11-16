@@ -5,7 +5,7 @@
 # GameLauncher Hub
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Release-v0.11.11b1-00C853?style=for-the-badge&logo=windows" alt="Release" />
+  <img src="https://img.shields.io/badge/Release-v0.11.16-00C853?style=for-the-badge&logo=windows" alt="Release" />
   <img src="https://img.shields.io/badge/Developer-Ademir%20Junior-6366F1?style=for-the-badge" alt="Developer" />
   <img src="https://img.shields.io/badge/License-GNU%20GPLv3-blue?style=for-the-badge" alt="License" />
   <img src="https://img.shields.io/badge/.NET-10.0%20(LTS)-512BD4?style=for-the-badge&logo=dotnet" alt=".NET 10" />
@@ -20,24 +20,17 @@ Inspirado na identidade visual do *ArtCraftLauncher*, o GameLauncher Hub unifica
 
 ---
 
-## 🚀 Novidades da Release 0.11.11b1 (11/11/2026)
+## 🚀 Novidades da Release 0.11.16 (16/11/2026)
 
-- **Correção Definitiva do Auto-Updater e Prevenção de Falsos-Positivos:**
-  - Normalização semântica bidirecional no comparador de releases do GitHub, resolvendo a divergência de tags (`v11.10b3` vs `0.11.10b3`) e prevenindo loop de atualização contínuo após instalar novas versões.
-  - Reconhecimento automático de números de versão beta/rc (`b1`, `b2`, `b3`...).
-  - Exibição aprimorada das versões instalada e remota na interface.
-- **Otimização Massiva de Consumo de RAM (-41% na memória privada):**
-  - Ativação do modo **Workstation GC** e **DATAS** (.NET Dynamic Adaptation to Application Sizes).
-  - Consulta seletiva de processos com `Process.GetProcessesByName(...)` e descarte imediato de handles nativos (`Dispose()`), eliminando milhares de alocações desnecessárias.
-  - Novo conversor `ThumbnailImageConverter` com decodificação restrita (`DecodePixelWidth = 64/48`) e congelamento de bitmaps (`bitmap.Freeze()`).
-  - Efeitos de sombra dos cards (`DropShadowEffect`) aplicados dinamicamente apenas sob demanda (*Hover*), aliviando dezenas de buffers gráficos da GPU e VRAM.
-  - Virtualização nativa de interface com reciclagem de containers (`VirtualizingPanel.VirtualizationMode="Recycling"`) no modo compacto.
-  - Substituição do recurso `logo.bmp` (7.1 MB) por `logo.png` (392 KB) proporcional.
-  - Eliminação de memory leaks em ViewModels com implementação de `IDisposable`.
-- **Compilação AOT Ahead-Of-Time (ReadyToRun):**
-  - Publicação com CrossGen2 pré-compilando o código de máquina para inicialização ultra-rápida e menor consumo de heap JIT.
-- **Catálogo de Emulação e Launchers Atualizado:**
-  - Adicionado suporte completo ao ShadPS4 (PS4), Citron Neo, Eden, VBA-M, Ymir e remoção de emuladores descontinuados.
+- **Correção e Estabilização dos Downloads Oficiais (GOG Galaxy, Epic Games e Battle.net):**
+  - **GOG GALAXY:** Migração para o instalador oficial web permanente (`webinstallers.gog-statics.com/download/GOG_Galaxy_2.0.exe`) e homologação do domínio de CDN seguro `gog-statics.com` na whitelist de segurança.
+  - **Epic Games Launcher:** Homologação dos domínios oficiais de entrega Akamai (`akamaized.net`, `epicgames-download1.akamaized.net`, `epicgamescdn.com`), liberando a resolução de redirecionamentos do pacote MSI oficial, com suporte a `/qn /norestart`.
+  - **Battle.net:** Padronização do endpoint oficial canônico (`Battle.net-Setup.exe`) e inclusão dos domínios da CDN Akamai/Blizzard (`blzddist1-a.akamaihd.net`, `akamaihd.net`) na whitelist de segurança.
+  - **Identificação HTTP (User-Agent):** Configuração de User-Agent de cliente Windows padrão em todas as conexões de download, prevenindo bloqueios HTTP 403 por WAFs de borda (Cloudflare e Akamai).
+  - **Resiliência na Validação Authenticode & Pós-Instalação:** Compatibilidade com variações de razão social e aliases de editores de certificados (`GOG`, `Epic Games`, `Blizzard`), além de detecção assíncrona com retentativas após a conclusão do instalador.
+- **Inicialização com o Sistema Minimizada no System Tray:**
+  - Nova opção no menu de configurações: *"Iniciar minimizado na bandeja ao inicializar com o sistema"*, vinculada de forma reativa à inicialização do Windows.
+  - O aplicativo lê parâmetros `--minimized` e carrega dados dos launchers em segundo plano sem piscar ou exibir a janela principal na tela.
 
 ---
 

@@ -23,11 +23,18 @@ public class HttpDownloadManager : IDownloadManager
         {
             PooledConnectionLifetime = TimeSpan.FromMinutes(5),
             ConnectTimeout = TimeSpan.FromSeconds(30),
-            AutomaticDecompression = System.Net.DecompressionMethods.All
+            AutomaticDecompression = System.Net.DecompressionMethods.All,
+            AllowAutoRedirect = true,
+            MaxAutomaticRedirections = 10
         })
         {
             Timeout = TimeSpan.FromMinutes(30)
         };
+
+        if (!_httpClient.DefaultRequestHeaders.Contains("User-Agent"))
+        {
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 GameLauncherHub/1.0");
+        }
     }
 
     public async Task<string> DownloadInstallerAsync(

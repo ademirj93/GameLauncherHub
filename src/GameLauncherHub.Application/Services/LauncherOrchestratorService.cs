@@ -361,11 +361,27 @@ public class LauncherOrchestratorService : ILauncherOrchestratorService
             Message = installResult.Message
         }, cancellationToken);
 
-        // 5. Re-detecção imediata pós-instalação
+        // 5. Re-detecção pós-instalação com retry resiliente
         platform.StatusMessage = "Verificando instalação concluída...";
         OnPlatformChanged(platform);
 
         var detectionResult = await _detectionService.DetectAsync(platform, cancellationToken);
+        if (!detectionResult.IsInstalled && installResult.Success)
+        {
+            for (int retry = 1; retry <= 3; retry++)
+            {
+                try
+                {
+                    await Task.Delay(1500, cancellationToken);
+                    detectionResult = await _detectionService.DetectAsync(platform, cancellationToken);
+                    if (detectionResult.IsInstalled) break;
+                }
+                catch (OperationCanceledException)
+                {
+                    break;
+                }
+            }
+        }
         if (detectionResult.IsInstalled)
         {
             platform.State = LauncherState.INSTALLED;
